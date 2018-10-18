@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Користувачі</title>
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+</head>
+<body class="user-page">
+<header>
+    <img class="angles topleft" src="imgs/topleft.svg" alt="1">
+    <div class="logo">
+        <img src="imgs/Coca-Cola_logo.svg" alt="logo">
+    </div>
+    <div class="back-site">
+        <div class="head-container">
+            <a href="javascript:void(0)" class="nav">Повернутись до сайту</a>
+            <a href="imgs/manual.png" download class="btn btn-white">Завантажити мануал</a>
+        </div>
+    </div>
+    <nav>
+        <div class="head-container">
+            <div class="menu">
+                <a href="content.html" class="nav img-content">Редагування контенту</a>
+                <a href="calendar.html" class="nav img-calendar">Календар екскурсій</a>
+                <a href="javascript:void(0)" class="nav img-users active">Користувачі сайту</a>
+                <hr class="hr-menu">
+                <a href="seo.html" class="nav img-seo">SEO текст</a>
+                <a href="javascript:void(0)" class="nav img-bell">Нагадування клієнтам</a>
+                <a href="javascript:void(0)" class="nav img-robotic">Чат-бот</a>
+            </div>
+        </div>
+    </nav>
+    <div class="logoFlesh">
+        <div class="fresh">
+            <div class="created">САЙТ РАЗРАБОТАН</div>
+            <a href="http://freshweb.agency/" target="_blank">
+                <div class="fresh-logo"><span>F</span><span>R</span><span>E</span><span>S</span><span>H</span></div>
+            </a>
+            <div class="creative">CREATIVE WEB AGENCY</div>
+        </div>
+    </div>
+    <div class="header-line"></div>
+</header>
+<main>
+    <div class="top-main">
+        <h1>Користувачі сайту</h1>
+        <div class="my-acc">
+            <div class="my-mail">
+                <img src="imgs/chicken.svg" alt="icon">
+                <span>zemna2013@gmail.com</span>
+            </div>
+            <a href="authorization.html" class="btn btn-grey">Вийти</a>
+        </div>
+    </div>
+    <div class="table-user">
+        <table>
+            <thead>
+            <tr>
+                <th>Ім’я</th>
+                <th>Пошта</th>
+                <th>Роль
+                    <div class="tooltip"><img src="imgs/Subtract.svg" alt="1">
+                        <span class="tooltiptext">Підказка</span>
+                    </div>
+
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="admin">
+                <td class="td-name">Маринка</td>
+                <td class="td-mail">deangelo.schumm@gmail.com</td>
+                <td class="td-position">
+                    <select name="sources" id="sources1" class="custom-select sources">
+                        <option value="Адміністратор" selected>Адміністратор</option>
+                        <option value="Редактор">Редактор</option>
+                    </select>
+                </td>
+                <td></td>
+                <td class="td-delete">
+                    <div class="btn btn-white">ВИдалити</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-name">Поліна</td>
+                <td class="td-mail">deangelo.schumm@gmail.com</td>
+                <td class="td-position">
+                    <select name="sources" id="sources2" class="custom-select sources">
+                        <option value="Адміністратор">Адміністратор</option>
+                        <option value="Редактор" selected>Редактор</option>
+                    </select>
+                </td>
+                <td></td>
+                <td class="td-delete">
+                    <div class="btn btn-white">ВИдалити</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-name">Тарас</td>
+                <td class="td-mail">deangelo.schumm@gmail.com</td>
+                <td class="td-position">
+                    <select name="sources" id="sources3" class="custom-select sources">
+                        <option value="Адміністратор">Адміністратор</option>
+                        <option value="Редактор" selected>Редактор</option>
+                    </select>
+                </td>
+                <td></td>
+                <td class="td-delete">
+                    <div class="btn btn-white">ВИдалити</div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="create-user">
+        <div class="under-back"></div>
+        <div class="create">
+            <img src="imgs/create.png" alt="create">
+            <h2>Створюйте нових користувачів
+                <p>та присвой роль для керування над сайтом</p>
+            </h2>
+        </div>
+        <form id="create-user" class="form-register">
+            <div>
+                <input id='email' type="email" class="form-control" required>
+                <label for="email">Пошта</label>
+            </div>
+            <div>
+                <select name="sources1" id="position" class="custom-select sources" placeholder='Роль'>
+                    <option value="Адміністратор">Адміністратор</option>
+                    <option value="Редактор">Редактор</option>
+                </select>
+                <label for="position">Роль</label>
+            </div>
+            <div>
+                <input id='name' type="text" class="form-control" required>
+                <label for="name">Ім’я</label>
+            </div>
+            <div>
+                <input id='pass' type="password" class="form-control" required>
+                <label for="pass">Пароль</label>
+                <div class="eye" data-action="see-password" data-toggle="pass">
+                    <i class="icon-eye-open"></i>
+                </div>
+            </div>
+            <div>
+                <input id='passtrue' type="password" class="form-control" required>
+                <label for="passtrue">Повтор пароля</label>
+                <div class="eye" data-action="see-password" data-toggle="passtrue">
+                    <i class="icon-eye-open"></i>
+                </div>
+            </div>
+            <button class="btn btn-red">Створити</button>
+
+        </form>
+    </div>
+</main>
+<div class="pops-alert">
+
+</div>
+<div class="pop-delete">
+    <div class="pop-main">
+        <div class="doubt-text">
+            Ви впевнені що хочете видалити цього чела?
+        </div>
+        <div class="doubt-button">
+            <div class="button-success">Так</div>
+            <div class="button-cancel">Ні</div>
+        </div>
+    </div>
+    <div class="pop-back"></div>
+</div>
+<footer>
+    <img class="angles topright" src="imgs/topright.svg" alt="1">
+    <img class="angles bottomright" src="imgs/bottomright.svg" alt="1">
+</footer>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
