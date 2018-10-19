@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Gate;
+use App\Screen;
 
 class IndexController extends AdminController
 {
@@ -11,9 +10,12 @@ class IndexController extends AdminController
 
     public function show()
     {
-        $this->title = "Календар екскурсій";
+        $this->title = "Редагування контенту";
 
-        $this->content = view('admin.contents.contents')->with(compact('users'))->render();
+        $screens = Screen::all();
+
+        $this->content = view('admin.contents.screens.index')
+                    ->with(compact('screens'))->render();
         return $this->renderOutput();
     }
 }

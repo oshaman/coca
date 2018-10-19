@@ -23,6 +23,7 @@ Route::prefix('admin')
         Route::get('/', 'IndexController@show')->name('index');
         Route::resource('users', 'UsersController')->except(['create'])->middleware('users');
         Route::resource('seo', 'SeoController')->only(['update', 'index']);
+        Route::resource('screen', 'ScreensController')->only(['update']);
     });
 
 Auth::routes();
