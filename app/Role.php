@@ -16,4 +16,8 @@ class Role extends Model
         return $this->hasMany(User::class);
     }
 
+    public function getUkNameAttribute()
+    {
+        return config('admin.roles.'.$this->name);
+    }
 }

@@ -33,7 +33,9 @@ abstract class AdminController extends Controller
         $menu =  Menu::make('adminMenu', function ($menu) {
 
             if (Gate::allows('VIEW_ADMIN')) {
-                $menu->add("Редагування контенту", array('route' => 'admin.index', 'class' => 'nav img-content'));
+                $menu->add("Редагування контенту", array('route' => 'admin.index', 'class' => 'nav img-content'))
+                        ->divide( ['class' => 'hr-menu'] );
+                $menu->add("SEO текст", array('route' => 'admin.seo.index', 'class' => 'nav img-seo'));
             }
 
             if (Gate::allows('EDIT_USERS')) {

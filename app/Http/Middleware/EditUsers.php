@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class EditUsers
 {
@@ -15,7 +16,7 @@ class EditUsers
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->hasRole(['admin'])) {
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
             return $next($request);
         }
         abort(404);

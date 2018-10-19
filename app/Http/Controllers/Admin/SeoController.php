@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Role;
-use App\User;
+use App\Seo;
 use Illuminate\Http\Request;
-use Gate;
 
-class UsersController extends AdminController
+class SeoController extends AdminController
 {
-
+    protected $jss = '<script src="/admn/js/tinymce/tinymce.min.js"></script>';
     /**
      * Display a listing of the resource.
      *
@@ -17,12 +15,8 @@ class UsersController extends AdminController
      */
     public function index()
     {
-        $this->title = 'Користувачі сайту';
-        $roles = Role::all()->pluck('uk_name', 'id');
-
-        $users = User::with('role')->paginate(10);
-
-        $this->content = view('admin.contents.users')->with(compact('users', 'roles'))->render();
+        $seo = Seo::first();
+        $this->content = view('admin.contents.seo')->with(compact('seo'))->render();
         return $this->renderOutput();
     }
 
@@ -44,18 +38,7 @@ class UsersController extends AdminController
      */
     public function store(Request $request)
     {
-
-
-        $this->validate($request, [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role_id' => 'numeric|between:1,1000',
-        ]);
-
-        $user = User::add($request->all());
-        $user->generatePassword($request->get('password'));
-
-        return ['success'=>'Користувача створено'];
+        return $request->all();
     }
 
     /**
@@ -66,7 +49,7 @@ class UsersController extends AdminController
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -77,7 +60,7 @@ class UsersController extends AdminController
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -87,9 +70,21 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Seo $seo)
     {
-        //
+        $this->validate($request, [
+            'seo_title' => 'string|max:255|nullable',
+            'seo_keywords' => 'string|max:255|nullable',
+            'seo_description' => 'string|max:255|nullable',
+            'og_image' => 'string|max:255|nullable',
+            'og_title' => 'string|max:255|nullable',
+            'og_description' => 'string|max:255|nullable',
+            'seo_text' => 'string|nullable'
+        ]);
+
+        $seo->updateSeo($request->all());
+        return redirect()->route('admin.seo.index');
+
     }
 
     /**
@@ -98,10 +93,8 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $result = $user->remove();
-        return $result;
+        //
     }
-
 }

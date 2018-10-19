@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
 use Illuminate\Http\Request;
-use Gate;
 
-class UsersController extends AdminController
+class SeoController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -17,13 +13,7 @@ class UsersController extends AdminController
      */
     public function index()
     {
-        $this->title = 'Користувачі сайту';
-        $roles = Role::all()->pluck('uk_name', 'id');
-
-        $users = User::with('role')->paginate(10);
-
-        $this->content = view('admin.contents.users')->with(compact('users', 'roles'))->render();
-        return $this->renderOutput();
+        //
     }
 
     /**
@@ -44,18 +34,7 @@ class UsersController extends AdminController
      */
     public function store(Request $request)
     {
-
-
-        $this->validate($request, [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role_id' => 'numeric|between:1,1000',
-        ]);
-
-        $user = User::add($request->all());
-        $user->generatePassword($request->get('password'));
-
-        return ['success'=>'Користувача створено'];
+        //
     }
 
     /**
@@ -98,10 +77,8 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $result = $user->remove();
-        return $result;
+        //
     }
-
 }

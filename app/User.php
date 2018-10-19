@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'role_id'
     ];
 
     /**
@@ -38,6 +39,42 @@ class User extends Authenticatable
     {
         if ($this->role->name == $name) {
             return true;
+        }
+    }
+
+    public static function add($fields)
+    {
+        $user = new static;
+        $user->fill($fields);
+        $user->save();
+
+        return $user;
+    }
+
+    public function edit($fields)
+    {
+        $this->fill($fields);
+
+        $this->save();
+    }
+
+    public function remove()
+    {
+
+        if(auth()->user()->id === $this->id){
+            return ['status' => trans('admin.self_delete')];
+        }
+
+        $this->delete();
+        return ['status' => trans('admin.user_deleted')];
+    }
+
+    public function generatePassword($password)
+    {
+        if($password != null)
+        {
+            $this->password = Hash::make($password);
+            $this->save();
         }
     }
 
