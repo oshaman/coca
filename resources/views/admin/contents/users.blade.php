@@ -64,6 +64,7 @@
                     null,
                     ['class' => 'custom-select sources'])
                 }}
+                <label for="position">Роль</label>
             </div>
             <div>
                 <input id='name' type="text" class="form-control" name="name" required>

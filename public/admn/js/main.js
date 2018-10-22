@@ -420,6 +420,16 @@ $(document).ready(function () {
 
 //    ---------------------pop-alert---------------
 
+
+
+    if($('.alert-danger').html()) {
+        alert_pop($('.alert-danger').html());
+    }
+
+    if($('.alert-success').html()) {
+        alert_pop($('.alert-success').html());
+    }
+
     function alert_pop(text) {
         var alertBlock = $('<div class="pop-alert"><div class="alert-text">' + text + '</div>\n' +
             '<div class="alert-close"><img src="/admn/imgs/close.svg" alt="1"></div></div>');
@@ -483,10 +493,6 @@ $(document).ready(function () {
 
     });
 
-    $('.form-content .btn').on('click', function () {
-        alert_pop('Успішно збережено')
-    });
-
     $('#create-user').submit(function (e) {
         e.preventDefault();
 
@@ -521,7 +527,7 @@ $(document).ready(function () {
 //-------------------------------tinymce-------------
 var editor_config = {
     selector: 'textarea.my-editor',
-    height: 500,
+    height: '300',
     theme: 'modern',
     toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
     image_advtab: true,

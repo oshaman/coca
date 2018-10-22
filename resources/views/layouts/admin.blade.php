@@ -2,13 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow"/>
     <title>{{ $title??'' }}</title>
     <link rel="stylesheet" href="{{ asset('admn') }}/css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="{{ asset('admn') }}/css/style.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
+@if (count($errors) > 0)
+    <div class="alert-danger" style="display: none">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+@if (session('status'))
+    <div class="alert-success" style="display: none">
+        {{ session('status') }}
+    </div>
+@endif
 @yield('header')
 
 @yield('content')

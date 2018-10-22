@@ -6,40 +6,23 @@
 
         <div class="seo-column">
             <div>
-                <input id='seo-title' type="text" class="form-control" name="seo_title"
-                       value="{{ $screen->title??'' }}">
-                <label for="seo-title">SEO_TITLE
+                {!! Form::text('headings[]', $screen->headings[0]??null, ['class' => 'form-control']) !!}
+                <label for="seo-title">Заголовок №1
                     <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
                         <span class="tooltiptext">Підказка</span>
                     </div>
                 </label>
             </div>
             <div>
-                <input id='seo-title' type="text" class="form-control" name="seo_title"
-                       value="{{ $screen->title??'' }}">
-                <label for="seo-title">SEO_TITLE
+                {!! Form::text('headings[]', $screen->headings[1]??null, ['class' => 'form-control']) !!}
+                <label for="seo-title">Заголовок №2
                     <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
                         <span class="tooltiptext">Підказка</span>
                     </div>
                 </label>
             </div>
-
         </div>
-        <div class="seo-column">
-            <div>
-                <input id='seo-title' type="text" class="form-control" name="seo_title"
-                       value="{{ $screen->title??'' }}">
-                <label for="seo-title">SEO_TITLE
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-
-        </div>
-        <!--<textarea name="content"></textarea>-->
-        <textarea name="content" class='my-editor'></textarea>
+        {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
         <button type="submit" class="btn btn-red">зберегти</button>
     </form>
-
 </div>

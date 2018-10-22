@@ -13,6 +13,7 @@ class IndexController extends AdminController
         $this->title = "Редагування контенту";
 
         $screens = Screen::all();
+        $screens->load('slider');
 
         $this->content = view('admin.contents.screens.index')
                     ->with(compact('screens'))->render();

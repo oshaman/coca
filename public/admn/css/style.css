@@ -310,11 +310,13 @@ div.inval label {
     width: 14.24vw;
     margin-bottom: 1.041vw;
 }
+.form-content label,
 .form-seo label,
 .form-trip-info label,
 .form-register label {
     letter-spacing: -0.5px;
 }
+.form-content label,
 .form-seo label,
 .form-trip-info label,
 .form-register label,
@@ -332,10 +334,12 @@ div.inval label {
 .form-register label {
     top: 25%;
 }
+.form-content label,
 .form-seo label {
     top: 24%;
     overflow: visible;
 }
+.form-content .seo-column > div,
 .form-seo > div div,
 .form-trip-info div,
 .form-register div,
@@ -386,6 +390,7 @@ div.inval label {
 .form-register input {
     letter-spacing: -0.45px;
 }
+.form-content input,
 .form-seo input,
 .form-trip-info input,
 .form-register input,
@@ -409,6 +414,10 @@ div.inval label {
 .form-trip-info input {
     padding: 0.941vw 0 0.8vw;
 }
+
+
+.form-content input:focus + label,
+.form-content input.label-stay + label,
 .form-seo input:focus + label,
 .form-seo input.label-stay + label,
 .form-trip-info .custom-select-wrapper.label-stay + label,
@@ -1556,7 +1565,9 @@ div.custom-options {
     margin-top: 2.1vh;
 }
 div.mce-edit-area {
-    height: 58.8vh;
+    /*height: 58.8vh;*/
+    max-height: 29.8vh;
+    overflow: auto;
     margin-bottom: 2.2vh;
 }
 .mce-container.mce-panel.mce-stack-layout-item.mce-statusbar {
@@ -1963,7 +1974,8 @@ h5 {
     top: -0.7vh;
 }
 .seo-texts div.mce-edit-area {
-    height: 24vh;
+    max-height: 24vh;
+    overflow: auto;
     /*height: 29.6vh;*/
 }
 .form-seo .seo-texts label  {
