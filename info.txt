@@ -1,0 +1,1 @@
+$posts = Post::whereDate('created_at', Carbon::today())->get();

@@ -557,3 +557,9 @@ var editor_config = {
 if ($('.my-editor').length > 0) {
     tinymce.init(editor_config);
 }
+
+$('.add-new-slide').on('click', function () {
+    _htms = $('.new-slide').html()
+    $(_htms).insertBefore(this);
+    $(this).remove();
+});

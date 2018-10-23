@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\SliderRepository;
 use App\Screen;
-use App\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ScreensController extends Controller
 {
+    protected $sliderRepository;
+
+    public function __construct(SliderRepository $sliderRepository)
+    {
+        $this->sliderRepository = $sliderRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,13 +68,6 @@ class ScreensController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Screen $screen)
     {
 
@@ -88,27 +87,8 @@ class ScreensController extends Controller
 
         $screen->updateScreen($request->all());
 
-        $slider = $request->only('slider');
+        $this->sliderRepository->handle($request, $screen);
 
-        if (count($slider['slider'])) {
-
-            foreach ($slider['slider'] as $fields) {
-
-                $slide = $screen->slider()->where('id', $fields['id'])->first();
-
-                if ($slide) {
-                    $slide->updateSlide($fields);
-                } else {
-                    dd('create');
-                }
-
-                if(!empty($fields[0])){
-                    $slide->uploadImage($fields[0]);
-                }
-
-
-            }
-        }
 
         return redirect()->back()->with(['status'=>'Екран збережено.']);
     }

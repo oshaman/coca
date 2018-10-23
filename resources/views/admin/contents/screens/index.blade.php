@@ -24,7 +24,7 @@
             @empty
             @endforelse
         </div>
-
+        @include('admin.contents.screens.new-slide')
     </div>
 </main>
 <div class="pops-alert">
