@@ -37,13 +37,17 @@ class HomeController extends Controller
 
         $disabledDays = $this->repository->getDisabledDays();
 
-        $available_excursions = $this->repository->getAvailableExcursions();
+        $available_excursions = $this->repository->getAvailableExcursionIntervals();
 
+
+        dd($maximal_allowed_day, $disabledDays, $available_excursions);
 
         return  [
             'max_day' => $maximal_allowed_day,
             'disabled' => $disabledDays,
             'excursions' => $available_excursions
         ];
+
+
     }
 }

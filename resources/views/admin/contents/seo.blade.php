@@ -53,8 +53,7 @@
                 </div>
                 <div>
                     <input id='og-image-load' type="text" disabled="" name="og_image" value="{{ $seo->og_image??'' }}">
-                    <input id="og-image" type="file">
-                    <label for="og-image">OG_IMAGE
+                    <label for="og-image-load">OG_IMAGE
                         <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
                             <span class="tooltiptext">Підказка</span>
                         </div>

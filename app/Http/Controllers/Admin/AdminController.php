@@ -39,6 +39,8 @@ abstract class AdminController extends Controller
                 $menu->add("Календар екскурсій", array('route' => 'admin.calendar.index', 'class' => 'nav img-calendar'))
                     ->divide( ['class' => 'hr-menu'] );
                 $menu->add("SEO текст", array('route' => 'admin.seo.index', 'class' => 'nav img-seo'));
+                $menu->add("Нагадування клієнтам", array('route' => 'admin.emails.index', 'class' => 'nav img-bell'));
+                $menu->add("Чат бот", array('route' => 'admin.bot.index', 'class' => 'nav img-robotic'));
             }
 
             if (Gate::allows('EDIT_USERS')) {

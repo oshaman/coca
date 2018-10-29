@@ -23,8 +23,13 @@ Route::prefix('admin')
         Route::resource('users', 'UsersController')->except(['create'])->middleware('users');
         Route::resource('seo', 'SeoController')->only(['update', 'index']);
         Route::resource('screen', 'ScreensController')->only(['update']);
-        Route::resource('calendar', 'CalendarController')->only(['index', 'store']);
+        Route::resource('bot', 'BotController')->only(['update', 'index']);
+        Route::resource('emails', 'EmailsController')->only(['update', 'index']);
         Route::delete('slider/{slider}', 'SliderController@destroy')->name('slide.delete');
+
+        Route::resource('calendar', 'CalendarController')->only(['index', 'store']);
+        Route::post('get-excursions', 'AjaxController@getExcursions');
+
     });
 
 Auth::routes();

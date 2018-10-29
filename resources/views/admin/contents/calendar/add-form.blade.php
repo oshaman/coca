@@ -9,14 +9,19 @@
             </option>
         </select>
         <select name="trip-day" id="select-day" class="custom-select sources">
-            @for($i=$today->copy()->addDay()->day;$i<=$today->daysInMonth; $i++)
-                <option value="{{$i}}" @if($i==$today->copy()->addDay()->day) selected @endif>{{$i}}</option>
+            @for($i=\Carbon\Carbon::now()->addDay()->day;$i<=\Carbon\Carbon::now()->daysInMonth; $i++)
+                <option value="{{$i}}" @if($i==\Carbon\Carbon::now()->addDay()->day) selected @endif>{{$i}}</option>
+            @endfor
+        </select>
+        <select name="trip-day" id="select-day-2" class="custom-select sources" style="display: none">
+            @for($i=\Carbon\Carbon::now()->startOfMonth()->addMonth()->day;$i<=\Carbon\Carbon::now()->addMonth()->daysInMonth; $i++)
+                <option value="{{$i}}" @if($i==\Carbon\Carbon::now()->startOfMonth()->addMonth()->day) selected @endif>{{$i}}</option>
             @endfor
         </select>
         <select name="interval" id="select-time" class="custom-select sources">
             @foreach(config('settings.time_intervals') as $interval)
                 @if($loop->first) @continue @endif
-                <option value="{{ $loop->iteration }}" @if(1 == $loop->index) selected @endif>{{ $interval }}</option>
+                <option value="{{ $loop->index }}" @if(1 == $loop->index) selected @endif>{{ $interval }}</option>
             @endforeach
         </select>
     </div>
@@ -67,18 +72,33 @@
         </div>--}}
 
         <div class="progress-bar">
-            <div class="bar-circle">
-                <div class="circle circle1 active"></div>
-                <div class="circle circle2"></div>
-                <div class="circle circle3"></div>
-                <hr class="active-top">
-                <hr class="active-bottom">
-            </div>
-            <div class="bar-text">
-                <p class="active">Заброньовано</p>
-                <p class="p-2">Очікує документ</p>
-                <p class="p-3">Підтвердженно</p>
-            </div>
+            <dl class="radio-list-left">
+                <dd>
+                    <input type="radio" name="pq1" id="pq1-1" value="1-1">
+                    <label for="pq1-1">Заброньовано</label>
+                </dd>
+                <dd>
+                    <input type="radio" name="pq1" id="pq1-2" value="1-2">
+                    <label for="pq1-2">Очікує документ</label>
+                </dd>
+                <dd>
+                    <input type="radio" name="pq1" id="pq1-3" value="1-3">
+                    <label for="pq1-3">Підтвердженно</label>
+                </dd>
+            </dl>
+
+            {{--<div class="bar-circle">--}}
+                {{--<div class="circle circle1 active"></div>--}}
+                {{--<div class="circle circle2"></div>--}}
+                {{--<div class="circle circle3"></div>--}}
+                {{--<hr class="active-top">--}}
+                {{--<hr class="active-bottom">--}}
+            {{--</div>--}}
+            {{--<div class="bar-text">--}}
+                {{--<p class="active">Заброньовано</p>--}}
+                {{--<p class="p-2">Очікує документ</p>--}}
+                {{--<p class="p-3">Підтвердженно</p>--}}
+            {{--</div>--}}
         </div>
     </div>
     <div class="trip-buttons">

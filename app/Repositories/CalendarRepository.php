@@ -151,7 +151,7 @@ class CalendarRepository
         return true;
     }
 
-    public function getAvailableExcursions()
+    public function getAvailableExcursionIntervals(): array
     {
         $result = [];
 
@@ -161,4 +161,19 @@ class CalendarRepository
 
         return $result;
     }
+
+    public static function getExcursionByDate($date):array
+    {
+        $excursions = Excursion::whereDate('created_at', '=', $date)->get();
+
+        $result = [];
+
+        for ($i=1;$i<7;$i++) {
+            $result[$i] = $excursions->where('interval','=', $i)->first();
+        }
+
+        return $result;
+
+    }
+
 }

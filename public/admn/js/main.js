@@ -78,52 +78,6 @@ $(document).ready(function () {
     //---------------------------------------------------------end bot edit
 
 
-    //------------------------------------------------------calendar accordion
-    $('.info-note').slideUp()
-    $('.header-note').on('click', function () {
-        _next = $(this).next('.info-note');
-        _this = $(this);
-        accord();
-    });
-
-    $('.info-after').on('click', function () {
-        _this = $(this).siblings('.header-note');
-        _next = $(this).siblings('.info-note');
-        accord();
-    });
-
-    function accord() {
-        if (_this.hasClass('opened')) {
-            _next.slideUp('fast');
-            _this.parent('.info-block').removeClass('opened');
-            _this.siblings('.info-after').removeClass('opened');
-            _this.find('.info-open').removeClass('del').html("Відкрити");
-            _this.removeClass('opened');
-        } else {
-            $('.header-note').removeClass('opened');
-            $('.info-block').removeClass('opened');
-            $('.info-after').removeClass('opened');
-            $('.info-open').removeClass('del').html("Відкрити");
-            $('.info-note').slideUp();
-
-            _this.addClass('opened');
-            _this.parent('.info-block').addClass('opened');
-            _this.siblings('.info-after').addClass('opened');
-            _next.slideDown('fast');
-
-            _this.find('.info-open').addClass('del');
-            if (_this.find('.info-open').hasClass("del")) {
-                _this.find('.info-open').html("Видалити")
-            } else _this.find('.info-open').html("Відкрити");
-
-            $('.del').on('click', function () {
-                pop_delete();
-            });
-        }
-    }
-
-    //-------------------------------------------------calendar accordion END
-
     $(".rubric").on("click", function () {
         var numberIndex = $(this).index();
 
@@ -136,31 +90,10 @@ $(document).ready(function () {
         }
     });
 
-    $(".pres-month").on("click", function () {
-        $('.empty-info').css('display', 'none')
-
-        if (!$(this).is("active")) {
-            $(".timetable .pres-month").removeClass("active");
-            $(".info-windows .info-window").removeClass("active");
-            $(this).addClass("active");
-            $(".info-windows").find(".info-window").addClass("active");
-
-        }
-    });
-    if ($('.pres-month').hasClass('active')) {
-        $('.empty-info').css('display', 'none')
-    }
 
     //------------------pop-trip------------
 
-    $('.add-trip, .info-after-add, .info-block-add').on('click', function () {
-        $('.pop-trip').addClass('active');
-        $('main').css('pointer-events', 'none')
-    });
-    $('.info-note div:nth-child(3)').on('click', function () {
-        $('.pop-trip').addClass('active edit');
-        $('main').css('pointer-events', 'none')
-    });
+
     // if ($('.pop-trip').hasClass('edit')) {
     //     $(this).find('.pop-header p').html('Редагування екскурсії');
     //     $(this).find('.form-trip-block p').html('Дата та час');
@@ -658,3 +591,144 @@ $('.del-slide').on('click', function (e) {
         }
     });
 });
+
+$(document).ready(function () {
+    if ($('.pres-month').hasClass('active')) {
+        $('.empty-info').css('display', 'none')
+    }
+
+    //------------------------------------------------------calendar accordion
+
+
+    function infoExcursions() {
+        $('.info-note').slideUp(0)
+        $('.header-note').unbind('click');
+        $('.header-note').bind('click', noteClick);
+
+        function noteClick() {
+            _next = $(this).next('.info-note');
+            _this = $(this);
+            accord();
+        };
+
+        $('.info-after').unbind('click');
+        $('.info-after').bind('click', infoClick);
+
+        function infoClick() {
+            _this = $(this).siblings('.header-note');
+            _next = $(this).siblings('.info-note');
+            accord();
+        };
+
+
+        $('.add-trip, .info-after-add, .info-block-add').unbind('click');
+        $('.add-trip, .info-after-add, .info-block-add').bind('click', addTrip);
+
+        function addTrip() {
+            $('.pop-trip').addClass('active');
+            $('main').css('pointer-events', 'none')
+        };
+
+        $('.info-note div:nth-child(3)').unbind('click');
+        $('.info-note div:nth-child(3)').bind('click', popTrip);
+
+        function popTrip() {
+            nam = $(this).parents('.info-block').attr('data-name');
+            tel = $(this).parents('.info-block').attr('data-phone');
+            inst = $(this).parents('.info-block').attr('data-institution');
+            posit = $(this).parents('.info-block').attr('data-position');
+            people = $(this).parents('.info-block').attr('data-people');
+            statue = $(this).parents('.info-block').attr('data-status');
+            month = $(this).parents('.info-block').attr('data-month');
+            day = $(this).parents('.info-block').attr('data-day');
+            currs = $(this).parents('.info-block').attr('data-current');
+            interval = $(this).parents('.info-block').attr('data-interval');
+
+            $('#select-month option').removeAttr('selected');
+            $('#select-month option[value="' + month + '"]').attr('selected', true);
+            $('#select-month').siblings('.custom-select').find('.custom-select-trigger').html($('#select-month option[value="' + month + '"]').html());
+
+            monthSel = currs ? '#select-day' : '#select-day-2'
+            $(monthSel + '[name="trip-day"] option').removeAttr('selected');
+            $(monthSel + '[name="trip-day"] option[value="' + day + '"]').attr('selected', true);
+            $(monthSel).siblings('.custom-select').find('.custom-select-trigger').html(day);
+console.log(interval)
+            $('#select-time option').removeAttr('selected');
+            $('#select-time option[value="' + interval + '"]').attr('selected', true);
+            $('#select-time').siblings('.custom-select').find('.custom-select-trigger').html($('#select-time option[value="' + interval + '"]').html());
+
+
+
+
+
+            $('.pop-trip').addClass('active edit');
+            $('main').css('pointer-events', 'none')
+        };
+        $('.info-window').addClass('active')
+
+    }
+
+    infoExcursions();
+
+    function accord() {
+        if (_this.hasClass('opened')) {
+            _next.slideUp('fast');
+            _this.parent('.info-block').removeClass('opened');
+            _this.siblings('.info-after').removeClass('opened');
+            _this.find('.info-open').removeClass('del').html("Відкрити");
+            _this.removeClass('opened');
+        } else {
+            $('.header-note').removeClass('opened');
+            $('.info-block').removeClass('opened');
+            $('.info-after').removeClass('opened');
+            $('.info-open').removeClass('del').html("Відкрити");
+            $('.info-note').slideUp();
+
+            _this.addClass('opened');
+            _this.parent('.info-block').addClass('opened');
+            _this.siblings('.info-after').addClass('opened');
+            _next.slideDown('fast');
+
+            _this.find('.info-open').addClass('del');
+            if (_this.find('.info-open').hasClass("del")) {
+                _this.find('.info-open').html("Видалити")
+            } else _this.find('.info-open').html("Відкрити");
+
+            $('.del').on('click', function () {
+                pop_delete();
+            });
+        }
+    }
+
+    //-------------------------------------------------calendar accordion END
+
+    $(".pres-month").on("click", function () {
+        $('.empty-info').css('display', 'none')
+        if (!$(this).is("active")) {
+            theDay = $(this).attr('data-date')
+            currDay = $(this).find('.day').html();
+            $('.info-content h5 .day').html(currDay);
+
+
+            $.ajax({
+                url: '/admin/get-excursions',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {days: theDay},
+                success: function (res) {
+                    $('.info-windows').html(res)
+                    infoExcursions()
+                }
+            })
+            $(".timetable .pres-month").removeClass("active");
+            $(".info-windows .info-window").removeClass("active");
+            $(this).addClass("active");
+            $(".info-windows").find(".info-window").addClass("active");
+
+
+        }
+    });
+
+})

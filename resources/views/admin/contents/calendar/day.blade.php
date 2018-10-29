@@ -1,4 +1,4 @@
-<td class="@if($currentDay->month == $today->month) pres-month @else prev-month @endif">
+<td class="@if($currentDay->month == $today->month) pres-month @else prev-month @endif" data-date="{{ $currentDay->format('Y-m-d') }}">
     <div class="td-wrap"></div>
     <p class="day">{{ $currentDay->day }} число</p>
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,6 +39,16 @@ class Excursion extends Model
     public function getCurrentDayAttribute()
     {
         return $this->created_at->day;
+    }
+
+    public function getCurrentMonthAttribute()
+    {
+        return $this->created_at->month;
+    }
+
+    public function isCurrentMonth()
+    {
+        return $this->created_at->month == Carbon::now()->month;
     }
 
     public function getDateAttribute()
