@@ -4,6 +4,10 @@
     {!! $jss !!}
 @endsection
 
+@section('body_class')
+    {!! $body_class !!}
+@endsection
+
 @section('header')
     @include('admin.header')
 @endsection

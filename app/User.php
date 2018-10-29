@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +77,26 @@ class User extends Authenticatable
             $this->password = Hash::make($password);
             $this->save();
         }
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request
+     */
+    public function toggleRole($request)
+    {
+        if(auth()->user()->id === $this->id){
+            return ['status' => trans('admin.self_delete')];
+        }
+
+        if($this->role_id == $request->get('role_id')){
+            return ['status' => 'Роль змінено'];
+        }
+
+        $this->role_id = $request->get('role_id');
+        $this->save();
+        return ['status' => 'Роль змінено'];
+
     }
 
 }

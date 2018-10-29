@@ -19,4 +19,27 @@ return [
         ['slug' => 'karta', 'title' => 'Карта',],
         ['slug' => 'futer', 'title' => 'Футер',],
     ],
+    'time_intervals' => [
+        'reserved',
+        '9:00 - 10:30',
+        '10:30 - 12:00',
+        '12:00 - 13:30',
+        '13:30 - 15:00',
+        '15:00 - 16:30',
+        '16:30 - 18:00',
+    ],
+    'statuses' => [
+        'reserved',
+        'Вільний',
+        'Реєстрація',
+        'Заброньовано',
+        'Підверджено',
+    ],
+    'status_class' => [
+        'reserved',
+        'time-free',
+        'time-register',
+        'time-reserved',
+        'time-confirmed',
+    ],
 ];

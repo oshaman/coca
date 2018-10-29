@@ -95,6 +95,8 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-red">зберегти</button>
+        <div style="width: 100%">
+            <button type="submit" class="btn btn-red">зберегти</button>
+        </div>
     </form>
 </div>

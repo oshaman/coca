@@ -57,6 +57,12 @@
                 <div class="button_callback">
                     <a href="#form">ЗАписатись</a>
                 </div>
+                <div class="button_callback">
+                    {{ Form::open(['url'=>'get-calendar', 'method'=>'post']) }}
+                    {!! Form::submit('Submit', ['class' => 'form-control']) !!}
+                    {{ Form::close() }}
+                </div>
+
             </div>
 
         </div>

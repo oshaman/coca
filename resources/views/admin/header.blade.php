@@ -1,4 +1,4 @@
-<body class="user-page">
+<body class="{{ $body_class??'' }}">
 <header>
     <img class="angles topleft" src="{{ asset('admn') }}/imgs/topleft.svg" alt="1">
     <div class="logo">

@@ -15,6 +15,7 @@ class SeoController extends AdminController
      */
     public function index()
     {
+        $this->body_class = 'seo-page';
         $seo = Seo::first();
         $this->content = view('admin.contents.seo')->with(compact('seo'))->render();
         return $this->renderOutput();

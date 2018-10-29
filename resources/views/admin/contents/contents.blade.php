@@ -103,7 +103,7 @@
     </div>
     <div class="tiny-content">
         <div class="under-back"></div>
-        <div class="nacc">
+        <div class="nacc scrollbar">
             <!--<div >-->
             <div class="nacc-content">
                 <h3>Головна <a href="javascript:void(0)">Переглянути</a></h3>

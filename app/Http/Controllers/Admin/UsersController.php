@@ -17,6 +17,7 @@ class UsersController extends AdminController
      */
     public function index()
     {
+        $this->body_class = 'user-page';
         $this->title = 'Користувачі сайту';
         $roles = Role::all()->pluck('uk_name', 'id');
 
@@ -44,8 +45,6 @@ class UsersController extends AdminController
      */
     public function store(Request $request)
     {
-
-
         $this->validate($request, [
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -85,11 +84,16 @@ class UsersController extends AdminController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+           'role_id' => 'required|numeric|between:1,10',
+        ]);
+//        return ['success'=>$request->get('role_id')];
+        $result = $user->toggleRole($request);
+        return $result;
     }
 
     /**

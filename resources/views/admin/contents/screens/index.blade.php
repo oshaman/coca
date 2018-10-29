@@ -3,7 +3,7 @@
         <h1>Редагування контенту</h1>
         @include('admin.logout')
     </div>
-    <div class="rubrics scrollbar">
+    <div class="rubrics">
         @forelse($screens as $screen)
             <div class="rubric @if(1 == $loop->iteration) active @endif">
                 <div class="rub-num">
@@ -18,7 +18,7 @@
     </div>
     <div class="tiny-content">
         <div class="under-back"></div>
-        <div class="nacc">
+        <div class="nacc scrollbar">
             @forelse($screens as $screen)
                 @include('admin.contents.screens.'.$screen->slug, $screen)
             @empty

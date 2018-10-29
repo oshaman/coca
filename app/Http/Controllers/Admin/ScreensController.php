@@ -15,6 +15,7 @@ class ScreensController extends Controller
     {
         $this->sliderRepository = $sliderRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +39,7 @@ class ScreensController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +50,7 @@ class ScreensController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +61,7 @@ class ScreensController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,16 +88,16 @@ class ScreensController extends Controller
 
         $screen->updateScreen($request->all());
 
-        $this->sliderRepository->handle($request, $screen);
+        if ($request->has('slider')) $this->sliderRepository->handle($request, $screen);
 
 
-        return redirect()->back()->with(['status'=>'Екран збережено.']);
+        return redirect()->back()->with(['status' => 'Екран збережено.']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

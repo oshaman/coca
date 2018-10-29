@@ -28,7 +28,7 @@
                         {{Form::select('role_id',
                             $roles,
                             $user->role_id,
-                            ['class' => 'custom-select sources'])
+                            ['class' => 'custom-select sources', 'data-url'=>route('admin.users.update', $user->id)])
                         }}
                     </td>
                     <td></td>

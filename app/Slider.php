@@ -42,4 +42,10 @@ class Slider extends Model
         $this->path = $filename;
         $this->save();
     }
+
+    public function remove()
+    {
+        $this->removeImage();
+        $this->delete();
+    }
 }

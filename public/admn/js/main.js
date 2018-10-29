@@ -1,15 +1,22 @@
-var _url=null;
+var _url = null;
 $(document).ready(function () {
-    $('input').change(function () {
+
+    function inputLabel() {
         $('input').each(function () {
             if ($(this).val().length > 0) {
                 $(this).addClass('label-stay');
-                // console.log($('input').length);
             } else {
                 $(this).removeClass('label-stay');
             }
         });
+    }
+
+    $('input').change(function () {
+        inputLabel()
     });
+
+    inputLabel();
+
 
     if ($('.prev-month').length > 0) {
         var _this = $('.prev-month');
@@ -23,10 +30,54 @@ $(document).ready(function () {
     }
 
     $(".form-seo input[type=file]").change(function () {
-        console.log(123);
         var filename = $(this).val().replace(/.*\\/, "");
         $("#og-image-load").val(filename);
     });
+    $(".form-content input[type=file]").change(function () {
+        $(".form-content input[type=file]").each(function () {
+            var filename = $(this).val().replace(/.*\\/, "");
+            $(this).siblings(".og-image-load").val(filename);
+        })
+    });
+
+    //-------------------------------------------------------bot edit
+    $('.area').each(function () {
+        var area = $(this);
+        var parent = area.parent('.bot-text');
+        var view = area.next('.view');
+        parent.removeClass('active');
+        area.val(view.text());
+
+        area.siblings('.save-bot').on('click', function () {
+            closeText()
+        });
+        area.siblings('.cancel-bot').on('click', function () {
+            closeText()
+        });
+        view.on('click', function () {
+            openText()
+        });
+        area.siblings('.second-open').on('click', function () {
+            openText()
+        });
+
+        function openText() {
+            parent.addClass('active');
+            area.css('display', 'block');
+            area.focus();
+            view.css('display', 'none');
+        }
+
+        function closeText() {
+            area.val(view.text());
+            parent.removeClass('active');
+            view.css('display', 'block');
+            area.css('display', 'none');
+        }
+    });
+    //---------------------------------------------------------end bot edit
+
+
     //------------------------------------------------------calendar accordion
     $('.info-note').slideUp()
     $('.header-note').on('click', function () {
@@ -238,7 +289,12 @@ $(document).ready(function () {
             $('.custom-options').removeClass('scrollbar')
         }
         $(this).find("option").each(function () {
-            template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            if ($('body').hasClass('user-page')) {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '" data-url="' + $(this).parent().attr("data-url") + '">' + $(this).html() + '</span>';
+            }
+            else {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            }
         });
         template += '</div></div>';
 
@@ -273,7 +329,26 @@ $(document).ready(function () {
 
     $(".custom-option").on("click", function () {
         _this = $(this);
-        custClick();
+        if ($('body').hasClass('user-page')) {
+            _role_id = _this.attr('data-value');
+            $.ajax({
+                url: _this.attr('data-url'),
+                type: "PUT",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {'role_id': _role_id},
+                success: function (data) {
+                    console.log(data);
+                    custClick();
+                },
+                error: function (data) {
+
+                }
+            });
+        } else {
+            custClick();
+        }
     });
     $(".form-register .custom-option").on("click", function () {
         _this = $(this);
@@ -421,12 +496,11 @@ $(document).ready(function () {
 //    ---------------------pop-alert---------------
 
 
-
-    if($('.alert-danger').html()) {
+    if ($('.alert-danger').html()) {
         alert_pop($('.alert-danger').html());
     }
 
-    if($('.alert-success').html()) {
+    if ($('.alert-success').html()) {
         alert_pop($('.alert-success').html());
     }
 
@@ -473,7 +547,7 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data: {'id':1},
+            data: {'id': 1},
             contentType: false,
             cache: false,
             processData: false,
@@ -559,7 +633,28 @@ if ($('.my-editor').length > 0) {
 }
 
 $('.add-new-slide').on('click', function () {
-    _htms = $('.new-slide').html()
+    _htms = $('.new-slide').html();
     $(_htms).insertBefore(this);
     $(this).remove();
+});
+$('.del-slide').on('click', function (e) {
+    e.preventDefault();
+    _this = $(this);
+    $.ajax({
+        url: _this.attr('data-url'),
+        type: "DELETE",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+            console.log(data);
+            _this.parent('.sl-block').remove();
+        },
+        error: function (data) {
+
+        }
+    });
 });

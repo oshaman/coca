@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::match(['post', 'get'], '/get-calendar', 'HomeController@getCalendar');
 
 Route::prefix('admin')
     ->name('admin.')
@@ -24,8 +23,8 @@ Route::prefix('admin')
         Route::resource('users', 'UsersController')->except(['create'])->middleware('users');
         Route::resource('seo', 'SeoController')->only(['update', 'index']);
         Route::resource('screen', 'ScreensController')->only(['update']);
+        Route::resource('calendar', 'CalendarController')->only(['index', 'store']);
+        Route::delete('slider/{slider}', 'SliderController@destroy')->name('slide.delete');
     });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
