@@ -1,6 +1,6 @@
 <main>
     <div class="top-main">
-        <h1>Редагування контенту</h1>
+        <h1>Редагування листів</h1>
         @include('admin.logout')
     </div>
     <div class="rubrics">

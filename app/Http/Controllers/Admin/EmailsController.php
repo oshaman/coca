@@ -94,6 +94,9 @@ class EmailsController extends AdminController
 
         if($request->filled('copy')){
             $email->attachCopies($request->get('copy'));
+        } else {
+            $email->copy = null;
+            $email->save();
         }
 
         return redirect()->back()->with(['status'=>'Контент збережено.']);

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CalendarRepository;
+use App\Screen;
+use App\Seo;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct(CalendarRepository $repository)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->repository = $repository;
     }
 
@@ -28,7 +29,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $screens = Screen::with('slider')->get();
+
+        $seo = Seo::first();
+
+        return view('main.index')->with(compact('screens', 'seo'));
     }
 
     public function getCalendar()
@@ -39,8 +44,7 @@ class HomeController extends Controller
 
         $available_excursions = $this->repository->getAvailableExcursionIntervals();
 
-
-        dd($maximal_allowed_day, $disabledDays, $available_excursions);
+//        dd($maximal_allowed_day, $disabledDays, $available_excursions);
 
         return  [
             'max_day' => $maximal_allowed_day,
@@ -49,5 +53,14 @@ class HomeController extends Controller
         ];
 
 
+    }
+
+    public function addExcursions(Request $request)
+    {
+        $this->validate($request, $this->repository->getArrayForCreateValidation());
+
+        $result = $this->repository->addExcursion($request);
+
+        return $result;
     }
 }

@@ -2,11 +2,21 @@
     <h5>
         <p class="day">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $date)->day }} число</p>
         Інформація екскурсій
+        {{--<div class="toggle-button-cover">--}}
+            <div class="button-cover">
+                <div class="button r" id="button-1">
+                    <input type="checkbox" class="checkbox">
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                    <div class="unactive"></div>
+                </div>
+            </div>
+        {{--</div>--}}
     </h5>
 
     @foreach($result as $item)
         @if(null == $item)
-            <div class="info-block-add">
+            <div class="info-block-add" data-interval="{{ $loop->iteration }}" data-day="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $date)->day }}" data-month="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $date)->month }}">
                 <div class="info-after-add"></div>
                 <div class="header-note">
                     <div class="time-calendar time-free">

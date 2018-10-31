@@ -93,6 +93,14 @@
                     </div>
                 </label>
             </div>
+            <div>
+                {!! Form::text('headings[]', $screen->headings[11]??null, ['class' => 'form-control']) !!}
+                <label for="seo-title">Заголовок №12
+                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
+                        <span class="tooltiptext">Підказка</span>
+                    </div>
+                </label>
+            </div>
         </div>
 
         <div style="width: 100%">

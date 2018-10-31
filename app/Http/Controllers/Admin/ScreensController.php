@@ -82,7 +82,7 @@ class ScreensController extends Controller
             'slider.*.alt' => 'nullable|string|max:256',
             'slider.*.title' => 'nullable|string|max:256',
             'slider.*.description' => 'nullable|string|max:256',
-            'slider.*.0' => 'nullable|mimes:jpg,png,jpeg|max:1024',
+            'slider.*.0' => 'nullable|mimes:jpg,png,jpeg|max:2560',
 
         ]);
 

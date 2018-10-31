@@ -212,8 +212,8 @@
                                 <label for="name">Ім’я та Прізвище</label>
                             </div>
                             <div class="tell">
-                                <input type="text" id="number" name="number">
-                                <label for="number">Телефон</label>
+                                <input type="text" id="phone" name="phone">
+                                <label for="phone">Телефон</label>
                             </div>
                             <div class="email">
                                 <input type="email" id="email" name="email">

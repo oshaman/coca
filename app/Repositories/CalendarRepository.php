@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Excursion;
+use App\Jobs\OrderCreated;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,11 @@ class CalendarRepository
         $today = Carbon::today();
         if ($request->has('step')) {
             if ('next' == $request->get('step')) {
-                $currentDay->addMonth();
-                $today->addMonth();
+                $currentDay->addMonthNoOverflow();
+                $today->addMonthNoOverflow();
             } else {
-                $currentDay->subMonth();
-                $today->subMonth();
+                $currentDay->subMonthsNoOverflow(1);
+                $today->subMonthsNoOverflow(1);
             }
         }
 
@@ -63,6 +64,44 @@ class CalendarRepository
         return true;
     }
 
+    public function addExcursion($request):array
+    {
+        $received_date = $this->getReceivedDate($request);
+
+        if (!$this->validateDate($received_date)) {
+            return ['status' => 'Реєстрація на даний день закрита'];
+        }
+
+        if (null !== $this->validateExcursion($received_date, $request->get('interval'))) {
+            return ['status' => 'Даний час вже заброньований'];
+        }
+
+        $excursion = new Excursion();
+
+        $excursion->add($request, $received_date);
+
+        dispatch(new OrderCreated($excursion->email));
+
+        return ['status' => 'Екскурсію збережено.'];
+    }
+
+    public function updateExcursion($request, $excursion):array
+    {
+
+        $received_date = $this->getReceivedDate($request);
+
+        if (!$this->validateDate($received_date)) {
+            return ['status' => 'Реєстрація на даний день закрита'];
+        }
+
+        if ($excursion->isIntervalChanged($received_date) && (null !== $this->validateExcursion($received_date, $request->get('interval')))) {
+            return ['status' => 'Даний час вже заброньований'];
+        }
+
+        $excursion->editExcursion($request, $received_date);
+        return ['status' => 'Екскурсію збережено.'];
+    }
+
     /**
      * @param Carbon $received_date
      * @param int $interval
@@ -78,7 +117,7 @@ class CalendarRepository
      * @param Request $request
      * @return Carbon
      */
-    public function getRecivedDate($request)
+    public function getReceivedDate($request)
     {
         $received_day = $request->get('trip-day');
         $received_month = $request->get('trip-month');
@@ -156,7 +195,7 @@ class CalendarRepository
         $result = [];
 
         foreach ($this->getExcursions(Carbon::now(), $this->getMaximalAllowedDay()->addDay()) as $excursion) {
-            $result[$excursion->created_at->format('Y-m-d')][] = $excursion->interval;
+            $result[$excursion->created_at->format('Y-m-j')][] = $excursion->interval;
         }
 
         return $result;
@@ -176,4 +215,60 @@ class CalendarRepository
 
     }
 
+    public function getArrayForCreateValidation():array
+    {
+        return [
+            "trip-month" => 'required|numeric|between:1,12',
+            "trip-day" => "required|numeric|between:1,31",
+            "interval" => "required|numeric|between:1,6",
+            "name" => "required|string|max:256",
+            "phone" => "required|string|max:256",
+            "email" => "required|string|max:256",
+            "status" => "nullable|numeric|between:2,4",
+            "position" => "required|string|max:256",
+            "people" => "required|numeric|between:4,32",
+            "institution" => "required|string|max:256",
+            "file" => "nullable|mimes:pdf|max:5120",
+            "comment" => "nullable|string|max:256",
+        ];
+    }
+
+    public function getArrayForUpdateValidation():array
+    {
+        return [
+            "trip-month" => 'required|numeric|between:1,12',
+            "trip-day" => "required|numeric|between:1,31",
+            "interval" => "required|numeric|between:1,6",
+            "status" => "required|numeric|between:2,4",
+            "name" => "required|string|max:256",
+            "phone" => "required|string|max:256",
+            "email" => "required|string|max:256",
+            "position" => "required|string|max:256",
+            "people" => "required|numeric|between:4,32",
+            "institution" => "required|string|max:256",
+            "file" => "nullable|mimes:pdf|max:5120",
+        ];
+    }
+
+    public function currentMonthHasAvailableDays():bool
+    {
+        $today = Carbon::now();
+        $lastDay = Carbon::now()->endOfMonth();
+
+        if ($today->isLastOfMonth()) {
+            return false;
+        }
+
+        $count = $today->day+1;
+
+        for ($i=$count;$i<=$lastDay->day;$i++) {
+            $today->addDay();
+
+            if (!$today->isWeekend() && !$today->isLastOfMonth()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -13,7 +13,7 @@
         </div>
 
         <div class="thumbnail">
-            {{ Html::image($pic->getImage(), 'a picture', array('class' => 'img-thumbnail', 'style'=>'width:auto; height: 5.6vh;')) }}
+            {{ Html::image($pic->getImage(), 'a picture', array('class' => 'img-thumbnail')) }}
         </div>
 
         <div>

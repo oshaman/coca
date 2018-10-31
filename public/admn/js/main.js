@@ -117,13 +117,7 @@ $(document).ready(function () {
     });
 
 
-    $('.form-trip').change(function () {
-        console.log(($("#filename").length));
-        if ($('.circle2').hasClass('active') && ($("#filename").length > 0 || $('.nodoc').val().length > 3)) {
-            $('.circle3').addClass('active');
-            $('.p-3').addClass('active');
-        }
-    })
+
 
     record();
 
@@ -204,110 +198,6 @@ $(document).ready(function () {
         $(el).focus();
     })
 
-    //----------------------select-------------------
-
-    $(".custom-select").each(function () {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-        var template = '<div class="' + classes + '">';
-        if ($(this).parents('div').hasClass('.form-register')) {
-            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-        } else {
-            template += '<span class="custom-select-trigger">' + $(this).find('option[selected]').text() + '</span>'
-        }
-        ;
-        template += '<div class="custom-options scrollbar">';
-        if ($('body').hasClass('user-page')) {
-            $('.custom-options').removeClass('scrollbar')
-        }
-        $(this).find("option").each(function () {
-            if ($('body').hasClass('user-page')) {
-                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '" data-url="' + $(this).parent().attr("data-url") + '">' + $(this).html() + '</span>';
-            }
-            else {
-                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-            }
-        });
-        template += '</div></div>';
-
-        $('.scrollbar').mCustomScrollbar();
-        $(this).wrap('<div class="custom-select-wrapper"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-    $(".custom-option:first-of-type").hover(function () {
-        $(this).parents(".custom-options").addClass("option-hover");
-    }, function () {
-        $(this).parents(".custom-options").removeClass("option-hover");
-    });
-    $(".custom-select-trigger").on("click", function () {
-        $('html').one('click', function () {
-            $(".custom-select").removeClass("opened");
-            $(".td-position").removeClass("opened");
-        });
-
-        $(this).parents(".custom-select").toggleClass("opened");
-        $(this).parents(".td-position").toggleClass("opened");
-        event.stopPropagation();
-    });
-
-    function custClick() {
-        _this.parents(".custom-select-wrapper").find("select").val(_this.data("value"));
-        _this.parents(".custom-options").find(".custom-option").removeClass("selection");
-        _this.addClass("selection");
-        _this.parents(".custom-select").removeClass("opened");
-        _this.parents(".custom-select").find(".custom-select-trigger").text(_this.text());
-    }
-
-    $(".custom-option").on("click", function () {
-        _this = $(this);
-        if ($('body').hasClass('user-page')) {
-            _role_id = _this.attr('data-value');
-            $.ajax({
-                url: _this.attr('data-url'),
-                type: "PUT",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {'role_id': _role_id},
-                success: function (data) {
-                    console.log(data);
-                    custClick();
-                },
-                error: function (data) {
-
-                }
-            });
-        } else {
-            custClick();
-        }
-    });
-    $(".form-register .custom-option").on("click", function () {
-        _this = $(this);
-        custClick();
-
-        $('.form-register  .custom-select-trigger').each(function () {
-            _th = $(this);
-            if (_th.length > 0) {
-                _th.parents('.custom-select-wrapper').addClass('label-stay');
-            } else {
-                _th.parents('.custom-select-wrapper').removeClass('label-stay');
-            }
-        });
-    });
-    $(".form-trip-info .custom-option").on("click", function () {
-        _this = $(this);
-        custClick();
-
-        $('.form-trip-info .custom-select-trigger').each(function () {
-            if ($(this).length > 0) {
-                $(this).parents('.custom-select-wrapper').addClass('label-stay');
-            } else {
-                $(this).parents('.custom-select-wrapper').removeClass('label-stay');
-            }
-        });
-    });
 //------------------------validation-------------------
 //Validate Functions
     function validateEmail(em) {
@@ -597,9 +487,136 @@ $(document).ready(function () {
         $('.empty-info').css('display', 'none')
     }
 
+    //----------------------select-------------------
+
+    $(".custom-select").each(function () {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+        var template = '<div class="' + classes + '">';
+        if ($(this).parents('div').hasClass('.form-register')) {
+            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+        } else {
+            template += '<span class="custom-select-trigger">' + $(this).find('option[selected]').text() + '</span>'
+        }
+        ;
+        template += '<div class="custom-options scrollbar">';
+        if ($('body').hasClass('user-page')) {
+            $('.custom-options').removeClass('scrollbar')
+        }
+        $(this).find("option").each(function () {
+            if ($('body').hasClass('user-page')) {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '" data-url="' + $(this).parent().attr("data-url") + '">' + $(this).html() + '</span>';
+            }
+            else {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            }
+        });
+        template += '</div></div>';
+
+        $('.scrollbar').mCustomScrollbar();
+        $(this).wrap('<div class="custom-select-wrapper"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+    $(".custom-option:first-of-type").hover(function () {
+        $(this).parents(".custom-options").addClass("option-hover");
+    }, function () {
+        $(this).parents(".custom-options").removeClass("option-hover");
+    });
+    $(".custom-select-trigger").on("click", function () {
+        $('html').one('click', function () {
+            $(".custom-select").removeClass("opened");
+            $(".td-position").removeClass("opened");
+        });
+
+        $(this).parents(".custom-select").toggleClass("opened");
+        $(this).parents(".td-position").toggleClass("opened");
+        event.stopPropagation();
+    });
+
+    function custClick() {
+        vals = _this.data("value")
+        _this.parents(".custom-select-wrapper").find("select").val(vals);
+        _this.parents(".custom-select-wrapper").find("select option").removeAttr('selected');
+        _this.parents(".custom-select-wrapper").find("select option[value='"+vals+"']").attr('selected', true);
+        _this.parents(".custom-options").find(".custom-option").removeClass("selection");
+        _this.addClass("selection");
+        _this.parents(".custom-select").removeClass("opened");
+        _this.parents(".custom-select").find(".custom-select-trigger").text(_this.text());
+        changeMonth()
+    }
+
+
+
+    $(".custom-option").on("click", function () {
+        _this = $(this);
+        if ($('body').hasClass('user-page')) {
+            _role_id = _this.attr('data-value');
+            $.ajax({
+                url: _this.attr('data-url'),
+                type: "PUT",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {'role_id': _role_id},
+                success: function (data) {
+                    console.log(data);
+                    custClick();
+                },
+                error: function (data) {
+
+                }
+            });
+        } else {
+            custClick();
+        }
+    });
+
+
+
+
+    $(".form-register .custom-option").on("click", function () {
+        _this = $(this);
+        custClick();
+
+        $('.form-register  .custom-select-trigger').each(function () {
+            _th = $(this);
+            if (_th.length > 0) {
+                _th.parents('.custom-select-wrapper').addClass('label-stay');
+            } else {
+                _th.parents('.custom-select-wrapper').removeClass('label-stay');
+            }
+        });
+    });
+
+
+
+    $(".form-trip-info .custom-option").on("click", function () {
+        _this = $(this);
+        custClick();
+
+        $('.form-trip-info .custom-select-trigger').each(function () {
+            if ($(this).length > 0) {
+                $(this).parents('.custom-select-wrapper').addClass('label-stay');
+            } else {
+                $(this).parents('.custom-select-wrapper').removeClass('label-stay');
+            }
+        });
+    });
+
+
+
+
+
     //------------------------------------------------------calendar accordion
-
-
+    function changeMonth() {
+        monthSel = $('#select-month option:selected').index() == 0 ? '#select-day' : '#select-day-2'
+        $('.del-name').removeAttr('name').parent().css({'display': 'none'})
+        $(monthSel).attr('name', 'trip-day')
+            .parent().css({'display': 'block'})
+    }
+    changeMonth()
     function infoExcursions() {
         $('.info-note').slideUp(0)
         $('.header-note').unbind('click');
@@ -624,17 +641,43 @@ $(document).ready(function () {
         $('.add-trip, .info-after-add, .info-block-add').unbind('click');
         $('.add-trip, .info-after-add, .info-block-add').bind('click', addTrip);
 
-        function addTrip() {
+        function addTrip(e) {
+            $('.form-trip').attr('action', 'https://coca.j2landing.com/admin/calendar');
             $('.pop-trip').addClass('active');
+            $('.form-trip').trigger('reset');
+            $('.form-trip div input').each(function () {
+                if($(this).attr('type') != 'radio') {
+                    $(this).val('');
+                }
+            })
+            $('.pop-trip input[name="_method"]').remove()
             $('main').css('pointer-events', 'none')
+            $('#position').siblings('.custom-select').find('.custom-select-trigger').html('')
+            $('#position').val()
+            $('#trip-pos').trigger('change');
         };
+
+        $('.form-trip').unbind('change');
+        $('.form-trip').bind('change', tripChange);
+
+       function tripChange() {
+            if ($('.circle2').hasClass('active') && ($("#filename").length > 0 || $('.nodoc').val().length > 3)) {
+                $('.circle3').addClass('active');
+                $('.p-3').addClass('active');
+            }
+            changeMonth()
+       }
 
         $('.info-note div:nth-child(3)').unbind('click');
         $('.info-note div:nth-child(3)').bind('click', popTrip);
 
         function popTrip() {
+            $('.pop-trip input[name="_method"]').remove()
+
+            ids = $(this).parents('.info-block').attr('data-id');
             nam = $(this).parents('.info-block').attr('data-name');
             tel = $(this).parents('.info-block').attr('data-phone');
+            email = $(this).parents('.info-block').attr('data-email');
             inst = $(this).parents('.info-block').attr('data-institution');
             posit = $(this).parents('.info-block').attr('data-position');
             people = $(this).parents('.info-block').attr('data-people');
@@ -644,29 +687,50 @@ $(document).ready(function () {
             currs = $(this).parents('.info-block').attr('data-current');
             interval = $(this).parents('.info-block').attr('data-interval');
 
+            $('.form-trip').attr('action', 'https://coca.j2landing.com/admin/calendar/' + ids);
+
             $('#select-month option').removeAttr('selected');
             $('#select-month option[value="' + month + '"]').attr('selected', true);
             $('#select-month').siblings('.custom-select').find('.custom-select-trigger').html($('#select-month option[value="' + month + '"]').html());
 
             monthSel = currs ? '#select-day' : '#select-day-2'
+            $('.del-name').removeAttr('name');
+            $(monthSel).attr('name', 'trip-day');
             $(monthSel + '[name="trip-day"] option').removeAttr('selected');
             $(monthSel + '[name="trip-day"] option[value="' + day + '"]').attr('selected', true);
             $(monthSel).siblings('.custom-select').find('.custom-select-trigger').html(day);
-console.log(interval)
             $('#select-time option').removeAttr('selected');
             $('#select-time option[value="' + interval + '"]').attr('selected', true);
             $('#select-time').siblings('.custom-select').find('.custom-select-trigger').html($('#select-time option[value="' + interval + '"]').html());
 
 
+            $('#trip-name').attr('value', nam);
+            $('#trip-phone').attr('value', tel);
+            $('#trip-email').attr('value', email);
+            $('#trip-pos').attr('value', posit);
+            $('#trip-school').attr('value', inst);
 
+            $('#position option').removeAttr('selected');
+            $('#position option[value="' + people + '"]').attr('selected', true);
+            $('#position').siblings('.custom-select').find('.custom-option[data-value="'+people+'"]').trigger('click');
 
+            $('input[type="radio"][value="'+statue+'"]').trigger('click')
 
             $('.pop-trip').addClass('active edit');
             $('main').css('pointer-events', 'none')
+            $('#trip-pos').trigger('change');
+            $('.pop-trip form').append('<input type="hidden" name="_method" value="PUT">')
+
+            changeMonth()
         };
         $('.info-window').addClass('active')
 
     }
+    $('.delete-excur').click(function () {
+        $('.pop-trip input[name="_method"]').remove();
+        $('.pop-trip form').append('<input type="hidden" name="_method" value="DELETE">');
+        $('.pop-trip form').trigger('submit');
+    })
 
     infoExcursions();
 

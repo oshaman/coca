@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Excursion;
-use App\Jobs\OrderCreated;
 use App\Repositories\CalendarRepository;
 use Illuminate\Http\Request;
 
@@ -29,11 +28,14 @@ class CalendarController extends AdminController
     {
         $calendar = $this->repository->getCalendar($request);
 
+        $currentMonthHasAvailableDays =$this->repository->currentMonthHasAvailableDays();
+
         $this->content = view('admin.contents.calendar.calendar')
             ->with([
                 'today' => $calendar['today'],
                 'currentDay' => $calendar['currentDay'],
                 'excursions' => $calendar['excursions'],
+                'currentMonthHasAvailableDays' => $currentMonthHasAvailableDays,
             ])
             ->render();
         return $this->renderOutput();
@@ -58,36 +60,11 @@ class CalendarController extends AdminController
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            "trip-month" => 'required|numeric|between:1,12',
-            "trip-day" => "required|numeric|between:1,31",
-            "interval" => "required|numeric|between:1,6",
-            "name" => "required|string|max:256",
-            "phone" => "required|string|max:256",
-            "email" => "required|string|max:256",
-            "position" => "required|string|max:256",
-            "people" => "required|numeric|between:4,32",
-            "institution" => "required|string|max:256",
-            "file" => "nullable|mimes:pdf|max:5120",
-        ]);
+        $this->validate($request, $this->repository->getArrayForCreateValidation());
 
-        $received_date = $this->repository->getRecivedDate($request);
+        $result = $this->repository->addExcursion($request);
 
-        if (!$this->repository->validateDate($received_date)) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['error' => 'Реєстрація на даний день закрита']);
-        }
-
-        if (null !== $this->repository->validateExcursion($received_date, $request->get('interval'))) {
-            return redirect()->back()->withInput()->withErrors(['error' => 'Даний час вже заброньований']);
-        }
-
-        $this->excursion->add($request, $received_date);
-
-        dispatch(new OrderCreated($this->excursion->email));
-
-        return redirect()->back()->with(['status' => 'Екскурсію збережено.']);
+        return redirect()->back()->with($result);
 
     }
 
@@ -122,7 +99,17 @@ class CalendarController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $excursion = Excursion::where('id', $id)->first();
+
+        if (!$excursion) {
+            abort(404);
+        }
+
+        $this->validate($request, $this->repository->getArrayForUpdateValidation());
+
+        $result = $this->repository->updateExcursion($request, $excursion);
+
+        return redirect()->back()->with($result);
     }
 
     /**
@@ -133,6 +120,12 @@ class CalendarController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        $excursion = Excursion::where('id', $id)->first();
+
+        if (!$excursion) {
+            abort(404);
+        }
+
+        return redirect()->back()->with($excursion->deleteExcursion());
     }
 }

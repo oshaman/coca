@@ -80,13 +80,22 @@
     </div>
 </main>
 
-<div class="pop-trip">
+<div class="pop-trip add-form">
     <div class="pop-header">
-        <p>Добавити екскурсію</p>
+        <p>Додати екскурсію</p>
         <div class="close"><img src="{{ asset('admn') }}/imgs/close-red.svg" alt="close"></div>
     </div>
     <div class="pop-form">
         @include('admin.contents.calendar.add-form')
+    </div>
+</div>
+<div class="pop-trip edit-form">
+    <div class="pop-header">
+        <p>Редагувати екскурсію</p>
+        <div class="close"><img src="{{ asset('admn') }}/imgs/close-red.svg" alt="close"></div>
+    </div>
+    <div class="pop-form">
+        @include('admin.contents.calendar.edit-form')
     </div>
 </div>
 
@@ -94,7 +103,7 @@
 <div class="pop-delete">
     <div class="pop-main">
         <div class="doubt-text">
-            Ви впевнені що хочете видалити цього чела?
+            Ви впевнені що хочете видалити?
         </div>
         <div class="doubt-button">
             <div class="button-success">Так</div>

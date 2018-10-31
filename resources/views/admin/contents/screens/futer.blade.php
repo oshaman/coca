@@ -22,7 +22,7 @@
             </div>
             <div>
                 {!! Form::text('headings[]', $screen->headings[2]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Посилання на
+                <label for="seo-title">Посилання на Pinterest
                     <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
                         <span class="tooltiptext">Підказка</span>
                     </div>

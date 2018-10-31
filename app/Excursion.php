@@ -18,7 +18,6 @@ class Excursion extends Model
         'file',
         'photo',
         'comment',
-        'status',
         'interval',
     ];
 
@@ -27,13 +26,48 @@ class Excursion extends Model
         $this->fill($request->all());
 
         $this->created_at = $date;
-        $this->status = 2;
+
+        $this->status = $request->get('status')??2;
 
         if ($request->has('file')) {
             $this->uploadFile($request->file('file'));
         }
 
         $this->save();
+    }
+
+    /**
+     * @param $request
+     * @param Carbon $date
+     */
+    public function editExcursion($request, $date)
+    {
+        $this->fill($request->all());
+        $this->created_at = $date;
+
+        if ($request->has('file')) {
+            $this->uploadFile($request->file('file'));
+        }
+
+        $this->updateStatus($request->get('status'));
+
+        $this->save();
+
+    }
+
+    public function deleteExcursion():array
+    {
+        $this->removeFile();
+        $this->delete();
+        return ['status' => 'Екскурсію видалено.'];
+    }
+
+    public function updateStatus($status): void
+    {
+        if ($this->status != $status){
+            $this->status = $status;
+            //TODO: send email
+        }
     }
 
     public function getCurrentDayAttribute()
@@ -79,5 +113,10 @@ class Excursion extends Model
         $file->storeAs('images/members', $filename, 'public');
         $this->file = $filename;
         $this->save();
+    }
+
+    public function isIntervalChanged($date)
+    {
+        return $date->format('Y-m-d') !== $this->created_at->format('Y-m-d');
     }
 }
