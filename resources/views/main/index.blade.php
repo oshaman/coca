@@ -83,7 +83,7 @@
     </div>
 </main>
 
-@include('main.footer', ['screen'=>$screens->where('slug', 'footer')->first()])
+@include('main.footer', ['screen'=>$screens->where('slug', 'futer')->first()])
 
 <div class="pop_up">
     <div class="modal">

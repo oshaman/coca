@@ -326,6 +326,7 @@ div.inval label {
     color: #A9AEBE;
     position: absolute;
     top: 35%;
+    left: 0;
     font-size: 0.729vw;
     transition: .2s linear;
 }
@@ -359,7 +360,7 @@ div.inval label {
     width:  47.2%;
 }
 /*.form-content .seo-column > div.sl-block {*/
-    /*width:  100%;*/
+/*width:  100%;*/
 /*}*/
 .form-register div {
     padding-bottom: 2.4vh;
@@ -610,7 +611,7 @@ div.eye {
     right: auto;
     z-index: 3;
     background: #FFF;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     border-radius: 4px;
 }
 .pop-trip.edit {
@@ -639,6 +640,9 @@ div.eye {
     opacity: .4;
     cursor: pointer;
 }
+.pop-header .close img {
+    width: 1.25VW;
+}
 .pop-header .close:hover {
     filter: grayscale(0);
     opacity: 1;
@@ -666,7 +670,7 @@ div.eye {
     width: 100%;
     justify-content: center;
     align-items: center;
-    padding: 0.4525vw 2.15vw;
+    padding: 1.4525vh 2.15vw;
     background: #F40009;
     color: #fff;
     border: none;
@@ -805,59 +809,59 @@ div.eye {
     border-color: #F40009;
 }
 /*.radio-list-left input[type="radio"] + label:before {*/
-  /**/
+/**/
 /*}*/
 
 /*.circle {*/
-    /*width: 17px;*/
-    /*height: 17px;*/
-    /*border: 1px solid #A9AEBE;*/
-    /*border-radius: 50%;*/
-    /*background: #fff;*/
-    /*margin-bottom: 1.2037vh;*/
+/*width: 17px;*/
+/*height: 17px;*/
+/*border: 1px solid #A9AEBE;*/
+/*border-radius: 50%;*/
+/*background: #fff;*/
+/*margin-bottom: 1.2037vh;*/
 /*}*/
 /*.circle3 {*/
-    /*margin-bottom: 0;*/
+/*margin-bottom: 0;*/
 /*}*/
 /*.bar-circle hr {*/
-    /*height: 1.2037vh;*/
-    /*width: 1px;*/
-    /*background: #A9AEBE;*/
-    /*position: absolute;*/
-    /*margin: 0 auto;*/
-    /*border: none;*/
-    /*left: 8px;*/
+/*height: 1.2037vh;*/
+/*width: 1px;*/
+/*background: #A9AEBE;*/
+/*position: absolute;*/
+/*margin: 0 auto;*/
+/*border: none;*/
+/*left: 8px;*/
 /*}*/
 /*.active-top {*/
-    /*top: 17px;*/
+/*top: 17px;*/
 /*}*/
 /*.active-bottom {*/
-    /*bottom: 17px;*/
+/*bottom: 17px;*/
 /*}*/
 /*.circle.active {*/
-    /*background: #F40009;*/
-    /*border-color: #F40009;*/
+/*background: #F40009;*/
+/*border-color: #F40009;*/
 /*}*/
 /*.circle1.active ~ .active-top,*/
 /*.circle2.active ~ .active-top {*/
-    /*background: #F40009;*/
+/*background: #F40009;*/
 /*}*/
 /*.circle2.active ~ .active-bottom,*/
 /*.circle3.active ~ .active-bottom {*/
-    /*background: #F40009;*/
+/*background: #F40009;*/
 /*}*/
 /*.bar-text p {*/
-    /*opacity: .4;*/
-    /*margin-bottom: 1.2vh;*/
-    /*line-height: 1.4;*/
-    /*padding-left: 0.7vw;*/
+/*opacity: .4;*/
+/*margin-bottom: 1.2vh;*/
+/*line-height: 1.4;*/
+/*padding-left: 0.7vw;*/
 /*}*/
 /*.bar-text p:last-child {*/
-    /*margin-bottom: 0;*/
-    /*line-height: 1.1;*/
+/*margin-bottom: 0;*/
+/*line-height: 1.1;*/
 /*}*/
 /*.bar-text .active {*/
-    /*opacity: 1;*/
+/*opacity: 1;*/
 /*}*/
 /* Checkmark style starts */
 @-moz-keyframes dothabottomcheck {
@@ -1182,7 +1186,7 @@ nav {
 }
 .img-calendar::before {
     background: url(../imgs/calendar.svg) no-repeat center;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 .img-users::before {
     background: url(../imgs/users.svg) no-repeat center;
@@ -1198,6 +1202,10 @@ nav {
 }
 .img-robotic::before {
     background: url(../imgs/robotic.svg) no-repeat center;
+    background-size: contain;
+}
+.img-frame::before {
+    background: url(../imgs/frame.svg) no-repeat center;
     background-size: contain;
 }
 .hr-menu {
@@ -1562,7 +1570,8 @@ div.custom-options {
 }
 .rubrics:before,
 .rubrics:after,
-.calendar:after{
+.calendar:after,
+.gallery:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -1580,7 +1589,8 @@ div.custom-options {
     background: #cfcfcf;
 }
 .rubrics:after,
-.calendar:after{
+.calendar:after,
+.gallery:after {
     bottom: 0;
 }
 .tiny-content {
@@ -1731,6 +1741,7 @@ div.mce-edit-area {
     opacity: 1;
 }
 .add-trip,
+.add-frame,
 .add-new-slide {
     color: #F40009;
     font-size: 0.729166vw;
@@ -1745,11 +1756,13 @@ div.mce-edit-area {
     justify-content: flex-start;
 }
 .add-trip p,
+.add-frame p,
 .add-new-slide p {
     margin-right: 0.15vw;
     margin-left: -0.3vw;
 }
 .add-trip p img,
+.add-frame p img,
 .add-new-slide p img {
     width: 2.95vw;
 }
@@ -1922,6 +1935,7 @@ h5 {
 .button-cover {
     position: absolute;
     right: 0;
+    top: 0;
 }
 
 .button-cover:before {
@@ -2003,23 +2017,8 @@ h5 {
 #button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
     transition: 0.3s ease all;
 }
-.unactive {
-    display: none;
-    position: absolute;
-    right: -10px;
-    background: url(../imgs/blur.png);
-    /*pointer-events: none;*/
-    /*filter: blur(5px);*/
-    width: 22.5vw;
-    /*background: #fff;*/
-    /*opacity: .5;*/
-    height: 33vh;
-    z-index: 2;
-}
-/*#button-1 .checkbox:checked ~ .unactive {*/
-    /*display: block;*/
-/*}*/
-.button-cover .checkbox:checked ~ .info-block-add {
+.info-window.unactive .info-block-add,
+.info-window.unactive .info-block{
     pointer-events: none;
     filter: blur(5px);
 }
@@ -2363,6 +2362,130 @@ h5 {
     border-right: none;
 }
 /*---------------------------------------END bot-page*/
+/*------------------------------------------frame-page*/
+.frame-page header {
+    width: 14.5vw;
+}
+.gallery {
+    width: 86.5vw;
+    margin: 0 0.15vw 0 0.425vw;
+    height: 92%;
+}
+.gallery .panel {
+    margin: 0 2.5VW;
+    justify-content: flex-end;
+    height: 6.5vh;
+    padding: 1vh 1.1vw 0;
+}
+
+.frames {
+    padding: 2.1vh 0.3vw;
+    display: flex;
+    flex-wrap: wrap;
+    height: 95%;
+}
+.frame {
+    margin: 1.8vh 2vw;
+    width: 13.125VW;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    transition: .1s;
+}
+.frame:hover {
+    z-index: 2;
+}
+.photo-frame {
+    display: grid;
+    margin-bottom: -0.2vh;
+    height: 20.5vh;
+    width: 100%;
+}
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.name-frame {
+    font-size: 0.729vw;
+    font-weight: 700;
+    color: #37393C;
+    border: 1px solid #cfcfcf;
+    border-right: none;
+    border-radius: 0 0 0 4px;
+    padding: 1.1vh 0.5vw 1.1vh 1vw;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #fff;
+    width: 81%;
+}
+.del-frame {
+    transition: .2s;
+    cursor: pointer;
+    border: 1px solid #cfcfcf;
+    border-radius: 0 0 4px 0;
+    width: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7vh 0;
+    background: #fff;
+}
+.del-frame svg {
+    width: .8vw;
+}
+.del-frame svg path {
+    transition: .2s;
+    fill: #B7BEC5;
+}
+.del-frame:hover svg path {
+    fill: #F40009;
+}
+.del-frame:active svg path {
+    fill: #fff;
+}
+.del-frame:hover {
+    border-color: #F40009;
+}
+.del-frame:active {
+    border-color: #F40009;
+    background: #F40009;
+}
+.frame-page .bottomright {
+    z-index: 1;
+}
+.frame-page .mCSB_inside>.mCSB_container {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.frame-page .mCSB_scrollTools {
+    z-index: 1;
+    border-left: none;
+    margin-right: 0.4vw;
+}
+.frame-page .mCSB_scrollTools .mCSB_draggerContainer {
+    background: transparent;
+}
+.frame-page .pop-trip {
+    left: auto;
+    right: 16vw;
+}
+.frame-page .form-trip-info {
+    padding: 0 1.5vw;
+}
+.frame-page .trip-photo {
+    padding: 1vh 0 2.8vh;
+}
+.frame-page .form-trip-info div:first-child {
+    width: auto;
+    padding: 2vh 0;
+}
+.frame-page .form-trip-info div:first-child div {
+    width: auto;
+    padding: 0;
+}
+/*---------------------------------------END frame-page*/
 /*----------------------------------------------media*/
 
 @media screen and (max-width: 1366px){
@@ -2385,6 +2508,11 @@ h5 {
         height: 52.8vh;
         margin-bottom: 2.2vh;
     }
+    .form-trip-info,
+    .form-trip-block,
+    .form-trip-file {
+        padding-bottom: 0;
+    }
     .form-trip-block p,
     .form-trip-info p,
     .trip-photo,
@@ -2398,18 +2526,8 @@ h5 {
     .form-trip-file .progress-bar {
         width: 6.97vw;
     }
-    .bar-circle hr {
-        left: 6px;
-    }
-    .active-top {
-        top: 13px;
-    }
-    .active-bottom {
-        bottom: 13px;
-    }
-    .bar-text p {
-        margin-bottom: 1.6vh;
-        /*margin-bottom: 10px;*/
+    .form-trip-file .progress-bar {
+        font-size: 12px;
     }
     .trip-check {
         margin: 0.5vh 0 2vh;

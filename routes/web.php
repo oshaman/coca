@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::match(['post', 'get'], '/get-calendar', 'HomeController@getCalendar');
 Route::post('/add-excursions', 'HomeController@addExcursions');
 
+Route::match(['post', 'get'], 'get-photo', 'PhotosController@index')->name('get-photo');
+
 Route::prefix('admin')
     ->name('admin.')
     ->middleware('admin')
@@ -29,6 +31,7 @@ Route::prefix('admin')
         Route::delete('slider/{slider}', 'SliderController@destroy')->name('slide.delete');
 
         Route::resource('calendar', 'CalendarController')->only(['index', 'store', 'destroy', 'update']);
+        Route::resource('photo-frame', 'PhotosController')->only(['index', 'store', 'destroy']);
         Route::post('get-excursions', 'AjaxController@getExcursions');
 
     });

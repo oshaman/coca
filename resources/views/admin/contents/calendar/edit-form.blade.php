@@ -33,10 +33,10 @@
     </div>
     <div class="form-trip-info">
         <p>Інформація щодо екскурсії</p>
-        <span>
+        <div>
             {{ Form::text('name', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-name']) }}
             <label for="trip-name">Ім’я та Прізвище</label>
-        </span>
+        </div>
         <div>
             {{ Form::text('phone', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-phone']) }}
             <label for="trip-phone">Телефон</label>
@@ -70,12 +70,20 @@
             <label for="upload-doc" class="btn btn-grey upload-doc">Завантажити</label>
             <input type="text" id="filename" class="filename" disabled>
         </div>
-        {{--<div class="trip-check">
-            <input type="checkbox" id="cbtest"/>
-            <label for="cbtest" class="check-box"></label>
-            <label for="cbtest" class="check-text">У мене немає документу</label>
-            <textarea name="pole" class="nodoc" cols="num" rows="num" placeholder="Тому що......"></textarea>
-        </div>--}}
+
+        {{--Групповое фото--}}
+        <div>
+            <div class="trip-photo">Групповое фото
+                <div class="tooltip"><img src="{{ asset('admn') }}/imgs/Subtract.svg" alt="1">
+                    <span class="tooltiptext">Підказка</span>
+                </div>
+            </div>
+            <input id="upload-photo" type="file" name="photo">
+            <label for="upload-photo" class="btn btn-grey upload-doc">Завантажити</label>
+            <input type="text" id="photo-filename" class="filename" disabled>
+        </div>
+        {{--Групповое фото--}}
+
 
         <div class="progress-bar">
             <dl class="radio-list-left">
@@ -92,23 +100,10 @@
                     <label for="pq1-3">Підтвердженно</label>
                 </dd>
             </dl>
-
-            {{--<div class="bar-circle">--}}
-            {{--<div class="circle circle1 active"></div>--}}
-            {{--<div class="circle circle2"></div>--}}
-            {{--<div class="circle circle3"></div>--}}
-            {{--<hr class="active-top">--}}
-            {{--<hr class="active-bottom">--}}
-            {{--</div>--}}
-            {{--<div class="bar-text">--}}
-            {{--<p class="active">Заброньовано</p>--}}
-            {{--<p class="p-2">Очікує документ</p>--}}
-            {{--<p class="p-3">Підтвердженно</p>--}}
-            {{--</div>--}}
         </div>
     </div>
     <div class="trip-buttons">
-        <button type="submit" class="btn">Створити</button>
+        <button type="submit" class="btn">Редагувати</button>
         <div class="btn btn-white delete-excur">
             Видалити
         </div>

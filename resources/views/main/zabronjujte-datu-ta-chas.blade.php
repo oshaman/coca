@@ -7,31 +7,31 @@
                 {!! $screen->content !!}
             </div>
             <div class="form_sec5">
-                <form action="">
+                <form action="" autocomplete="off">
                     <fieldset>
                         <h3>Загальна інформація</h3>
                         <div class="name">
-                            <input type="text" id="name" name="name">
+                            <input type="text" id="name" name="name" autocomplete="off">
                             <label for="name">Ім’я та Прізвище</label>
                         </div>
                         <div class="tell">
-                            <input type="text" id="phone" name="phone">
+                            <input type="text" id="phone" name="phone" autocomplete="off">
                             <label for="phone">Телефон</label>
                         </div>
                         <div class="email">
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="email" autocomplete="off">
                             <label for="email">Пошта</label>
                         </div>
                         <div class="pole_form">
-                            <input type="text" id="position" name="position">
+                            <input type="text" id="position" name="position" autocomplete="off">
                             <label for="position">Посада</label>
                         </div>
                         <div class="pole_form">
-                            <input type="text" id="institution" name="institution">
+                            <input type="text" id="institution" name="institution" autocomplete="off">
                             <label for="institution">Назва закладу</label>
                         </div>
                         <div class="pole_form">
-                            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select sources"])}}
+                            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources"])}}
                         </div>
                     </fieldset>
                     <fieldset>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="timer">
 
-                                <select name="interval" id="interval" class="custom-select" placeholder="Час">
+                                <select name="interval" id="interval" class="custom-select" >
                                     <option value="1">9:00-10:30</option>
                                     <option  value="2">10:30-12:00</option>
                                     <option value="3">12:00-13:30</option>

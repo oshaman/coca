@@ -5,7 +5,7 @@
         {{--<div class="toggle-button-cover">--}}
             <div class="button-cover">
                 <div class="button r" id="button-1">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="foo" class="checkbox vkl">
                     <div class="knobs"></div>
                     <div class="layer"></div>
                     <div class="unactive"></div>
@@ -42,6 +42,11 @@
                         <p class="info-document">
                             @if($item->file)
                                 <a href="{{ URL::to( '/assets/images/members/' . $item->file)  }}" target="_blank">{{ $item->file }}</a>
+                            @endif
+                        </p>
+                        <p class="info-document">
+                            @if($item->photo)
+                                <a href="{{ URL::to( '/assets/images/group-photos/' . $item->photo)  }}" target="_blank">{{ $item->photo }}</a>
                             @endif
                         </p>
                     </div>

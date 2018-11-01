@@ -33,10 +33,10 @@
     </div>
     <div class="form-trip-info">
         <p>Інформація щодо екскурсії</p>
-        <span>
+        <div>
             {{ Form::text('name', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-name-add']) }}
             <label for="trip-name-add">Ім’я та Прізвище</label>
-        </span>
+        </div>
         <div>
             {{ Form::text('phone', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-phone-add']) }}
             <label for="trip-phone-add">Телефон</label>

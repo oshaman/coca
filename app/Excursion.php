@@ -49,6 +49,10 @@ class Excursion extends Model
             $this->uploadFile($request->file('file'));
         }
 
+        if ($request->has('photo')) {
+            $this->uploadPhoto($request->file('photo'));
+        }
+
         $this->updateStatus($request->get('status'));
 
         $this->save();
@@ -58,6 +62,7 @@ class Excursion extends Model
     public function deleteExcursion():array
     {
         $this->removeFile();
+        $this->removePhoto();
         $this->delete();
         return ['status' => 'Екскурсію видалено.'];
     }
@@ -113,6 +118,26 @@ class Excursion extends Model
         $file->storeAs('images/members', $filename, 'public');
         $this->file = $filename;
         $this->save();
+    }
+
+    public function uploadPhoto($file)
+    {
+        if (null == $file) {
+            return;
+        }
+
+        $this->removePhoto();
+        $filename = str_random(10) . time() . '.' . $file->extension();
+        $file->storeAs('images/group-photos', $filename, 'public');
+        $this->photo = $filename;
+        $this->save();
+    }
+
+    public function removePhoto()
+    {
+        if (!empty($this->photo)) {
+            Storage::disk('public')->delete('images/group-photos/' . $this->photo);
+        }
     }
 
     public function isIntervalChanged($date)

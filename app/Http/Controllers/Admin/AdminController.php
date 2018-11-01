@@ -46,6 +46,7 @@ abstract class AdminController extends Controller
                 $menu->add("SEO текст", array('route' => 'admin.seo.index'))->link->attr(['class' => 'nav img-seo']);
                 $menu->add("Нагадування клієнтам", array('route' => 'admin.emails.index'))->link->attr(['class' => 'nav img-bell']);
                 $menu->add("Чат бот", array('route' => 'admin.bot.index'))->link->attr(['class' => 'nav img-robotic']);
+                $menu->add("Рамки для фото", array('route' => 'admin.photo-frame.index'))->link->attr(['class' => 'nav img-frame']);
             }
 
             if (Gate::allows('EDIT_USERS')) {

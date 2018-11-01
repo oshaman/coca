@@ -28,10 +28,14 @@ class CalendarRepository
             }
         }
 
+
+
         $lastDay = $currentDay->copy()->endOfMonth();
         $excursions = $this->getExcursions($currentDay, $lastDay);
 
+
         $dayOfWeek = $currentDay->dayOfWeekIso;
+
         if ($dayOfWeek <= 5) {
             for ($i = 0; $i < $dayOfWeek; $i++) {
                 $currentDay->subDay();
@@ -87,7 +91,9 @@ class CalendarRepository
 
     public function updateExcursion($request, $excursion):array
     {
-
+        /**
+         * @var Excursion $excursion
+         */
         $received_date = $this->getReceivedDate($request);
 
         if (!$this->validateDate($received_date)) {
@@ -247,6 +253,7 @@ class CalendarRepository
             "people" => "required|numeric|between:4,32",
             "institution" => "required|string|max:256",
             "file" => "nullable|mimes:pdf|max:5120",
+            "photo" => "nullable|mimes:jpeg,jpg,png|max:5120",
         ];
     }
 

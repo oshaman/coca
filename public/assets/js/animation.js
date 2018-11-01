@@ -2846,7 +2846,6 @@ r2 = $(".text_R").offset().top;
 r3 = $(".text_R2").offset().top;
 l1 = $(".text_L").offset().top;
 
-var data_mone,data_day,data_year
 
 function f1() {
 
@@ -2865,6 +2864,92 @@ if ($(window).width() > 1024) {
 
     })
 }
+
+
+function select_() {
+    $(".timer .custom-select").each(function () {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+
+
+        var template = '<div class="' + classes + '">';
+        template += '<span class="custom-select-trigger">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
+        template += '<div class="custom-options"><ul>';
+        $(this).find("option").each(function () {
+            template += '<li class="custom-option " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
+        });
+        template += '</ul></div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+    $(".custom-option:first-of-type").hover(function () {
+        $(this).parents(".custom-options").addClass("option-hover");
+    }, function () {
+        $(this).parents(".custom-options").removeClass("option-hover");
+    });
+    $(".custom-select-trigger").on("click", function () {
+        $('.calendar_w').removeClass('open')
+        $(this).parents(".custom-select").toggleClass("opened");
+        event.stopPropagation();
+    });
+    $(".custom-option").on("click", function () {
+        $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select").removeClass("opened");
+        $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+
+
+    });
+}
+
+select_()
+
+function select_2() {
+    $(".custom-select_people").each(function () {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+
+
+        var template = '<div class="' + classes + '">';
+        template += '<span class="custom-select-trigger_people">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
+        template += '<div class="custom-options_people"><ul>';
+        $(this).find("option").each(function () {
+            template += '<li class="custom-option_people " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
+        });
+        template += '</ul></div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper_people"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+    $(".custom-option_people:first-of-type").hover(function () {
+        $(this).parents(".custom-options_people").addClass("option-hover");
+    }, function () {
+        $(this).parents(".custom-options_people").removeClass("option-hover");
+    });
+    $(".custom-select-trigger_people").on("click", function () {
+        $('.calendar_w').removeClass('open')
+        $(this).parents(".custom-select_people").toggleClass("opened");
+        event.stopPropagation();
+    });
+    $(".custom-option_people").on("click", function () {
+        $(this).parents(".custom-select-wrapper_people").find("select").val($(this).data("value"));
+        $(this).parents(".custom-options_people").find(".custom-option_people").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select_people").removeClass("opened");
+        $(this).parents(".custom-select_people").find(".custom-select-trigger_people").text($(this).text());
+
+
+    });
+}
+
+select_2()
+
 $.getScript("http://www.youtube.com/iframe_api");
 $(document).ready(function () {
     function f2() {
@@ -2912,8 +2997,8 @@ $(document).ready(function () {
             $('.slider_popUp .popUp_c').append($('.gallery_block').clone())
             id = $(this).data('id')
             data = $('.slider_popUp .gallery_block')
-            for (var i=0; i <  $('.slider_popUp .gallery_block').length; i++) {
-                if (id == data.eq(i).data('id') ) {
+            for (var i = 0; i < $('.slider_popUp .gallery_block').length; i++) {
+                if (id == data.eq(i).data('id')) {
                     data.eq(i).addClass('active')
                 }
             }
@@ -2963,44 +3048,6 @@ $(document).ready(function () {
 
 
 
-    $(".custom-select").each(function () {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-        var template = '<div class="' + classes + '">';
-        template += '<span class="custom-select-trigger">' + $(this).find('option').eq(0).val() + '</span>';
-        template += '<div class="custom-options"><ul>';
-        $(this).find("option").each(function () {
-            template += '<li class="custom-option " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
-        });
-        template += '</ul></div></div>';
-
-        $(this).wrap('<div class="custom-select-wrapper"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-    $(".custom-option:first-of-type").hover(function () {
-        $(this).parents(".custom-options").addClass("option-hover");
-    }, function () {
-        $(this).parents(".custom-options").removeClass("option-hover");
-    });
-    $(".custom-select-trigger").on("click", function () {
-        // $('html').one('click',function() {
-        //     $(".custom-select").removeClass("opened");
-        // });
-        $('.calendar_w').removeClass('open')
-        $(this).parents(".custom-select").toggleClass("opened");
-        event.stopPropagation();
-    });
-    $(".custom-option").on("click", function () {
-        $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-        $(this).addClass("selection");
-        $(this).parents(".custom-select").removeClass("opened");
-        $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-
-
-    });
     $('.check_text input').change(function () {
         if ($(this).is(":checked")) {
             $('.check_text textarea').addClass('open')
@@ -3029,7 +3076,7 @@ $(document).ready(function () {
         var videoDiv = $(".video_galegy");
 
 
-        onYouTubeIframeAPIReady = function() {
+        onYouTubeIframeAPIReady = function () {
             for (var a = 0; a < videoDiv.length; a++) {
                 videoDiv[a].id = "video_galegy" + a;
                 video = videoDiv[a].getAttribute("data-video");
@@ -3068,16 +3115,29 @@ $(document).ready(function () {
                 $('.gallery_slider').append(wrap);
             }
             // var nn = (container.find('.maii-item').length * 7) - container.find('.item-senn').length
-            $('.conteiner_slider').eq(0).addClass('active')
-            curr_obj = 0;
-            $('.gallery-area .nav-control').click(function () {
-                nav_container = $('.conteiner_slider');
-                $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
-                nav_container.removeClass('active');
-                nav_container.eq(curr_obj).addClass('active');
 
-            })
+        } else if (window.matchMedia("(max-width: 1025px)").matches) {
+            for (var p = 0; p < allElements.length; p += 1) {
+                var wrap = document.createElement("div");
+                wrap.classList.add("conteiner_slider");
+                for (var j = 0; j < 1; j++) {
+                    if (p + j < allElements.length) {
+                        wrap.append(allElements[p + j]);
+                    }
+                }
+                $('.gallery_slider').append(wrap);
+            }
         }
+
+        $('.conteiner_slider').eq(0).addClass('active')
+        curr_obj = 0;
+        $('.gallery-area .nav-control').click(function () {
+            nav_container = $('.conteiner_slider');
+            $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
+            nav_container.removeClass('active');
+            nav_container.eq(curr_obj).addClass('active');
+
+        })
 
     }
 
@@ -3085,7 +3145,7 @@ $(document).ready(function () {
 
     function form() {
 
-        var b = 4 * 1024 * 1024;
+        var b = 5 * 1024 * 1024;
         var d = {};
         d[""];
 
@@ -3097,19 +3157,19 @@ $(document).ready(function () {
             var m = this.files;
             for (var k = 0; k < m.length; k++) {
                 var j = m[k];
-                console.log(j);
                 if (j.type != "application/pdf") {
-                    alert("Фотография должна быть в формате pdf");
+                    alert("Файл должна быть в формате pdf");
                     continue
                 }
                 if (j.size > b) {
-                    alert("Размер фотографии не должен превышать 5 Мб");
+                    alert("Размер файла не должен превышать 5 Мб");
                     continue
                 }
                 file(m[k])
             }
             this.value = ""
         });
+
         function file(k) {
             var j = new FileReader();
             j.addEventListener("load", function (m) {
@@ -3117,6 +3177,7 @@ $(document).ready(function () {
             });
             j.readAsDataURL(k)
         }
+
         $('.form_sec5 form').submit(function (j) {
             j.preventDefault()
             var formData = new FormData(this);
@@ -3149,6 +3210,7 @@ $(document).ready(function () {
 
 
     }
+
     form()
 });
 
@@ -10257,6 +10319,7 @@ function angular_js() {
     !window.angular.$$csp() && window.angular.element(document).find("head").prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 }
+
 function angular_tr() {
 
     (function (root, factory) {
@@ -10315,6 +10378,7 @@ function angular_tr() {
                 $translate.use($translate.preferredLanguage());
             }
         }
+
         runTranslate.$inject = ['$translate'];
 
         runTranslate.displayName = 'runTranslate';
@@ -10329,7 +10393,7 @@ function angular_tr() {
          */
         angular.module('pascalprecht.translate').provider('$translateSanitization', $translateSanitizationProvider);
 
-        function $translateSanitizationProvider () {
+        function $translateSanitizationProvider() {
 
             'use strict';
 
@@ -10683,7 +10747,7 @@ function angular_tr() {
              *
              * @returns {int} Index of search element.
              */
-            var indexOf = function(array, searchElement) {
+            var indexOf = function (array, searchElement) {
                 for (var i = 0, len = array.length; i < len; i++) {
                     if (array[i] === searchElement) {
                         return i;
@@ -10701,7 +10765,7 @@ function angular_tr() {
              *
              * @returns {string} The string stripped of whitespace from both ends
              */
-            var trim = function() {
+            var trim = function () {
                 return this.toString().replace(/^\s+|\s+$/g, '');
             };
 
@@ -10728,7 +10792,7 @@ function angular_tr() {
                             angular.lowercase(langKeyAlias) === angular.lowercase(preferred);
 
                         if (langKeyAlias.slice(-1) === '*') {
-                            hasWildcardKey = langKeyAlias.slice(0, -1) === preferred.slice(0, langKeyAlias.length-1);
+                            hasWildcardKey = langKeyAlias.slice(0, -1) === preferred.slice(0, langKeyAlias.length - 1);
                         }
                         if (hasExactKey || hasWildcardKey) {
                             alias = $languageKeyAliases[langKeyAlias];
@@ -10765,13 +10829,13 @@ function angular_tr() {
              * <pre>
              *  // register translation table for language: 'de_DE'
              *  $translateProvider.translations('de_DE', {
-   *    'GREETING': 'Hallo Welt!'
-   *  });
+             *    'GREETING': 'Hallo Welt!'
+             *  });
              *
              *  // register another one
              *  $translateProvider.translations('en_US', {
-   *    'GREETING': 'Hello world!'
-   *  });
+             *    'GREETING': 'Hello world!'
+             *  });
              * </pre>
              *
              * When registering multiple translation tables for for the same language key,
@@ -10854,7 +10918,7 @@ function angular_tr() {
                         flatObject(val, path.concat(key), result, key);
                     } else {
                         keyWithPath = path.length ? ('' + path.join(NESTED_OBJECT_DELIMITER) + NESTED_OBJECT_DELIMITER + key) : key;
-                        if(path.length && key === prevKey){
+                        if (path.length && key === prevKey) {
                             // Create shortcut path (foo.bar == foo.bar.bar)
                             keyWithShortPath = '' + path.join(NESTED_OBJECT_DELIMITER);
                             // Link it to original path
@@ -10940,7 +11004,7 @@ function angular_tr() {
              * @param {string} langKey A language key.
              *
              */
-            this.preferredLanguage = function(langKey) {
+            this.preferredLanguage = function (langKey) {
                 setupPreferredLanguage(langKey);
                 return this;
 
@@ -11036,12 +11100,12 @@ function angular_tr() {
                 if (langKey) {
                     if (angular.isString(langKey)) {
                         $fallbackWasString = true;
-                        $fallbackLanguage = [ langKey ];
+                        $fallbackLanguage = [langKey];
                     } else if (angular.isArray(langKey)) {
                         $fallbackWasString = false;
                         $fallbackLanguage = langKey;
                     }
-                    if (angular.isString($preferredLanguage)  && indexOf($fallbackLanguage, $preferredLanguage) < 0) {
+                    if (angular.isString($preferredLanguage) && indexOf($fallbackLanguage, $preferredLanguage) < 0) {
                         $fallbackLanguage.push($preferredLanguage);
                     }
 
@@ -11091,7 +11155,7 @@ function angular_tr() {
              *
              * @param {string} key A key for the storage.
              */
-            var storageKey = function(key) {
+            var storageKey = function (key) {
                 if (!key) {
                     if ($storagePrefix) {
                         return $storagePrefix + $storageKey;
@@ -11116,7 +11180,7 @@ function angular_tr() {
              * @param {Object=} options Optional configuration object
              */
             this.useUrlLoader = function (url, options) {
-                return this.useLoader('$translateUrlLoader', angular.extend({ url: url }, options));
+                return this.useLoader('$translateUrlLoader', angular.extend({url: url}, options));
             };
 
             /**
@@ -11236,14 +11300,14 @@ function angular_tr() {
              * Example:
              * <pre>
              *  app.config(function ($translateProvider) {
-   *    $translateProvider.useMissingTranslationHandler('customHandler');
-   *  });
+             *    $translateProvider.useMissingTranslationHandler('customHandler');
+             *  });
              *
              *  app.factory('customHandler', function (dep1, dep2) {
-   *    return function (translationId) {
-   *      // something with translationId and dep1 and dep2
-   *    };
-   *  });
+             *    return function (translationId) {
+             *      // something with translationId and dep1 and dep2
+             *    };
+             *  });
              * </pre>
              *
              * @param {string} factory Factory name
@@ -11265,8 +11329,8 @@ function angular_tr() {
              * Example:
              * <pre>
              *  app.config(function ($translateProvider) {
-   *    $translateProvider.usePostCompiling(true);
-   *  });
+             *    $translateProvider.usePostCompiling(true);
+             *  });
              * </pre>
              *
              * @param {string} factory Factory name
@@ -11289,8 +11353,8 @@ function angular_tr() {
              * Example:
              * <pre>
              *  app.config(function ($translateProvider) {
-   *    $translateProvider.forceAsyncReload(true);
-   *  });
+             *    $translateProvider.forceAsyncReload(true);
+             *  });
              * </pre>
              *
              * @param {boolean} value - valid values are true or false
@@ -11507,8 +11571,8 @@ function angular_tr() {
              *
              * <pre>
              *  $translate('HEADLINE_TEXT').then(function (translation) {
-   *    $scope.translatedText = translation;
-   *  });
+             *    $scope.translatedText = translation;
+             *  });
              * </pre>
              *
              * @param {string|array} translationId A token which represents a translation id
@@ -11967,7 +12031,7 @@ function angular_tr() {
                      */
                     var fallbackTranslation = function (translationId, interpolateParams, Interpolator, defaultTranslationText) {
                         // Start with the fallbackLanguage with index 0
-                        return resolveForFallbackLanguage((startFallbackIteration>0 ? startFallbackIteration : fallbackIndex), translationId, interpolateParams, Interpolator, defaultTranslationText);
+                        return resolveForFallbackLanguage((startFallbackIteration > 0 ? startFallbackIteration : fallbackIndex), translationId, interpolateParams, Interpolator, defaultTranslationText);
                     };
 
                     /**
@@ -11980,7 +12044,7 @@ function angular_tr() {
                      */
                     var fallbackTranslationInstant = function (translationId, interpolateParams, Interpolator) {
                         // Start with the fallbackLanguage with index 0
-                        return resolveForFallbackLanguageInstant((startFallbackIteration>0 ? startFallbackIteration : fallbackIndex), translationId, interpolateParams, Interpolator);
+                        return resolveForFallbackLanguageInstant((startFallbackIteration > 0 ? startFallbackIteration : fallbackIndex), translationId, interpolateParams, Interpolator);
                     };
 
                     var determineTranslation = function (translationId, interpolateParams, interpolationId, defaultTranslationText) {
@@ -12085,7 +12149,7 @@ function angular_tr() {
                         return result;
                     };
 
-                    var clearNextLangAndPromise = function(key) {
+                    var clearNextLangAndPromise = function (key) {
                         if ($nextLang === key) {
                             $nextLang = undefined;
                         }
@@ -12105,7 +12169,7 @@ function angular_tr() {
                      * @return {string} preferred language key
                      */
                     $translate.preferredLanguage = function (langKey) {
-                        if(langKey) {
+                        if (langKey) {
                             setupPreferredLanguage(langKey);
                         }
                         return $preferredLanguage;
@@ -12233,8 +12297,8 @@ function angular_tr() {
                      * Returns promise object with loaded language file data
                      * @example
                      * $translate.use("en_US").then(function(data){
-       *   $scope.text = $translate("HELLO");
-       * });
+                     *   $scope.text = $translate("HELLO");
+                     * });
                      *
                      * @param {string} key Language key
                      * @return {string} Language key
@@ -12563,7 +12627,7 @@ function angular_tr() {
                         if ($fallbackLanguage && $fallbackLanguage.length) {
                             var processAsyncResult = function (translation) {
                                 translations(translation.key, translation.table);
-                                $rootScope.$emit('$translateChangeEnd', { language: translation.key });
+                                $rootScope.$emit('$translateChangeEnd', {language: translation.key});
                                 return translation;
                             };
                             for (var i = 0, len = $fallbackLanguage.length; i < len; i++) {
@@ -12579,6 +12643,7 @@ function angular_tr() {
                 }
             ];
         }
+
         $translate.$inject = ['$STORAGE_KEY', '$windowProvider', '$translateSanitizationProvider', 'pascalprechtTranslateOverrider'];
 
         $translate.displayName = 'displayName';
@@ -12600,7 +12665,7 @@ function angular_tr() {
          */
         angular.module('pascalprecht.translate').factory('$translateDefaultInterpolation', $translateDefaultInterpolation);
 
-        function $translateDefaultInterpolation ($interpolate, $translateSanitization) {
+        function $translateDefaultInterpolation($interpolate, $translateSanitization) {
 
             'use strict';
 
@@ -12668,6 +12733,7 @@ function angular_tr() {
 
             return $translateInterpolator;
         }
+
         $translateDefaultInterpolation.$inject = ['$interpolate', '$translateSanitization'];
 
         $translateDefaultInterpolation.displayName = '$translateDefaultInterpolation';
@@ -12762,6 +12828,7 @@ function angular_tr() {
          </example>
          */
             .directive('translate', translateDirective);
+
         function translateDirective($translate, $q, $interpolate, $compile, $parse, $rootScope) {
 
             'use strict';
@@ -12775,7 +12842,7 @@ function angular_tr() {
              *
              * @returns {string} The string stripped of whitespace from both ends
              */
-            var trim = function() {
+            var trim = function () {
                 return this.toString().replace(/^\s+|\s+$/g, '');
             };
 
@@ -12830,7 +12897,7 @@ function angular_tr() {
                                 observeElementTranslation._unwatchOld = undefined;
                             }
 
-                            if (angular.equals(translationId , '') || !angular.isDefined(translationId)) {
+                            if (angular.equals(translationId, '') || !angular.isDefined(translationId)) {
                                 // Resolve translation id by inner html if required
                                 var interpolateMatches = trim.apply(iElement.text()).match(interpolateRegExp);
                                 // Interpolate translation id if required
@@ -12846,7 +12913,7 @@ function angular_tr() {
                                         });
                                     }
                                 } else {
-                                    translationIds.translate = iElement.text().replace(/^\s+|\s+$/g,'');
+                                    translationIds.translate = iElement.text().replace(/^\s+|\s+$/g, '');
                                 }
                             } else {
                                 translationIds.translate = translationId;
@@ -12924,7 +12991,7 @@ function angular_tr() {
                         };
 
                         // Put translation processing function outside loop
-                        var updateTranslation = function(translateAttr, translationId, scope, interpolateParams, defaultTranslationText) {
+                        var updateTranslation = function (translateAttr, translationId, scope, interpolateParams, defaultTranslationText) {
                             if (translationId) {
                                 $translate(translationId, interpolateParams, translateInterpolation, defaultTranslationText)
                                     .then(function (translation) {
@@ -12991,6 +13058,7 @@ function angular_tr() {
                 }
             };
         }
+
         translateDirective.$inject = ['$translate', '$q', '$interpolate', '$compile', '$parse', '$rootScope'];
 
         translateDirective.displayName = 'translateDirective';
@@ -13049,6 +13117,7 @@ function angular_tr() {
                 }
             };
         }
+
         translateCloakDirective.$inject = ['$rootScope', '$translate'];
 
         translateCloakDirective.displayName = 'translateCloakDirective';
@@ -13126,6 +13195,7 @@ function angular_tr() {
 
             return translateFilter;
         }
+
         translateFilterFactory.$inject = ['$parse', '$translate'];
 
         translateFilterFactory.displayName = 'translateFilterFactory';
@@ -13152,6 +13222,7 @@ function angular_tr() {
 
             return $cacheFactory('translations');
         }
+
         $translationCache.$inject = ['$cacheFactory'];
 
         $translationCache.displayName = '$translationCache';
@@ -13165,6 +13236,8 @@ $('.data_calendar').click(function () {
     $('.calendar_w').toggleClass('open')
     event.stopPropagation();
 })
+var data_mone, data_day, data_year
+
 function angul() {
     $.ajax({
         url: 'get-calendar',
@@ -13182,25 +13255,20 @@ function angul() {
             // var data_ggg = data.max_day
 
             mondays_ = []
-            console.log( Object.keys(data.excursions));
 
             mondays = []
             for (ooo in Object.keys(data.excursions)) {
                 // mondays_.push("foo : bar", "date:"+ Object.keys(data.excursions)[ooo]+")
-                mondays_.push({foo : 'bar',date : Object.keys(data.excursions)[ooo]})
+                mondays_.push({foo: 'bar', date: Object.keys(data.excursions)[ooo]})
             }
             for (ooo in mondays_) {
                 count++
             }
             for (var i = 0; i < count; i++) {
-            mondays.push(mondays_[i])
+                mondays.push(mondays_[i])
             }
-            console.log(mondays);
 
-            // for (var p = 0; p < data.excursions.length; p ++) {
-            //     // mondays_.push("foo: 'bar', date: "+data.excursions[p]+"")
-            //     // console.log(mondays_,data.excursions);
-            // }
+
             angular_js()
             angular_tr()
             angular
@@ -13216,63 +13284,63 @@ function angul() {
                         current_date = year + '-' + month + '-' + date;
 
 
-
                     $scope.options = {
-                        disabledDates:data.disabled ,
+                        disabledDates: data.disabled,
                         minDate: "" + current_date + "",
-                        maxDate:  data.max_day,
+                        maxDate: data.max_day,
                         dayNamesLength: 2,
                         mondayIsFirstDay: true,
                         eventClick: function (date) {
-                            console.log(date);
                             $('.calendar_w').removeClass('open')
                             data_day = date.day;
                             data_year = date.year;
-                            data_mone = date._month
+                            data_mone = date._month;
                             f2()
                         },
                         dateClick: function (date) {
                             $('.calendar_w').removeClass('open')
                             data_day = date.day;
-                            data_mone = date._month
+                            data_mone = date._month;
                             data_year = date.year;
+                            f2()
                         },
                         changeMonth: function (month, year) {
-                            // console.log(month, year, 5);
                         },
                     };
 
 
                     $scope.events = mondays_;
 
-                    console.log($scope.events);
 
 
                 }])
 
             function f2() {
                 // var codtatdunt = 0;
-                a = ""+data_year+"-"+data_mone+"-"+data_day+"";
+                a = "" + data_year + "-" + data_mone + "-" + data_day + "";
                 // for (ooo in data.excursions) {
                 //     codtatdunt++
                 // }
                 sel = $('#interval').find('option')
-                for (var i = 0; i <  sel.length; i++) {
+                sel.removeAttr('disabled')
+                if (data.excursions[a] != undefined) {
                     cache = data.excursions[a]
-                    for (var j = 0; j < cache.length; ++j) {
-                        console.log(cache[j]);
-                        if (sel.eq(i).val() == cache[j]) {
-                            sel.eq(i).prop('disabled',true)
+                    for (var i = 0; i < sel.length; i++) {
+                        for (var j = 0; j < cache.length; ++j) {
+                            if (sel.eq(i).val() == cache[j]) {
+                                sel.eq(i).prop('disabled', true)
+                            }
                         }
                     }
-
-                    //     if (sel.eq(i).val() == 2) {
-                    //     console.log(data.excursions[i]);
-                    // }
                 }
-                console.log(data.excursions[a]);
 
+
+                $('.custom-select').not($('select.custom-select')).remove()
+                select_()
+
+                return
             }
+
             !function () {
                 "use strict";
 
@@ -13415,15 +13483,20 @@ function angul() {
         },
     });
 }
+
 angul()
-
-
 
 
 // Library
 
 /*******************madia**********************/
+
 if ($(window).width() < 1025) {
     $('nav, .stock_cola,.back_call').wrapAll('<div class="menu_mob"><div class="mobile_nav"></div><span></span><span></span><span></span></div>');
+    $('.name, .tell,.email,.pole_for,.pole_form').wrapAll('<div class="form_left"></div>');
+
+    $('fieldset:nth-child(2) h3:nth-child(1), .bron').wrapAll('<div class="data_tp"></div>');
+    $('fieldset:nth-child(2) h3:nth-child(2), .file_b').wrapAll('<div class="data_cl"></div>');
+    $('.data_cl, .data_tp').wrapAll('<div class="tp"></div>');
 
 }

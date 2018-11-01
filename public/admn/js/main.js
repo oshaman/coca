@@ -18,6 +18,10 @@ $(document).ready(function () {
     inputLabel();
 
 
+    // $(".vkl:checkbox").on('click', function(){
+    //     $(this).parent().toggleClass("unactive");
+    // });
+
     if ($('.prev-month').length > 0) {
         var _this = $('.prev-month');
         for (var i = 0; i < _this.length; i++) {
@@ -115,8 +119,6 @@ $(document).ready(function () {
             $('.upload-doc').removeClass('btn-grey').addClass('btn-white').html('Завантажено')
         }
     });
-
-
 
 
     record();
@@ -418,6 +420,34 @@ $(document).ready(function () {
 
     });
 
+    $('.add-frame').click(function (e) {
+        $('.pop-trip').show();
+    })
+
+    $('.del-frame').on('click', function (e) {
+        e.preventDefault();
+        _this = $(this);
+
+        _id = _this.attr('data-id');
+        if(undefined == _id){return}
+        $.ajax({
+            url: '/admin/photo-frame/'+_id,
+            type: "DELETE",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                _this.parent().remove();
+            },
+            error: function (data) {
+
+            }
+        });
+    });
 
 });
 
@@ -498,8 +528,7 @@ $(document).ready(function () {
             template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
         } else {
             template += '<span class="custom-select-trigger">' + $(this).find('option[selected]').text() + '</span>'
-        }
-        ;
+        };
         template += '<div class="custom-options scrollbar">';
         if ($('body').hasClass('user-page')) {
             $('.custom-options').removeClass('scrollbar')
@@ -515,6 +544,7 @@ $(document).ready(function () {
         template += '</div></div>';
 
         $('.scrollbar').mCustomScrollbar();
+
         $(this).wrap('<div class="custom-select-wrapper"></div>');
         $(this).hide();
         $(this).after(template);
@@ -539,14 +569,13 @@ $(document).ready(function () {
         vals = _this.data("value")
         _this.parents(".custom-select-wrapper").find("select").val(vals);
         _this.parents(".custom-select-wrapper").find("select option").removeAttr('selected');
-        _this.parents(".custom-select-wrapper").find("select option[value='"+vals+"']").attr('selected', true);
+        _this.parents(".custom-select-wrapper").find("select option[value='" + vals + "']").attr('selected', true);
         _this.parents(".custom-options").find(".custom-option").removeClass("selection");
         _this.addClass("selection");
         _this.parents(".custom-select").removeClass("opened");
         _this.parents(".custom-select").find(".custom-select-trigger").text(_this.text());
         changeMonth()
     }
-
 
 
     $(".custom-option").on("click", function () {
@@ -563,6 +592,7 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
                     custClick();
+                    location.reload()
                 },
                 error: function (data) {
 
@@ -572,8 +602,6 @@ $(document).ready(function () {
             custClick();
         }
     });
-
-
 
 
     $(".form-register .custom-option").on("click", function () {
@@ -591,7 +619,6 @@ $(document).ready(function () {
     });
 
 
-
     $(".form-trip-info .custom-option").on("click", function () {
         _this = $(this);
         custClick();
@@ -606,17 +633,19 @@ $(document).ready(function () {
     });
 
 
-
-
-
     //------------------------------------------------------calendar accordion
     function changeMonth() {
-        monthSel = $('#select-month option:selected').index() == 0 ? '#select-day' : '#select-day-2'
-        $('.del-name').removeAttr('name').parent().css({'display': 'none'})
-        $(monthSel).attr('name', 'trip-day')
-            .parent().css({'display': 'block'})
+        $('.pop-trip').each(function () {
+            monthSel = $(this).find('#select-month option:selected').index() == 0 ? '.select-day' : '.select-day-2'
+            $(monthSel).removeAttr('name').parent().css({'display': 'none'})
+            $(monthSel).attr('name', 'trip-day')
+                .parent().css({'display': 'block'})
+        })
+
     }
+
     changeMonth()
+
     function infoExcursions() {
         $('.info-note').slideUp(0)
         $('.header-note').unbind('click');
@@ -642,31 +671,21 @@ $(document).ready(function () {
         $('.add-trip, .info-after-add, .info-block-add').bind('click', addTrip);
 
         function addTrip(e) {
-            $('.form-trip').attr('action', 'https://coca.j2landing.com/admin/calendar');
-            $('.pop-trip').addClass('active');
-            $('.form-trip').trigger('reset');
-            $('.form-trip div input').each(function () {
-                if($(this).attr('type') != 'radio') {
-                    $(this).val('');
-                }
-            })
-            $('.pop-trip input[name="_method"]').remove()
-            $('main').css('pointer-events', 'none')
-            $('#position').siblings('.custom-select').find('.custom-select-trigger').html('')
-            $('#position').val()
-            $('#trip-pos').trigger('change');
+            $('.add-form').addClass('active');
+
+
         };
 
         $('.form-trip').unbind('change');
         $('.form-trip').bind('change', tripChange);
 
-       function tripChange() {
+        function tripChange() {
             if ($('.circle2').hasClass('active') && ($("#filename").length > 0 || $('.nodoc').val().length > 3)) {
                 $('.circle3').addClass('active');
                 $('.p-3').addClass('active');
             }
             changeMonth()
-       }
+        }
 
         $('.info-note div:nth-child(3)').unbind('click');
         $('.info-note div:nth-child(3)').bind('click', popTrip);
@@ -687,45 +706,50 @@ $(document).ready(function () {
             currs = $(this).parents('.info-block').attr('data-current');
             interval = $(this).parents('.info-block').attr('data-interval');
 
-            $('.form-trip').attr('action', 'https://coca.j2landing.com/admin/calendar/' + ids);
 
-            $('#select-month option').removeAttr('selected');
-            $('#select-month option[value="' + month + '"]').attr('selected', true);
-            $('#select-month').siblings('.custom-select').find('.custom-select-trigger').html($('#select-month option[value="' + month + '"]').html());
+            $('.edit-form #select-month option').removeAttr('selected');
+            $('.edit-form #select-month option[value="' + month + '"]').attr('selected', true);
+            $('.edit-form  #select-month').siblings('.custom-select').find('.custom-select-trigger').html($('#select-month option[value="' + month + '"]').html());
 
             monthSel = currs ? '#select-day' : '#select-day-2'
-            $('.del-name').removeAttr('name');
-            $(monthSel).attr('name', 'trip-day');
-            $(monthSel + '[name="trip-day"] option').removeAttr('selected');
-            $(monthSel + '[name="trip-day"] option[value="' + day + '"]').attr('selected', true);
-            $(monthSel).siblings('.custom-select').find('.custom-select-trigger').html(day);
-            $('#select-time option').removeAttr('selected');
-            $('#select-time option[value="' + interval + '"]').attr('selected', true);
-            $('#select-time').siblings('.custom-select').find('.custom-select-trigger').html($('#select-time option[value="' + interval + '"]').html());
+            $('.edit-form').find('.del-name').removeAttr('name');
+            $('.edit-form').find(monthSel).attr('name', 'trip-day');
+            $('.edit-form').find(monthSel + '[name="trip-day"] option').removeAttr('selected');
+            $('.edit-form').find(monthSel + '[name="trip-day"] option[value="' + day + '"]').attr('selected', true);
+            $('.edit-form').find(monthSel).siblings('.custom-select').find('.custom-select-trigger').html(day);
+            $('.edit-form #select-time option').removeAttr('selected');
+            $('.edit-form #select-time option[value="' + interval + '"]').attr('selected', true);
+            $('.edit-form #select-time').siblings('.custom-select').find('.custom-select-trigger').html($('#select-time option[value="' + interval + '"]').html());
 
 
-            $('#trip-name').attr('value', nam);
-            $('#trip-phone').attr('value', tel);
-            $('#trip-email').attr('value', email);
-            $('#trip-pos').attr('value', posit);
-            $('#trip-school').attr('value', inst);
+            $('.edit-form #trip-name').attr('value', nam);
+            $('.edit-form #trip-phone').attr('value', tel);
+            $('.edit-form #trip-email').attr('value', email);
+            $('.edit-form #trip-pos').attr('value', posit);
+            $('.edit-form #trip-school').attr('value', inst);
 
-            $('#position option').removeAttr('selected');
-            $('#position option[value="' + people + '"]').attr('selected', true);
-            $('#position').siblings('.custom-select').find('.custom-option[data-value="'+people+'"]').trigger('click');
+            $('.edit-form #position option').removeAttr('selected');
+            $('.edit-form #position option[value="' + people + '"]').attr('selected', true);
+            $('.edit-form #position').siblings('.custom-select').find('.custom-option[data-value="' + people + '"]').trigger('click');
 
-            $('input[type="radio"][value="'+statue+'"]').trigger('click')
+            $('.edit-form input[type="radio"][value="' + statue + '"]').trigger('click')
 
-            $('.pop-trip').addClass('active edit');
+            $('.edit-form').addClass('active edit');
             $('main').css('pointer-events', 'none')
-            $('#trip-pos').trigger('change');
-            $('.pop-trip form').append('<input type="hidden" name="_method" value="PUT">')
+            $('.edit-form  #trip-pos').trigger('change');
 
-            changeMonth()
+            $('.edit-form form').attr('action', 'https://coca.j2landing.com/admin/calendar/' + ids);
+            $('.edit-form form').append('<input type="hidden" name="_method" value="PUT">')
+
+            changeMonth();
+
+            $('.scrollbar').mCustomScrollbar();
+
         };
         $('.info-window').addClass('active')
 
     }
+
     $('.delete-excur').click(function () {
         $('.pop-trip input[name="_method"]').remove();
         $('.pop-trip form').append('<input type="hidden" name="_method" value="DELETE">');
@@ -774,6 +798,7 @@ $(document).ready(function () {
             $('.info-content h5 .day').html(currDay);
 
 
+
             $.ajax({
                 url: '/admin/get-excursions',
                 type: 'POST',
@@ -783,13 +808,18 @@ $(document).ready(function () {
                 data: {days: theDay},
                 success: function (res) {
                     $('.info-windows').html(res)
-                    infoExcursions()
+                    infoExcursions();
+                    $(".vkl:checkbox").on('click', function(){
+                        $(this).parents('.info-window').toggleClass("unactive");
+                    });
                 }
             })
             $(".timetable .pres-month").removeClass("active");
             $(".info-windows .info-window").removeClass("active");
             $(this).addClass("active");
             $(".info-windows").find(".info-window").addClass("active");
+
+
 
 
         }

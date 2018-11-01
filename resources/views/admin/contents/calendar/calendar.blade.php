@@ -44,7 +44,7 @@
             </thead>
             <tbody class="timetable">
 
-            @while ($currentDay->month <= $today->month)
+            @while (($currentDay->month <= $today->month) && ($currentDay->year <= $today->year))
                 <tr>
                     @for ($i = 0; $i < 7; $i++)
 

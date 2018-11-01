@@ -96,6 +96,7 @@ class CalendarController extends AdminController
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -106,6 +107,7 @@ class CalendarController extends AdminController
         }
 
         $this->validate($request, $this->repository->getArrayForUpdateValidation());
+
 
         $result = $this->repository->updateExcursion($request, $excursion);
 
@@ -120,6 +122,9 @@ class CalendarController extends AdminController
      */
     public function destroy($id)
     {
+        /**
+         * @var Excursion $excursion
+         */
         $excursion = Excursion::where('id', $id)->first();
 
         if (!$excursion) {
