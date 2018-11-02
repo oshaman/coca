@@ -1,8 +1,10 @@
 <form class="form-trip" action="{{ route('admin.calendar.store') }}" method="post" enctype="multipart/form-data">
+    @method('put')
     @csrf
     <div class="form-trip-block">
         <p>Виберіть дату та час</p>
-        <select name="trip-month" id="select-month" class="custom-select sources">
+        <select name="trip-month" id="select-month-edit" class="custom-select sources">
+
             @if($currentMonthHasAvailableDays)
                 <option value="{{ \Carbon\Carbon::now()->month }}"
                         selected>{{ \Carbon\Carbon::now()->format('F') }}</option>
@@ -12,19 +14,19 @@
             </option>
         </select>
         @if($currentMonthHasAvailableDays)
-            <select name="trip-day" id="select-day" class="custom-select sources del-name">
+            <select name="trip-day" id="select-day-edit" class="custom-select sources del-name select-day days-select">
                 @for($i=\Carbon\Carbon::now()->addDay()->day;$i<=\Carbon\Carbon::now()->daysInMonth; $i++)
                     <option value="{{$i}}" @if($i==\Carbon\Carbon::now()->addDay()->day) selected @endif>{{$i}}</option>
                 @endfor
             </select>
         @endif
-        <select name="trip-day" @if($currentMonthHasAvailableDays) id="select-day-2" @else id="select-day" @endif  class="custom-select sources del-name" @if($currentMonthHasAvailableDays) style="display: none" @endif>
+        <select name="trip-day" @if($currentMonthHasAvailableDays) id="select-day-2-edit" @else id="select-day-edit" @endif  class="custom-select sources days-select del-name @if($currentMonthHasAvailableDays) select-day-2 @else select-day @endif" @if($currentMonthHasAvailableDays) style="display: none" @endif>
             @for($i=\Carbon\Carbon::now()->startOfMonth()->addMonthNoOverflow()->day;$i<=\Carbon\Carbon::now()->addMonthNoOverflow()->daysInMonth; $i++)
                 <option value="{{$i}}"
                         @if($i==\Carbon\Carbon::now()->startOfMonth()->addMonthNoOverflow()->day) selected @endif>{{$i}}</option>
             @endfor
         </select>
-        <select name="interval" id="select-time" class="custom-select sources">
+        <select name="interval" id="select-time-edit" class="custom-select sources">
             @foreach(config('settings.time_intervals') as $interval)
                 @if($loop->first) @continue @endif
                 <option value="{{ $loop->index }}" @if(1 == $loop->index) selected @endif>{{ $interval }}</option>
@@ -34,28 +36,28 @@
     <div class="form-trip-info">
         <p>Інформація щодо екскурсії</p>
         <div>
-            {{ Form::text('name', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-name']) }}
-            <label for="trip-name">Ім’я та Прізвище</label>
+            {{ Form::text('name', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-name-edit']) }}
+            <label for="trip-name-edit">Ім’я та Прізвище</label>
         </div>
         <div>
-            {{ Form::text('phone', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-phone']) }}
-            <label for="trip-phone">Телефон</label>
+            {{ Form::text('phone', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-phone-edit']) }}
+            <label for="trip-phone-edit">Телефон</label>
         </div>
         <div>
-            {{ Form::text('email', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-email', 'type'=>'trip-email']) }}
-            <label for="trip-email">Пошта</label>
+            {{ Form::text('email', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-email', 'type'=>'trip-email-edit']) }}
+            <label for="trip-email-edit">Пошта</label>
         </div>
         <div>
-            {{ Form::text('position', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-pos']) }}
-            <label for="trip-pos">Посада</label>
+            {{ Form::text('position', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-pos-edit']) }}
+            <label for="trip-pos-edit">Посада</label>
         </div>
         <div>
-            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select sources"])}}
-            <label for="position">Кількість людей</label>
+            {{Form::selectRange('people', 4, 32, null, ['id'=>'position-edit', 'class'=>"custom-select sources"])}}
+            <label for="position-edit">Кількість людей</label>
         </div>
         <div>
-            {{ Form::text('institution', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-school']) }}
-            <label for="trip-school">Назва закладу</label>
+            {{ Form::text('institution', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-school-edit']) }}
+            <label for="trip-school-edit">Назва закладу</label>
         </div>
 
     </div>
@@ -66,9 +68,9 @@
                     <span class="tooltiptext">Підказка</span>
                 </div>
             </div>
-            <input id="upload-doc" type="file" name="file">
-            <label for="upload-doc" class="btn btn-grey upload-doc">Завантажити</label>
-            <input type="text" id="filename" class="filename" disabled>
+            <input id="update-doc" type="file" name="file">
+            <label for="update-doc" class="btn btn-grey upload-doc">Завантажити</label>
+            <input type="text" id="update-filename" class="filename" disabled>
         </div>
 
         {{--Групповое фото--}}

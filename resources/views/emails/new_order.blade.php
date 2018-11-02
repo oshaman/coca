@@ -1,7 +1,7 @@
 @component('mail::message')
 # Introduction
 
-Ваше замовлення прийняте.
+{!! $email->content??'' !!}
 
 Дякуємо,<br>
 {{ config('app.name') }}

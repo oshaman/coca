@@ -3202,8 +3202,20 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 cache: false,
+                dataType: "json",
                 success: function (data) {
-                    console.log(data);
+                    if (data.status == 'Екскурсію збережено.') {
+                        $('.form_sec5 form').find('input').val('')
+
+                        $('body').addClass('hover_full')
+                        $('.pop_blag').addClass('open')
+                        console.log(56454);
+
+                        $('.pop_blag .close').click(function () {
+                            $('body').removeClass('hover_full')
+                            $('.pop_blag').removeClass('open')
+                        })
+                    }
                 },
             });
         })
@@ -13494,7 +13506,7 @@ angul()
 if ($(window).width() < 1025) {
     $('nav, .stock_cola,.back_call').wrapAll('<div class="menu_mob"><div class="mobile_nav"></div><span></span><span></span><span></span></div>');
     $('.name, .tell,.email,.pole_for,.pole_form').wrapAll('<div class="form_left"></div>');
-
+    $('.mobile_nav').prepend('<div class="nav_top"><div class="nav_logo"></div><div class="close_nav"></div></div>')
     $('fieldset:nth-child(2) h3:nth-child(1), .bron').wrapAll('<div class="data_tp"></div>');
     $('fieldset:nth-child(2) h3:nth-child(2), .file_b').wrapAll('<div class="data_cl"></div>');
     $('.data_cl, .data_tp').wrapAll('<div class="tp"></div>');

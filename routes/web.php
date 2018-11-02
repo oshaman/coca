@@ -16,6 +16,7 @@ Route::match(['post', 'get'], '/get-calendar', 'HomeController@getCalendar');
 Route::post('/add-excursions', 'HomeController@addExcursions');
 
 Route::match(['post', 'get'], 'get-photo', 'PhotosController@index')->name('get-photo');
+Route::post('/get-bot', 'BotController@getBot')->name('get-bot');
 
 Route::prefix('admin')
     ->name('admin.')

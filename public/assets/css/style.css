@@ -2021,9 +2021,23 @@ main {
     border-radius: 50px;
     text-align: center;
 }
-.custom-select-wrapper_people {
+fieldset:nth-child(1) .custom-select-wrapper_people {
     height: 34px;
     margin-bottom: 0;
+    display: block;
+}
+.custom-select-trigger_people {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'SFUIDisplay';
+    font-weight: 400;
+    /* line-height: 58px; */
+    /* font-size: 14px; */
+    font-size: 0.7291666666666667vw;
+    letter-spacing: -0.385882px;
+    color: #A9AEBE;
 }
 fieldset:nth-child(1) .custom-select_people {
     border: none;
@@ -2037,9 +2051,9 @@ fieldset:nth-child(1) .custom-select_people {
     font-size: 0.9375vw;
     letter-spacing: -0.385882px;
     color: #37393C;
-    padding: 0 0 30px 0;
-    height: 38px;
-
+    /*padding: 0 0 30px 0;*/
+    height: 26px;
+    display: block;
     cursor: pointer;
 }
 .custom-select-trigger {
@@ -2065,13 +2079,70 @@ fieldset:nth-child(1) .custom-select_people {
     /* height: 5px; */
     height: 0.26260504201680673vw;
     /* top: 50%; */
-    right: -8px;
+    right: 0px;
     background-image: url(../img/icon/st.svg);
     transition: all .4s ease-in-out;
     /* transform: translate(0,-50%); */
     background-size: contain;
 }
-
+.pop_blag {
+    display: none;
+    width: 293px;
+    height: 453px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    flex-direction: column;
+    position: fixed;
+    z-index: 3;
+    background-color: #F3F4F8;
+    align-items: center;
+    justify-content: center;
+}
+.pop_blag.open {
+    display: flex;
+}
+.pop_blag img {
+    width: 167px;
+    height: 192px;
+    /* margin-bottom: 30px; */
+}
+.pop_blag h3 {
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.385882px;
+    text-align: center;
+    font-family: 'Play';
+    font-weight: 700;
+    margin: 7px 0 20px;
+}
+.pop_blag p {
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: -0.385882px;
+    text-align: center;
+    font-family: 'Play';
+    font-weight: 400;
+}
+.pop_blag .close {
+    width: 183px;
+    height: 40px;
+    border-radius: 21px;
+    border: 1px solid #F40009;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.pop_blag .close p {
+    font-family: 'Play';
+    font-weight: 400;
+    color: #F40009;
+    font-size: 14px;
+    text-transform: uppercase;
+}
 .custom-options ul {
     padding: 0 19px;
 }
@@ -2673,9 +2744,55 @@ body.hover_full main, body.hover_full header {
     }
 
     .mobile_nav {
+        /*display: none;*/
+        position: fixed;
+        width: 400px;
+        height: 500px;
+        background-color: #fff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        right: 0;
+    }
+    .back_call {
+        position: absolute;
+        width: 100%;
+        height: 52px;
+        margin-right: 0;
+        background-color: red;
+        bottom: 0;
+    }
+    .back_call a {
+        font-size: 14px;
+    }
+    nav ul {
+        flex-direction: column;
+        text-align: left;
+        align-items: initial;
+    }
+    nav {
+        margin-left: 25px;
+    }
+    nav ul li {
+        margin: 9px 0;
+    }
+    .nav_top {
+        height: 91px;
+        margin: 0 20px;
+        border-bottom: 1px solid #E8E8E8;
+    }
+    .nav_logo  {
+        filter: brightness(0);
+        opacity: 0.2;
+    }
+    nav a {
+        font-size: 18px;
+    }
+    .stock_cola,.back_call:before,nav ul li:before {
         display: none;
     }
-
     .menu_mob span {
         /*width: 16px;*/
         width: 2.083333333333333vw;
@@ -3239,7 +3356,7 @@ body.hover_full main, body.hover_full header {
         top: 0;
         z-index: 2;
         padding: 2.604166666666667vw 4.375vw;
-         width: 604px;
+        width: 604px;
     }
 
 }

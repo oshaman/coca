@@ -31,7 +31,7 @@
                             <label for="institution">Назва закладу</label>
                         </div>
                         <div class="pole_form">
-                            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources"])}}
+                            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources",'placeholder'=>'Кількість людей'])}}
                         </div>
                     </fieldset>
                     <fieldset>

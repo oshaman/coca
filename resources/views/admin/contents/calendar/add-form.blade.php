@@ -12,13 +12,13 @@
             </option>
         </select>
         @if($currentMonthHasAvailableDays)
-            <select name="trip-day" id="select-day-add" class="custom-select sources del-name select-day">
+            <select name="trip-day" id="select-day-add" class="custom-select sources del-name select-day days-select">
                 @for($i=\Carbon\Carbon::now()->addDay()->day;$i<=\Carbon\Carbon::now()->daysInMonth; $i++)
                     <option value="{{$i}}" @if($i==\Carbon\Carbon::now()->addDay()->day) selected @endif>{{$i}}</option>
                 @endfor
             </select>
         @endif
-        <select name="trip-day" @if($currentMonthHasAvailableDays) id="select-day-add-2" @else id="select-day-add" @endif  class="custom-select sources del-name @if($currentMonthHasAvailableDays) select-day-2 @else select-day @endif" @if($currentMonthHasAvailableDays) style="display: none" @endif>
+        <select name="trip-day" @if($currentMonthHasAvailableDays) id="select-day-add-2" @else id="select-day-add" @endif  class="custom-select sources del-name days-select @if($currentMonthHasAvailableDays) select-day-2 @else select-day @endif" @if($currentMonthHasAvailableDays) style="display: none" @endif>
             @for($i=\Carbon\Carbon::now()->startOfMonth()->addMonthNoOverflow()->day;$i<=\Carbon\Carbon::now()->addMonthNoOverflow()->daysInMonth; $i++)
                 <option value="{{$i}}"
                         @if($i==\Carbon\Carbon::now()->startOfMonth()->addMonthNoOverflow()->day) selected @endif>{{$i}}</option>

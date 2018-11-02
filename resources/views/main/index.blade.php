@@ -93,8 +93,26 @@
         <div class="close"></div>
     </div>
 </div>
+<div class="pop_blag">
+    <img src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
+    <h3>Круто!</br>
+        Вітаю з завершенням!</h3>
+        <p>Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації</p>
+    <div class="close">
+        <p>ок</p>
+    </div>
+</div>
 <div class="chat">
-    <img src="{{ asset('assets') }}/img/icon/chat.svg" alt="">
+    <div class="chat_open">
+        <img src="{{ asset('assets') }}/img/icon/chat.svg" alt="">
+    </div>
+    <div class="chat_close">
+        <span></span>
+        <span></span>
+    </div>
+    <div class="chat_window">
+
+    </div>
 </div>
 {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>--}}

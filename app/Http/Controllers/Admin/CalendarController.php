@@ -108,7 +108,6 @@ class CalendarController extends AdminController
 
         $this->validate($request, $this->repository->getArrayForUpdateValidation());
 
-
         $result = $this->repository->updateExcursion($request, $excursion);
 
         return redirect()->back()->with($result);

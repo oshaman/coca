@@ -96,10 +96,6 @@ class CalendarRepository
          */
         $received_date = $this->getReceivedDate($request);
 
-        if (!$this->validateDate($received_date)) {
-            return ['status' => 'Реєстрація на даний день закрита'];
-        }
-
         if ($excursion->isIntervalChanged($received_date) && (null !== $this->validateExcursion($received_date, $request->get('interval')))) {
             return ['status' => 'Даний час вже заброньований'];
         }

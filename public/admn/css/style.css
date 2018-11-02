@@ -655,6 +655,9 @@ div.eye {
     display: flex;
     flex-wrap: wrap;
 }
+.form-trip-info {
+    padding-bottom: 0;
+}
 .form-trip-info p,
 .form-trip-file > div,
 .form-trip-block p {
@@ -744,7 +747,7 @@ div.eye {
     background: transparent;
 }
 .form-trip-info p {
-    padding: 5.2vh 0 1vh;
+    padding: 0 0 1vh;
     /*padding: 5.2vh 0 2.4vh;*/
 }
 .trip-photo {
@@ -1112,11 +1115,11 @@ header {
     text-align: center;
     transition: .2s linear;
 }
-.nav.active,
+.active .nav,
 .nav:hover {
     color: #F40009;
 }
-.nav.active::before,
+.active .nav::before,
 .nav:hover::before {
     filter: grayscale(0);
     opacity: 1;
@@ -1670,8 +1673,22 @@ div.mce-edit-area {
 
 .sl-block {
     width: 47.2%;
+    border: 1px solid #cfcfcf;
+    padding: 0 !important;
+    margin-bottom: 1vh;
 }
-
+.sl-block p {
+    margin-bottom: 2vh;
+    padding: 1vh 1vw;
+    font-size: 0.833vw;
+    text-transform: uppercase;
+    color: #37393C;
+    border-bottom: 1px solid #cfcfcf;
+}
+.sl-block div {
+    margin: 0 1vw;
+    width: calc(100% - 2vw);
+}
 .form-content .mce-tinymce {
     margin-bottom: 1.2vh;
 }
