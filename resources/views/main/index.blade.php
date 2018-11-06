@@ -111,9 +111,12 @@
         <span></span>
     </div>
     <div class="chat_window">
-
+        <div class="bot_window"></div>
     </div>
 </div>
+
+@include('main.popups', ['screen'=>$screens->where('slug', 'futer')->first()])
+
 {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>--}}
 <script src="{{ asset('assets') }}/js/animation.js"></script>

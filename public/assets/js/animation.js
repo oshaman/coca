@@ -2951,7 +2951,284 @@ function select_2() {
 select_2()
 
 $.getScript("http://www.youtube.com/iframe_api");
+
+
+function chat_bot() {
+    var chat = $('.chat'),
+        chat_window = $('.bot_window'),
+        data_chat,
+        button_chat
+
+    function ajax_chat() {
+        $.ajax({
+            url: 'get-bot',
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                data_chat = data
+                button_chat = '<div class="button_one_block"><div class="button_chat">' + data_chat[0].question + '</div><div class="button_chat">' + data_chat[1].question + '</div><div class="button_chat">' + data_chat[2].question + '</div><div class="button_chat">' + data_chat[3].question + '</div></div>'
+
+
+            },
+        });
+    }
+
+
+    var messages = [
+        {
+            img: '/assets/img/icon/one_icon_chat.svg',
+            h3: '<h3>Привіт! Я - <span>Кока Коля.</span></h3>',
+            p: '<p>Я допоможу дізнатись цікаву для тебе інформацію.</p>',
+            button: 'Добре. Почнемо'
+        },
+        {
+            text: 'Що тебе цікавить?',
+            text_next: 'У мене ще є питання'
+        },
+        {
+            free_places: 'Вільні місця',
+            sign_up: 'Записатися на екскурсію'
+
+        },
+        {
+            h3_fin: '<h3>Хей!</h3>',
+            p_fin: '<p>Дзвоніть за номером гарячої лінії Кока-Кола</p>',
+            ok_fin: 'ок'
+
+        }
+    ]
+
+    var loader = '<div class="c-chat__item log"> <div class="loader"><span></span><span></span><span></span></div> </div>';
+
+
+    chat.find('.chat_open').click(function () {
+        chat_window.html('')
+        chat.addClass('open')
+        ajax_chat()
+        chat_window.append(loader)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            one_ekran()
+        }, 800)
+    })
+
+    function click_nav_bot() {
+        $('.button_one_block .button_chat').click(function () {
+           var text_a = $(this).text();
+            if ($(this).index() == 0) {
+
+                address(text_a)
+            } else if ($(this).index() == 1) {
+                content(text_a)
+            } else if ($(this).index() == 2) {
+                rules(text_a)
+            } else if ($(this).index() == 3) {
+                sign_up(text_a)
+            }
+        })
+    }
+
+    function one_ekran() {
+        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt="">' + messages[0].h3 + '' + messages[0].p + '<div class="button_chat">' + messages[0].button + '</div></div>')
+        $('.hellow .button_chat').click(function () {
+            two_ekran()
+        })
+    }
+
+    function two_ekran() {
+        chat_window.html('')
+        chat_window.append(loader)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[1].text + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 800)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend(button_chat)
+
+            click_nav_bot()
+        }, 1600)
+
+    }
+
+
+
+    function address(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[0].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+    function content(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[1].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+    function rules(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[2].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+    function sign_up(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            eskurs()
+            // chat_window.prepend(loader)
+        }, 1100)
+
+    }
+
+
+    function eskurs() {
+        chat_window.prepend('<div class="button_one_block"><div class="button_chat sing">' + messages[2].free_places + '</div><div class="button_chat sing">' + messages[2].sign_up + '</div></div>')
+        $('.button_chat.sing').click(function () {
+            var text_a = $(this).text();
+
+            if ($(this).index() == 0) {
+                sign_up_1(text_a)
+            } else {
+                sign_up_2(text_a)
+            }
+        })
+    }
+
+    function sign_up_1(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.prepend('<div class="bot_calendar"></div>')
+
+        var $button = $('form .calendar_w').clone(true, true);
+        $('.bot_calendar').html($button);
+
+        $('.month .arrow') .click(function () {
+            var $button = $('form .calendar_w').clone(true, true);
+            $('.bot_calendar').html('');
+            // chat.find('.bot_calendar').remove()
+            // chat_window.prepend('<div class="bot_calendar"></div>')
+            $('.bot_calendar').html($button);
+
+        })
+
+    }
+
+
+    function sign_up_2(text_a) {
+        chat.find('.button_one_block').remove()
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            chat_window.html('')
+            chat_window.append('<div class="hellow fin"><img src="' + messages[0].img + '" alt="">' + messages[3].h3_fin + '' + messages[3].p_fin + '<h5>'+data_chat[4].answer+'</h5><div class="button_chat">' + messages[3].ok_fin + '</div></div>')
+            chat.find('.fin .button_chat').click(function () {
+                chat.removeClass('open')
+                chat_window.html('')
+
+
+            })
+            // chat_window.prepend(loader)
+        }, 1100)
+    }
+    chat.find('.chat_close').click(function () {
+        chat.removeClass('open')
+        chat_window.html('')
+
+
+    })
+
+
+}
+
+function private_() {
+    var cd_modal = $('.cd-modal')
+    $('.footer__column:nth-child(2)').find('a').click(function (e) {
+        $('body').addClass('nooverflow')
+        e.preventDefault()
+
+        if($(this).index() == 0){
+            cd_modal.eq(0).addClass('modal-is-visible')
+        } else  if($(this).index() == 1){
+            cd_modal.eq(1).addClass('modal-is-visible')
+        }
+    })
+    $('.close-privacy').click(function (e) {
+        e.preventDefault()
+        $('body').removeClass('nooverflow')
+        cd_modal.removeClass('modal-is-visible')
+    })
+}
+
 $(document).ready(function () {
+    chat_bot()
+    private_()
     function f2() {
         var el = $('.slider_top'),
             curr_obj = 0;
@@ -3044,8 +3321,6 @@ $(document).ready(function () {
     }
 
     f3()
-
-
 
 
     $('.check_text input').change(function () {
@@ -13308,8 +13583,11 @@ function angul() {
                             data_year = date.year;
                             data_mone = date._month;
                             f2()
+                            console.log(date);
+
                         },
                         dateClick: function (date) {
+                            console.log(date);
                             $('.calendar_w').removeClass('open')
                             data_day = date.day;
                             data_mone = date._month;
@@ -13322,7 +13600,6 @@ function angul() {
 
 
                     $scope.events = mondays_;
-
 
 
                 }])
@@ -13504,11 +13781,22 @@ angul()
 /*******************madia**********************/
 
 if ($(window).width() < 1025) {
-    $('nav, .stock_cola,.back_call').wrapAll('<div class="menu_mob"><div class="mobile_nav"></div><span></span><span></span><span></span></div>');
+    $('.head').append('<div class="menu_mob"><span></span><span></span><span></span></div>')
+    $('nav, .stock_cola,.back_call').wrapAll('<div class="mobile_nav"></div>');
     $('.name, .tell,.email,.pole_for,.pole_form').wrapAll('<div class="form_left"></div>');
     $('.mobile_nav').prepend('<div class="nav_top"><div class="nav_logo"></div><div class="close_nav"></div></div>')
     $('fieldset:nth-child(2) h3:nth-child(1), .bron').wrapAll('<div class="data_tp"></div>');
     $('fieldset:nth-child(2) h3:nth-child(2), .file_b').wrapAll('<div class="data_cl"></div>');
     $('.data_cl, .data_tp').wrapAll('<div class="tp"></div>');
+    $('.nav_logo').append($('.logo img').clone(true, true))
+    $('.close_nav').click(function () {
+        $('.mobile_nav').removeClass('open_menu')
+        $('body').removeClass('bg_blur')
+    })
+    $('.menu_mob').click(function () {
+        $('body').addClass('bg_blur')
+            $('.mobile_nav').addClass('open_menu')
+    })
+
 
 }

@@ -4,7 +4,6 @@
     <div class="form-trip-block">
         <p>Виберіть дату та час</p>
         <select name="trip-month" id="select-month-edit" class="custom-select sources">
-
             @if($currentMonthHasAvailableDays)
                 <option value="{{ \Carbon\Carbon::now()->month }}"
                         selected>{{ \Carbon\Carbon::now()->format('F') }}</option>
@@ -44,7 +43,7 @@
             <label for="trip-phone-edit">Телефон</label>
         </div>
         <div>
-            {{ Form::text('email', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-email', 'type'=>'trip-email-edit']) }}
+            {{ Form::text('email', null, ['class'=>"form-control", 'required'=>'required', 'id'=>'trip-email-edit', 'type'=>'trip-email-edit']) }}
             <label for="trip-email-edit">Пошта</label>
         </div>
         <div>

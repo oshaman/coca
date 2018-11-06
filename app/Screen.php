@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Screen extends Model
 {
-    protected $fillable = ['content', 'additionally', 'headings'];
+    protected $fillable = ['content', 'additionally', 'headings', 'description'];
 
     protected $casts = [
         'headings' => 'array',

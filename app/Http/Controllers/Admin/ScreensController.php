@@ -73,8 +73,8 @@ class ScreensController extends Controller
     {
 
         $this->validate($request, [
-            'content' => 'nullable|string|max:2000',
-            'description' => 'nullable|string|max:2000',
+            'content' => 'nullable|string|max:40000',
+            'description' => 'nullable|string|max:40000',
             'headings' => 'nullable|array',
             'headings.*' => 'nullable|string|max:256',
             'slider' => 'nullable|array',

@@ -1571,6 +1571,7 @@ div.custom-options {
 .rubric.active .rub-name {
     line-height: 2.8;
 }
+.small:after,
 .rubrics:before,
 .rubrics:after,
 .calendar:after,
@@ -1591,6 +1592,7 @@ div.custom-options {
     top: 0;
     background: #cfcfcf;
 }
+.small:after,
 .rubrics:after,
 .calendar:after,
 .gallery:after {
@@ -2316,24 +2318,25 @@ h5 {
 .bot-text:last-child {
     border-bottom: 1px solid #cfcfcf;
 }
-.view,
+/*.view,*/
 .area {
     width: 100%;
-    height: 10vh;
+    height: 15vh;
     padding: 2.4vh 2vw 2vh 1.8vw;
+    margin-bottom: 2vh;
     letter-spacing: -0.25px;
     line-height: 1.15;
     font-size: 0.72916vw;
     font-family: 'Play', sans-serif;
 }
-.bot-second .view,
-.bot-second .area {
-    height: 13.5vh;
-}
+/*.bot-second .view,*/
+/*.bot-second .area {*/
+    /*height: 13.5vh;*/
+/*}*/
 .area {
-    display: none;
+    /*display: none;*/
     resize: none;
-    border: none;
+    /*border: none;*/
 }
 .bot-page .tiny-content {
     width: 61.35416667vw;
@@ -2503,6 +2506,89 @@ h5 {
     padding: 0;
 }
 /*---------------------------------------END frame-page*/
+
+/*------------------------------------------ photo-page*/
+
+.photo-page header {
+    position: static;
+}
+.photo-page .logoFlesh {
+    width: 8vw;
+}
+.photo-page .under-back {
+}
+.photo-page .bottomright {
+    z-index: 2;
+}
+.photo-page h1 {
+    font-size: 2.083vw;
+    margin: 5.4vh 0 3.4vh -1vw;
+}
+.photo-page main {
+    margin-left: -14.7vw;
+    width: 100vw;
+    justify-content: space-between;
+}
+.big {
+    width: 66.3vw;
+    text-align: center;
+}
+.small {
+    height: 93vh;
+    width: 32.17vw;
+    margin-top: 7.9vh;
+    margin-right: 1.5vw;
+}
+.small h2 {
+    padding: 2.8vh 1.3vw 2vh;
+    font-size: 1vw;
+    border-bottom: 1px solid #cfcfcf;
+    letter-spacing: .39px;
+    margin-bottom: 1vh;
+}
+.choose {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 2vh;
+}
+.choose .frame {
+    margin: 1vh 1.2vw;
+    cursor: pointer;
+    transition: .3s;
+}
+.choose .frame:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+}
+.choose .frame:active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.choose .name-frame {
+    border: 1px solid #cfcfcf;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+}
+.users-photo {
+    position: absolute;
+    z-index: 2;
+}
+.users-photo img {
+    width: 39.8vw;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.4);
+}
+.big .btn {
+    margin-right: -0.8vw;
+}
+.main-frames {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto -.8vw 3.2vh auto;
+}
+.main-frames > img {
+    width: 47.3vw;
+    z-index: 0;
+}
+/*---------------------------------------END photo-page*/
 /*----------------------------------------------media*/
 
 @media screen and (max-width: 1366px){

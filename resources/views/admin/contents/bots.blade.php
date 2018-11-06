@@ -26,8 +26,8 @@
                         @method('PUT')
                         @csrf
 
-                        {!! Form::textarea('question', $bot->question??null, ['class'=>'my-editor']) !!}
-                        {!! Form::textarea('answer', $bot->answer??null, ['class'=>'my-editor']) !!}
+                        {!! Form::textarea('question', $bot->question??null, ['class'=>'area']) !!}
+                        {!! Form::textarea('answer', $bot->answer??null, ['class'=>'area']) !!}
                         <div style="width: 100%">
                             <button type="submit" class="btn btn-red">зберегти</button>
                         </div>

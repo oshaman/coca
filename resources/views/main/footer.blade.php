@@ -24,7 +24,9 @@
                 </div>
             </div>
             <div class="footer__column">
-                <p>Всі права захищені. {{ date('Y') }}</p>
+                {{--<p>Всі права захищені. {{ date('Y') }}</p>--}}
+                <a href="#">Політика конфіденційності</a>
+                <a href="#"> Згода на обробку персональних даних</a>
             </div>
             <div class="footer__column">
                 <div class="logo_flesh">
