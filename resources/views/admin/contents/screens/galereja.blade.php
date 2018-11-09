@@ -4,6 +4,8 @@
         @method('PUT')
         @csrf
 
+        <h2>Пляшка</h2>
+        {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
         <div class="seo-column">
             <div>
                 {!! Form::text('headings[]', $screen->headings[0]??null, ['class' => 'form-control']) !!}

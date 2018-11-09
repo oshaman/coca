@@ -98,4 +98,7 @@
             </div>
         </div>
     </div>
+    <div class="class_woter">
+        <img src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">
+    </div>
 </section>

@@ -5,6 +5,13 @@
     font-weight: 700;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Oswald';
+    src: url('../fonts/Oswald-Medium.eot');
+    src: local('☺'), url('../fonts/Oswald-Medium.woff') format('woff'), url('../fonts/Oswald-Medium.ttf') format('truetype'), url('../fonts/Oswald-Medium.svg') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'Oswald';
@@ -933,7 +940,29 @@ img {
     background-repeat: no-repeat;
     z-index: -1;
 }
-
+.sec_5:after {
+    content: '';
+    position: absolute;
+    width: 48.285417vw;
+    height: 77.572917vw;
+    top: -27.970833vw;
+    left: 0;
+    background-image: url(../img/icon/bron_bg_1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.class_woter {
+    position: absolute;
+    /* left: 291px; */
+    left: 15.18625vw;
+    bottom: -9.635417vw;
+    z-index: -1;
+    /* width: 539px; */
+    width: 27.972917vw;
+    /* height: 175px; */
+    height: 9.114583vw;
+}
 .form_sec5 {
     /* width: 829px; */
     width: 43.177083333333336vw;
@@ -3996,6 +4025,37 @@ fieldset .error input {
         /*left: -139px;*/
         left: -18.098958333333336vw;
     }
+    /*.sec_5:before {*/
+        /*!* width: 1095px; *!*/
+        /*width: 122.578125vw;*/
+        /*!* height: 1346px; *!*/
+        /*height: 192.360417vw;*/
+        /*!* top: -544px; *!*/
+        /*top: -74.633333vw;*/
+        /*!* left: -139px; *!*/
+        /*left: -20.798958vw;*/
+    /*}*/
+    .class_woter {
+        position: absolute;
+        /* left: 291px; */
+        left: 19.28625vw;
+        bottom: 79.264583vw;
+        z-index: -1;
+        /* width: 539px; */
+        width: 69.972917vw;
+        /* height: 175px; */
+        height: 23.114583vw;
+    }
+    .sec_5:after {
+        /* width: 1095px; */
+        width: 122.578125vw;
+        /* height: 1346px; */
+        height: 192.360417vw;
+        /* top: -544px; */
+        top: -74.633333vw;
+        /* left: -139px; */
+        left: -20.798958vw;
+    }
 
     .form_sec5 {
         width: 100%;
@@ -5045,6 +5105,28 @@ fieldset .error input {
         top: -99.6875vw;
         /*left: -47px;*/
         left: -14.6875vw;
+    }
+    .sec_5:after {
+        /* width: 1095px; */
+        width: 174.578125vw;
+        /* height: 1346px; */
+        height: 275.360417vw;
+        /* top: -544px; */
+        top: -102.633333vw;
+        /* left: -139px; */
+        left: -11.798958vw;
+    }
+    .class_woter {
+        position: absolute;
+        /* left: 291px; */
+        left: 41.78625vw;
+        bottom: 286.264583vw;
+        z-index: -1;
+        /* width: 539px; */
+        width: 92.972917vw;
+        /* height: 175px; */
+        height: 23.114583vw;
+        top: 108.2vw;
     }
     .sec_5 .sec_title {
         width: 100%;

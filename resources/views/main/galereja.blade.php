@@ -13,7 +13,9 @@
             </div>
             <div class="gallery_slider">
                 @forelse($screen->slider as $slide)
-                    <div class="gallery_block" data-id="{{ $loop->iteration }}">
+
+                    <div class="gallery_block"
+                         data-id="@if(3>$loop->iteration) {{ $loop->iteration }} @else {{ $loop->iteration+1 }} @endif">
 
                         @if(empty($slide->video))
                             <img src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}" title="{{ $slide->title }}">
@@ -23,6 +25,15 @@
 
                         <p>{{ $slide->description }}</p>
                     </div>
+
+                    @if(2==$loop->iteration)
+                        <div class="gallery_block" data-id="3">
+                            <img src="">
+
+                            {!! $screen->content !!}
+                        </div>
+                    @endif
+
 
                 @empty
                 @endforelse

@@ -2654,10 +2654,13 @@ if ($(window).width() > 1024) {
 }
 
 
-bl2 = $("main").height();
-r2 = $(".text_R").offset().top;
-r3 = $(".text_R2").offset().top;
-l1 = $(".text_L").offset().top;
+if ($(window).width() > 1024) {
+    bl2 = $("main").height();
+    r2 = $(".text_R").offset().top;
+    r3 = $(".text_R2").offset().top;
+    l1 = $(".text_L").offset().top;
+}
+
 
 
 function f1() {

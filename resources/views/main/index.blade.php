@@ -4,7 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Coca Cola</title>
+    <title>{{ $seo->seo_title }}</title>
+    <meta name="description" content="{{ $seo->seo_description }}" />
+    <meta name="keywords" content="{{ $seo->seo_keywords }}">
+    
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:url" content="{{ env('APP_URL') }}">
+    <meta property="og:site_name" content="{{ $seo->seo_title }}">
+
+
+    <meta property="og:title" content="{{ $seo->og_title }}">
+    <meta property="og:description" content="{{ $seo->og_description }}">
+    <meta property="og:image" content="{{ $seo->og_image }}">
+
+    <meta name="twitter:title" content="{{ $seo->seo_title }}">
+    <meta name="twitter:description" content="{{ $seo->seo_description }}">
+    <meta name="twitter:image" content="{{ $seo->og_image }}">
+
     <link rel="stylesheet" href="{{ asset('assets') }}/css/reset.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
 </head>
