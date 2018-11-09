@@ -17,6 +17,18 @@ $(document).ready(function () {
 
     inputLabel();
 
+    //-------------------------------mob version for photo-page
+    if (window.matchMedia("(max-width: 1025px)").matches && window.matchMedia("(min-width: 768px)").matches || window.matchMedia("(max-width: 500px)").matches) {
+        $(".small").removeClass('scrollbar');
+        $(".choose").addClass('scrollbar');
+    }
+    $(".choose.scrollbar").mCustomScrollbar({
+        axis: "x",
+        advanced:{ autoExpandHorizontalScroll:true }
+    });
+    //-------------------------------------------------------end
+
+
     $('.small .frame').on("click",function(){
         $(".main-frames > img").remove();
         var frame = $(this).find("img").clone();
@@ -543,7 +555,7 @@ $(document).ready(function () {
         }
         $(this).find("option").each(function () {
             if ($('body').hasClass('user-page')) {
-                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '" data-url="' + $(this).parent().attr("data-url") + '">' + $(this).html() + '</span>';
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '" data-select="' + $(this).attr("selected") + '" data-url="' + $(this).parent().attr("data-url") + '"><span class="check-box"></span>' + $(this).html() + '</span>';
             }
             else {
                 template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';

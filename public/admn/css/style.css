@@ -872,7 +872,7 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 7px;
+        height: 6px;
     }
 }
 @-webkit-keyframes dothabottomcheck {
@@ -880,7 +880,7 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 7px;
+        height: 6px;
     }
 }
 @keyframes dothabottomcheck {
@@ -888,7 +888,7 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 7px;
+        height: 6px;
     }
 }
 @keyframes dothatopcheck {
@@ -899,7 +899,7 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 12px;
+        height: 10px;
     }
 }
 @-webkit-keyframes dothatopcheck {
@@ -910,7 +910,7 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 12px;
+        height: 10px;
     }
 }
 @-moz-keyframes dothatopcheck {
@@ -921,22 +921,25 @@ div.eye {
         height: 0;
     }
     100% {
-        height: 12px;
+        height: 10px;
     }
 }
+.form-register .check-box,
 input[type=checkbox],
 .form-trip-file input[type=file] {
     display: none;
 }
 .check-box {
-    height: 14px;
-    width: 14px;
+    height: 12px;
+    width: 12px;
+    margin-right: 0.4vw;
     background-color: transparent;
-    border: 1px solid #F40009;
+    border: 1px solid #cfcfcf;
     border-radius: 1px;
     position: relative;
     display: inline-block;
     cursor: pointer;
+    transition: .5s;
 }
 .check-box::before, .check-box::after {
     -moz-box-sizing: border-box;
@@ -959,7 +962,7 @@ input[type=checkbox],
     transition: opacity ease .5s;
 }
 .check-box::before {
-    top: 9px;
+    top: 7px;
     left: 7px;
     box-shadow: 0 0 0 1px #fff;
     -moz-transform: rotate(-135deg);
@@ -977,47 +980,68 @@ input[type=checkbox],
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
-.nodoc {
-    display: block;
-    resize: none;
-    width: 100%;
-    height:0;
-    border: none;
-    font-size: 0.72916vw;
-    font-family: 'Play', sans-serif;
-    color: #B7BEC5;
-    transition: .2s;
-    padding: 0 1.2vw;
+span[data-select=selected] {
+    color: #F40009;
 }
-.nodoc::placeholder {
-    color: #B7BEC5;
-}
-input[type=checkbox]:checked ~ .nodoc {
-    height: 6.5vh;
-    border: 1px solid #B7BEC5;
-    margin: 1vh 0 0;
-    padding: 0.5vh 1.2vw;
-}
-input[type=checkbox]:checked + .check-box,
-.check-box.checked {
+span[data-select=selected] .check-box,
+.custom-option:hover .check-box {
     border-color: #F40009;
 }
-input[type=checkbox]:checked + .check-box::after,
-.check-box.checked::after {
+span[data-select=selected] .check-box::after {
     height: 10px;
     -moz-animation: dothabottomcheck 0.2s ease 0s forwards;
     -o-animation: dothabottomcheck 0.2s ease 0s forwards;
     -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
     animation: dothabottomcheck 0.2s ease 0s forwards;
 }
-input[type=checkbox]:checked + .check-box::before,
-.check-box.checked::before {
+span[data-select=selected] .check-box::before {
     height: 20px;
     -moz-animation: dothatopcheck 0.4s ease 0s forwards;
     -o-animation: dothatopcheck 0.4s ease 0s forwards;
     -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
     animation: dothatopcheck 0.4s ease 0s forwards;
 }
+/*.nodoc {*/
+    /*display: block;*/
+    /*resize: none;*/
+    /*width: 100%;*/
+    /*height:0;*/
+    /*border: none;*/
+    /*font-size: 0.72916vw;*/
+    /*font-family: 'Play', sans-serif;*/
+    /*color: #B7BEC5;*/
+    /*transition: .2s;*/
+    /*padding: 0 1.2vw;*/
+/*}*/
+/*.nodoc::placeholder {*/
+    /*color: #B7BEC5;*/
+/*}*/
+/*input[type=checkbox]:checked ~ .nodoc {*/
+    /*height: 6.5vh;*/
+    /*border: 1px solid #B7BEC5;*/
+    /*margin: 1vh 0 0;*/
+    /*padding: 0.5vh 1.2vw;*/
+/*}*/
+/*input[type=checkbox]:checked + .check-box,*/
+/*.check-box.checked {*/
+    /*border-color: #F40009;*/
+/*}*/
+/*input[type=checkbox]:checked + .check-box::after,*/
+/*.check-box.checked::after {*/
+    /*height: 10px;*/
+    /*-moz-animation: dothabottomcheck 0.2s ease 0s forwards;*/
+    /*-o-animation: dothabottomcheck 0.2s ease 0s forwards;*/
+    /*-webkit-animation: dothabottomcheck 0.2s ease 0s forwards;*/
+    /*animation: dothabottomcheck 0.2s ease 0s forwards;*/
+/*}*/
+/*input[type=checkbox]:checked + .check-box::before,*/
+/*.check-box.checked::before {*/
+    /*height: 20px;*/
+    /*-moz-animation: dothatopcheck 0.4s ease 0s forwards;*/
+    /*-o-animation: dothatopcheck 0.4s ease 0s forwards;*/
+    /*-webkit-animation: dothatopcheck 0.4s ease 0s forwards;*/
+    /*animation: dothatopcheck 0.4s ease 0s forwards;*/
+/*}*/
 /*---------------------------------------END pop-trip*/
 /*-------------------------------------------------scroll*/
 .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar,
@@ -1506,6 +1530,8 @@ div.custom-options {
 .form-register .btn {
     margin-top: 2.09vh;
 }
+
+
 /*--------------------------------------END user-page*/
 /*---------------------------------------content-page*/
 
@@ -2644,5 +2670,214 @@ h5 {
     .create {
         padding: 3.444vh 2.25vw 2.2vh;
     }
+}
+
+
+/*-------------------------------------------mob version for photo-page*/
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .photo-page .logoFlesh,
+    footer {
+        display: none;
+    }
+    .photo-page .topleft {
+        width: 18vw;
+    }
+    .photo-page .logo {
+        width: 13vw;
+        height: 3vh;
+    }
+    .photo-page .logo img {
+        width: 10vw;
+    }
+    .photo-page h1 {
+        font-size: 3vw;
+        margin: 5vh 0 2vh;
+    }
+    .big,
+    .users-photo {
+        width: 100%;
+    }
+    .main-frames {
+        margin: auto auto 30px auto;
+    }
+    .main-frames > img {
+        width: 87%;
+    }
+    .users-photo img {
+        width: 72%;
+    }
+    .big .btn {
+        padding: 8px 35px;
+        font-size: 2vw;
+        margin: 0;
+    }
+    .small {
+        height: 29vh;
+        width: 94%;
+        margin-top: 5vh;
+        margin-right: auto;
+        margin-left: 6%;
+    }
+    .choose {
+        display: block;
+        padding-bottom: 0;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .choose .frame {
+        margin: 1vh 1.5vw 2vh;
+        display: inline-block;
+        width: 25vw;
+    }
+    .small h2 {
+        padding: 2.8vh 1.3vw 2vh;
+        font-size: 2vw;
+    }
+    .choose .name-frame {
+        font-size: 1.7vw;
+    }
+    .small:after {
+        left: auto;
+        top: 0;
+        width: 1px;
+        height: 100%;
+    }
+    .photo-page .under-back {
+        bottom: 8px;
+    }
+    .small .mCSB_scrollTools .mCSB_draggerContainer {
+        background: transparent;
+    }
+    .small .mCSB_scrollTools {
+        border: none;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+        height: 18px;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+        margin: 9px 0;
+    }
+    .small .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+        border-radius: 50%;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        margin: auto;
+    }
+    .small .mCSB_horizontal.mCSB_inside>.mCSB_container {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .photo-page .topleft {
+        width: 121px;
+    }
+    .photo-page .logo {
+        width: 87px;
+        height: 25px;
+    }
+    .photo-page .logo img {
+        width: 66px;
+    }
+    .photo-page h1 {
+        font-size: 16px;
+        margin: 45px 0 15px;
+    }
+    .photo-page .logoFlesh,
+    footer {
+        display: none;
+    }
+    .big,
+    .users-photo {
+        width: 100%;
+    }
+    .main-frames {
+        margin: auto auto 30px auto;
+    }
+    .main-frames > img {
+        width: 87%;
+    }
+    .users-photo img {
+        width: 72%;
+    }
+    .big .btn {
+        padding: 8px 35px;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .small {
+        height: 176px;
+        width: 94%;
+        margin-top: 30px;
+        margin-right: auto;
+        margin-left: 6%;
+    }
+    .choose .frame {
+        margin: 10px 10px 15px;
+        display: inline-block;
+        width: 119px;
+    }
+    .small h2 {
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+    .choose .name-frame {
+        font-size: 9px;
+    }
+    .photo-page .photo-frame {
+        margin-bottom: -1px;
+    }
+    .photo-page .under-back {
+        bottom: 0;
+    }
+    .choose {
+        display: block;
+        padding-bottom: 0;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .small:after {
+        left: auto;
+        top: 0;
+        width: 1px;
+        height: 100%;
+    }
+    .small .mCSB_scrollTools .mCSB_draggerContainer {
+        background: transparent;
+    }
+    .small .mCSB_scrollTools {
+        border: none;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+        height: 18px;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
+        margin: 9px 0;
+    }
+    .small .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+    .small .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+        border-radius: 50%;
+    }
+    .small .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        margin: auto;
+    }
+    .small .mCSB_horizontal.mCSB_inside>.mCSB_container {
+        margin-bottom: 10px;
+        height: 139px;
+    }
+
 }
 /*------------------------------------------END media*/

@@ -33,7 +33,7 @@
                         <a href="#gallery">Галерея</a>
                     </li>
                     <li>
-                        <a href="#map_cola">Карта</a>
+                        <a href="#map_cola">Контакти</a>
                     </li>
                 </ul>
             </nav>
@@ -104,11 +104,14 @@
 </div>
 <div class="chat">
     <div class="chat_open">
-        <img src="{{ asset('assets') }}/img/icon/chat.svg" alt="">
+        <img src="{{ asset('assets') }}/img/icon/chat_bot_colo.svg" alt="">
+        <img class="bot_coca_i" src="{{ asset('assets') }}/img/icon/luar.svg" alt="">
+        <div class="coca_hello"><p>Хей! Запитуй в мене!</p></div>
     </div>
     <div class="chat_close">
         <span></span>
         <span></span>
+        <img class="puls_cl" src="{{ asset('assets') }}/img/icon/puls_cl.gif" alt="">
     </div>
     <div class="chat_window">
         <div class="bot_window"></div>

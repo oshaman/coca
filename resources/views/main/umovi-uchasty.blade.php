@@ -10,7 +10,7 @@
 
 
             </div>
-            <div class="participation-block">
+            <div class="participation-block" id="participation-block">
                 <div class="block_par">
                     <div class="block_head">
                         <div class="block_img_">

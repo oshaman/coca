@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Email;
 use App\Excursion;
 use App\Jobs\OrderCreated;
 use Carbon\Carbon;
@@ -27,7 +28,6 @@ class CalendarRepository
                 $today->subMonthsNoOverflow(1);
             }
         }
-
 
 
         $lastDay = $currentDay->copy()->endOfMonth();
@@ -68,7 +68,7 @@ class CalendarRepository
         return true;
     }
 
-    public function addExcursion($request):array
+    public function addExcursion($request): array
     {
         $received_date = $this->getReceivedDate($request);
 
@@ -84,12 +84,12 @@ class CalendarRepository
 
         $excursion->add($request, $received_date);
 
-        dispatch(new OrderCreated($excursion->email));
+        dispatch(new OrderCreated($excursion->email, Email::getEmail('first')));
 
         return ['status' => 'Екскурсію збережено.'];
     }
 
-    public function updateExcursion($request, $excursion):array
+    public function updateExcursion($request, $excursion): array
     {
         /**
          * @var Excursion $excursion
@@ -137,10 +137,10 @@ class CalendarRepository
     {
 
         $today = Carbon::now();
-        $all_excursion = Excursion::where('created_at', '>', $today->format('Y-m-d'))
-            ->where('created_at', '<', $this->getMaximalAllowedDay()->addDay()->format('Y-m-d'))->get();
+        $all_excursion = $this->getAllAvailableExcursions();
 
         $range = $this->dateRange();
+
         $disabled_days = [];
 
         for ($i = 1; $i <= $range; $i++) {
@@ -150,19 +150,52 @@ class CalendarRepository
                 continue;
             }
 
-
             $current_day_excursion = $all_excursion->where('date', $today->format('Y-m-d'))->pluck(['interval'])->toArray();
-
 
             if ($this->hasFreeIntervals($current_day_excursion)) {
                 $disabled_days[] = $today->format('Y-m-d');
             }
 
-
             $today->addDay();
         }
 
         return $disabled_days;
+    }
+
+    public function getAllAvailableExcursions()
+    {
+        $today = Carbon::now();
+
+        return Excursion::where('created_at', '>', $today->format('Y-m-d'))
+            ->where('created_at', '<', $this->getMaximalAllowedDay()->addDay()->format('Y-m-d'))->get();
+    }
+
+    public function getFirstAvailableDay()
+    {
+        $today = Carbon::now();
+        $today->addDay();
+
+        $range = $this->dateRange();
+
+        $all_excursion = $this->getAllAvailableExcursions();
+
+        for ($i = 1; $i <= $range; $i++) {
+
+            if ($today->isWeekend()) {
+                $today->addDay();
+                continue;
+            }
+
+            $current_day_excursion = $all_excursion->where('date', $today->format('Y-m-d'))->pluck(['interval'])->toArray();
+
+            if (!count($current_day_excursion) || $this->hasFreeIntervals($current_day_excursion)) {
+                return $today->format('Y-m-d');
+            }
+
+            $today->addDay();
+        }
+
+        return Carbon::now();
     }
 
     public function dateRange()
@@ -203,21 +236,21 @@ class CalendarRepository
         return $result;
     }
 
-    public static function getExcursionByDate($date):array
+    public static function getExcursionByDate($date): array
     {
         $excursions = Excursion::whereDate('created_at', '=', $date)->get();
 
         $result = [];
 
-        for ($i=1;$i<7;$i++) {
-            $result[$i] = $excursions->where('interval','=', $i)->first();
+        for ($i = 1; $i < 7; $i++) {
+            $result[$i] = $excursions->where('interval', '=', $i)->first();
         }
 
         return $result;
 
     }
 
-    public function getArrayForCreateValidation():array
+    public function getArrayForCreateValidation(): array
     {
         return [
             "trip-month" => 'required|numeric|between:1,12',
@@ -235,7 +268,7 @@ class CalendarRepository
         ];
     }
 
-    public function getArrayForUpdateValidation():array
+    public function getArrayForUpdateValidation(): array
     {
         return [
             "trip-month" => 'required|numeric|between:1,12',
@@ -253,7 +286,7 @@ class CalendarRepository
         ];
     }
 
-    public function currentMonthHasAvailableDays():bool
+    public function currentMonthHasAvailableDays(): bool
     {
         $today = Carbon::now();
         $lastDay = Carbon::now()->endOfMonth();
@@ -262,9 +295,9 @@ class CalendarRepository
             return false;
         }
 
-        $count = $today->day+1;
+        $count = $today->day + 1;
 
-        for ($i=$count;$i<=$lastDay->day;$i++) {
+        for ($i = $count; $i <= $lastDay->day; $i++) {
             $today->addDay();
 
             if (!$today->isWeekend() && !$today->isLastOfMonth()) {

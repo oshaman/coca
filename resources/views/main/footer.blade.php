@@ -32,7 +32,7 @@
                 <div class="logo_flesh">
                     <div class="fresh">
                         <div class="created">САЙТ РАЗРАБОТАН</div>
-                        <a href="http://freshweb.agency/" target="_blank">
+                        <a href="https://freshweb.agency/?utm_source=visitcoke.com.ua" target="_blank">
                             <div class="fresh-logo">
                                 <span>F</span><span>R</span><span>E</span><span>S</span><span>H</span>
                             </div>

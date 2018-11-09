@@ -27,7 +27,7 @@ class Excursion extends Model
 
         $this->created_at = $date;
 
-        $this->status = $request->get('status')??2;
+        $this->status = $request->get('status') ?? 2;
 
         if ($request->has('file')) {
             $this->uploadFile($request->file('file'));
@@ -59,7 +59,7 @@ class Excursion extends Model
 
     }
 
-    public function deleteExcursion():array
+    public function deleteExcursion(): array
     {
         $this->removeFile();
         $this->removePhoto();
@@ -69,9 +69,18 @@ class Excursion extends Model
 
     public function updateStatus($status): void
     {
-        if ($this->status != $status){
+        if ($this->status != $status) {
             $this->status = $status;
             //TODO: send email
+
+            if (3 === $this->status) {
+                dispatch(new OrderCreated($this->email, Email::getEmail('second')));
+            }
+
+            if (4 === $this->status) {
+                dispatch(new OrderCreated($this->email, Email::getEmail('fourth')));
+            }
+
         }
     }
 
@@ -97,7 +106,7 @@ class Excursion extends Model
 
     public function getStatusClassAttribute()
     {
-        return config('settings.status_class.'.$this->status);
+        return config('settings.status_class.' . $this->status);
     }
 
     public function removeFile()

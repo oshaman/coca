@@ -1,8 +1,8 @@
 @component('mail::message')
-# Introduction
+# Дані щодо бронювання
 
 {!! $email->content??'' !!}
 
-Дякуємо,<br>
-{{ config('app.name') }}
+{{--Дякуємо,<br>--}}
+{{--{{ config('app.name') }}--}}
 @endcomponent

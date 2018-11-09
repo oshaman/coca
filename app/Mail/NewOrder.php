@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -12,14 +11,16 @@ class NewOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $content;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($content)
     {
-        //
+        $this->content = $content;
     }
 
     /**
@@ -29,9 +30,9 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        $email = Email::where('slug', 'first')->first();
+        $email = $this->content;
 
-        return $this->cc(['ekompanec@gmail.com', 'irka.v.struk@gmail.com'])
-            ->markdown('emails.new_order')->with('email', $email);
+        return $this->cc(['ekompanec@gmail.com', 'irka.v.struk@gmail.com', 'oshaman789@gmail.com'])
+            ->markdown('emails.new_order')->with(compact('email'));
     }
 }

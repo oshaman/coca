@@ -22,4 +22,11 @@ class Email extends Model
         $this->copy = explode(',', preg_replace('/[\s]/', '', $str));
         $this->save();
     }
+
+    public static function getEmail($slug)
+    {
+        return static::where('slug', $slug)->first();
+    }
+
+
 }

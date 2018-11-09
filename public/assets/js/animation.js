@@ -2611,196 +2611,9 @@ $(".seo_button").click(function () {
         $(this).find("p").text($(this).data('on_text'));
     }
 });
-$(".header, .button_callback").on("click", "a", function (event) {
-    event.preventDefault();
-    var id = $(this).attr('href'),
-        top = $(id).offset().top - 200;
-    $('body,html').animate({scrollTop: top}, 1500);
-});
 
 
-// Функция initMap которая отрисует карту на странице
-// function initMap() {
-//     var _lat, _lng, centerX, centerY;
-//     _lat = 50.610271;
-//     _lng = 30.873070;
-//     centerX = 50.611271;
-//     centerY = 30.872070;
-//     var e = [{
-//             featureType: "all",
-//             elementType: "geometry.fill",
-//             stylers: [{
-//                 weight: "2.00"
-//             }]
-//         }, {
-//             featureType: "all",
-//             elementType: "geometry.stroke",
-//             stylers: [{
-//                 color: "#9c9c9c"
-//             }]
-//         }, {
-//             featureType: "all",
-//             elementType: "labels.text",
-//             stylers: [{
-//                 visibility: "on"
-//             }]
-//         }, {
-//             featureType: "administrative.locality",
-//             elementType: "labels.text.fill",
-//             stylers: [{
-//                 color: "#de4540"
-//             }]
-//         }, {
-//             featureType: "administrative.locality",
-//             elementType: "labels.text.stroke",
-//             stylers: [{
-//                 color: "#de4540"
-//             }, {
-//                 visibility: "off"
-//             }]
-//         }, {
-//             featureType: "landscape",
-//             elementType: "all",
-//             stylers: [{
-//                 color: "#f2f2f2"
-//             }]
-//         }, {
-//             featureType: "landscape",
-//             elementType: "geometry.fill",
-//             stylers: [{
-//                 color: "#ffffff"
-//             }]
-//         }, {
-//             featureType: "landscape.man_made",
-//             elementType: "geometry.fill",
-//             stylers: [{
-//                 color: "#ffffff"
-//             }]
-//         }, {
-//             featureType: "poi",
-//             elementType: "all",
-//             stylers: [{
-//                 visibility: "off"
-//             }]
-//         }, {
-//             featureType: "road",
-//             elementType: "all",
-//             stylers: [{
-//                 saturation: -100
-//             }, {
-//                 lightness: 45
-//             }]
-//         }, {
-//             featureType: "road",
-//             elementType: "geometry.fill",
-//             stylers: [{
-//                 color: "#eeeeee"
-//             }]
-//         }, {
-//             featureType: "road",
-//             elementType: "labels.text.fill",
-//             stylers: [{
-//                 color: "#7b7b7b"
-//             }]
-//         }, {
-//             featureType: "road",
-//             elementType: "labels.text.stroke",
-//             stylers: [{
-//                 color: "#ffffff"
-//             }]
-//         }, {
-//             featureType: "road.highway",
-//             elementType: "all",
-//             stylers: [{
-//                 visibility: "simplified"
-//             }]
-//         }, {
-//             featureType: "road.arterial",
-//             elementType: "labels.icon",
-//             stylers: [{
-//                 visibility: "off"
-//             }]
-//         }, {
-//             featureType: "transit",
-//             elementType: "all",
-//             stylers: [{
-//                 visibility: "off"
-//             }]
-//         }, {
-//             featureType: "transit",
-//             elementType: "geometry",
-//             stylers: [{
-//                 visibility: "on"
-//             }]
-//         }, {
-//             featureType: "transit",
-//             elementType: "labels",
-//             stylers: [{
-//                 visibility: "on"
-//             }]
-//         }, {
-//             featureType: "transit.station",
-//             elementType: "labels.text.fill",
-//             stylers: [{
-//                 color: "#646464"
-//             }]
-//         }, {
-//             featureType: "water",
-//             elementType: "all",
-//             stylers: [{
-//                 color: "#46bcec"
-//             }, {
-//                 visibility: "on"
-//             }]
-//         }, {
-//             featureType: "water",
-//             elementType: "geometry.fill",
-//             stylers: [{
-//                 color: "#c8d7d4"
-//             }]
-//         }, {
-//             featureType: "water",
-//             elementType: "labels.text.fill",
-//             stylers: [{
-//                 color: "#070707"
-//             }]
-//         }, {
-//             featureType: "water",
-//             elementType: "labels.text.stroke",
-//             stylers: [{
-//                 color: "#ffffff"
-//             }]
-//         }],
-//         t = {
-//             lat: centerX,
-//             lng: centerY
-//         },
-//         markerPos = {
-//             lat: _lat,
-//             lng: _lng
-//         }
-//     var coordinates = {lat: 50.611271, lng: 30.872070},
-//         map = new google.maps.Map(document.getElementById('map'), {
-//             center: t,
-//             zoom: 16,
-//             styles: e,
-//             disableDefaultUI: true,
-//         }),
-//         icon = {
-//             url: 'assets/img/icon/marker.svg',
-//             scaledSize: new google.maps.Size(273, 400)
-//         },
-//         marker = new google.maps.Marker({
-//             position: markerPos,
-//             map: map,
-//             icon: icon,
-//         });
-//
-//     setTimeout(function () {
-//         $(".gm-style img[src='" + icon.url + "']").addClass("markerClass")
-//     }, 2000)
-//
-// }
+
 
 
 function f() {
@@ -2993,14 +2806,19 @@ function chat_bot() {
         },
         {
             free_places: 'Вільні місця',
-            sign_up: 'Записатися на екскурсію'
-
+            sign_up: 'Записатися на екскурсію',
+            cal_day: 'Виберіть дату',
+            cal_time: 'А тепер час'
         },
         {
             h3_fin: '<h3>Хей!</h3>',
             p_fin: '<p>Дзвоніть за номером гарячої лінії Кока-Кола</p>',
             ok_fin: 'ок'
 
+        },
+        {
+            prev: 'Назад',
+            next: 'Далі',
         }
     ]
 
@@ -3020,7 +2838,7 @@ function chat_bot() {
 
     function click_nav_bot() {
         $('.button_one_block .button_chat').click(function () {
-           var text_a = $(this).text();
+            var text_a = $(this).text();
             if ($(this).index() == 0) {
 
                 address(text_a)
@@ -3061,7 +2879,6 @@ function chat_bot() {
     }
 
 
-
     function address(text_a) {
         chat.find('.button_one_block').remove()
         chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
@@ -3085,6 +2902,7 @@ function chat_bot() {
             })
         }, 1900)
     }
+
     function content(text_a) {
         chat.find('.button_one_block').remove()
         chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
@@ -3108,6 +2926,7 @@ function chat_bot() {
             })
         }, 1900)
     }
+
     function rules(text_a) {
         chat.find('.button_one_block').remove()
         chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
@@ -3131,6 +2950,7 @@ function chat_bot() {
             })
         }, 1900)
     }
+
     function sign_up(text_a) {
         chat.find('.button_one_block').remove()
         chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
@@ -3161,23 +2981,56 @@ function chat_bot() {
 
     function sign_up_1(text_a) {
         chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.html('')
+        // chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_day + '</p></div></div>')
+
         chat_window.prepend('<div class="bot_calendar"></div>')
 
         var $button = $('form .calendar_w').clone(true, true);
         $('.bot_calendar').html($button);
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
+        $('.month .arrow').click(function () {
+            add_calendar()
+        })
 
-        $('.month .arrow') .click(function () {
+        function data_click_e() {
+            $('.day.ng-scope').not('.disabled').on('click',function () {
+                add_calendar()
+            })
+
+        }
+        data_click_e()
+        function add_calendar() {
             var $button = $('form .calendar_w').clone(true, true);
             $('.bot_calendar').html('');
-            // chat.find('.bot_calendar').remove()
-            // chat_window.prepend('<div class="bot_calendar"></div>')
             $('.bot_calendar').html($button);
+            data_click_e()
+            console.log(data_mone, data_day, data_year);
+        }
 
+            angular.element(".day").triggerHandler("click");
+        $('.cl_next').on('click',function () {
+            sign_up_time()
+        })
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            eskurs()
         })
 
     }
-
+    function sign_up_time() {
+        chat_window.html('')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
+        chat_window.prepend('<div class="bot_time"></div>')
+        var $timer = $('form .custom-options').clone(true, true);
+        $('.bot_time').html($timer);
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            sign_up_1()
+        })
+    }
 
     function sign_up_2(text_a) {
         chat.find('.button_one_block').remove()
@@ -3187,7 +3040,7 @@ function chat_bot() {
         setTimeout(function () {
             chat.find('.log').remove()
             chat_window.html('')
-            chat_window.append('<div class="hellow fin"><img src="' + messages[0].img + '" alt="">' + messages[3].h3_fin + '' + messages[3].p_fin + '<h5>'+data_chat[4].answer+'</h5><div class="button_chat">' + messages[3].ok_fin + '</div></div>')
+            chat_window.append('<div class="hellow fin"><img src="' + messages[0].img + '" alt="">' + messages[3].h3_fin + '' + messages[3].p_fin + '<h5>' + data_chat[4].answer + '</h5><div class="button_chat">' + messages[3].ok_fin + '</div></div>')
             chat.find('.fin .button_chat').click(function () {
                 chat.removeClass('open')
                 chat_window.html('')
@@ -3197,6 +3050,7 @@ function chat_bot() {
             // chat_window.prepend(loader)
         }, 1100)
     }
+
     chat.find('.chat_close').click(function () {
         chat.removeClass('open')
         chat_window.html('')
@@ -3213,9 +3067,9 @@ function private_() {
         $('body').addClass('nooverflow')
         e.preventDefault()
 
-        if($(this).index() == 0){
+        if ($(this).index() == 0) {
             cd_modal.eq(0).addClass('modal-is-visible')
-        } else  if($(this).index() == 1){
+        } else if ($(this).index() == 1) {
             cd_modal.eq(1).addClass('modal-is-visible')
         }
     })
@@ -3226,9 +3080,60 @@ function private_() {
     })
 }
 
+function top_menu_active() {
+
+    var lastId,
+        topMenu = $(".head li"),
+        topMenuHeight = topMenu.outerHeight() + 150,
+        menuItems = topMenu.find("a"),
+        scrollItems = menuItems.map(function () {
+            var item = $($(this).attr("href"));
+            if (item.length) {
+                return item;
+            }
+        });
+
+    menuItems.click(function (e) {
+        var href = $(this).attr("href"),
+            offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
+        $('html, body').stop().animate({
+            scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+        if($( window ).width() < 1025) {
+            setTimeout(function () {
+                $('.mobile_nav').removeClass('open_menu')
+                $('body').removeClass('bg_blur')
+            },300)
+
+        }
+    });
+
+    $(window).scroll(function () {
+        var fromTop = $(this).scrollTop() + topMenuHeight;
+
+        var cur = scrollItems.map(function () {
+            if ($(this).offset().top < fromTop)
+                return this;
+        });
+        cur = cur[cur.length - 1];
+        var id = cur && cur.length ? cur[0].id : "";
+
+        if (lastId !== id) {
+            lastId = id;
+            menuItems
+                .parent().removeClass("active")
+                .end().filter("[href='#" + id + "']").parent().addClass("active");
+        }
+    });
+}
+
 $(document).ready(function () {
     chat_bot()
     private_()
+    top_menu_active()
+
+
     function f2() {
         var el = $('.slider_top'),
             curr_obj = 0;
@@ -3490,8 +3395,49 @@ $(document).ready(function () {
                             $('body').removeClass('hover_full')
                             $('.pop_blag').removeClass('open')
                         })
+                    } else {
+                        console.log(555);
                     }
+
                 },
+                error: function (xhr, ajaxOptions, thrownError) {
+                   var erf = xhr.responseText
+                    erf = JSON.parse(erf);
+
+                   var form_sec5 = $('.form_sec5')
+
+                    if (erf.errors.email != undefined) {
+                        form_sec5.find('.email').addClass('error')
+                    } else {
+                        form_sec5.find('.email').removeClass('error')
+                    }
+                    if (erf.errors.institution != undefined) {
+                        form_sec5.find('#institution').parent().addClass('error')
+                    }
+                    else {
+                        form_sec5.find('#institution').parent().removeClass('error')
+                    }
+                    if (erf.errors.name != undefined) {
+                        form_sec5.find('.name').addClass('error')
+                    }else {
+                        form_sec5.find('.name').parent().removeClass('error')
+                    }
+                    if (erf.errors.people != undefined) {
+                        form_sec5.find('.custom-select_people').addClass('error')
+                    }else {
+                        form_sec5.find('.custom-select_people').removeClass('error')
+                    }
+                    if (erf.errors.phone != undefined) {
+                        form_sec5.find('.tell').addClass('error')
+                    }else {
+                        form_sec5.find('.tell').removeClass('error')
+                    }
+                    if (erf.errors.position != undefined) {
+                        form_sec5.find('input#position').parent().addClass('error')
+                    }else {
+                        form_sec5.find('input#position').parent().removeClass('error')
+                    }
+                }
             });
         })
 
@@ -13526,6 +13472,7 @@ $('.data_calendar').click(function () {
 var data_mone, data_day, data_year
 
 function angul() {
+
     $.ajax({
         url: 'get-calendar',
         type: "POST",
@@ -13539,13 +13486,11 @@ function angul() {
             var count = 0;
 
 
-            // var data_ggg = data.max_day
 
             mondays_ = []
 
             mondays = []
             for (ooo in Object.keys(data.excursions)) {
-                // mondays_.push("foo : bar", "date:"+ Object.keys(data.excursions)[ooo]+")
                 mondays_.push({foo: 'bar', date: Object.keys(data.excursions)[ooo]})
             }
             for (ooo in mondays_) {
@@ -13566,12 +13511,18 @@ function angul() {
                         inWeek = new Date();
                     inWeek.setDate(today.getDate());
                     var month = inWeek.getMonth() + 1,
-                        date = inWeek.getDate(),
+                        date = inWeek.getDate() + 1,
                         year = inWeek.getFullYear(),
-                        current_date = year + '-' + month + '-' + date;
-
-
+                        current_date = year + '/' + month + '/' + date;
+                    var first_available = data.first_available_day.split('-');
+                    data_day = first_available[2];
+                    data_year = first_available[0];
+                    data_mone = first_available[1];
+                    console.log(data_day, data_year,data_mone);
                     $scope.options = {
+                        // defaultDate: "" + current_date + "",
+                        defaultDate: data.first_available_day,
+                        // defaultDate: data.max_day,
                         disabledDates: data.disabled,
                         minDate: "" + current_date + "",
                         maxDate: data.max_day,
@@ -13752,7 +13703,7 @@ function angul() {
 
                     e.days = [], e.options = e.options || {}, e.events = e.events || [], e.options.dayNamesLength = e.options.dayNamesLength || 1, e.options.mondayIsFirstDay = e.options.mondayIsFirstDay || !1, e.onClick = o, e.allowedPrevMonth = l, e.allowedNextMonth = r, e.weekDays = u, e.isDefaultDate = v, e.prevMonth = f, e.nextMonth = h, e.arrowPrevClass = "visible", e.arrowNextClass = "visible";
                     var m = t("translate"),
-                        M = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопал", "Грудень"],
+                        M = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
                         g = ["НД", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
                     if (e.options.mondayIsFirstDay) {
                         var y = g.shift();
@@ -13795,8 +13746,162 @@ if ($(window).width() < 1025) {
     })
     $('.menu_mob').click(function () {
         $('body').addClass('bg_blur')
-            $('.mobile_nav').addClass('open_menu')
+        $('.mobile_nav').addClass('open_menu')
     })
 
+    function mousedown_clider() {
+        $('.participation-area').append('<div class="nav_participation"><div class="nav-control nav-control_prev"></div><div class="nav-control nav-control_next"></div></div>')
+
+        nav_participation = $('.nav_participation')
+        $('.participation-block').css({'left': '0px'})
+        var t = 0
+
+        var k = true
+        yy = ($('.participation-block').width() + 40) - $(window).width()
+
+
+        var el = document.getElementById('participation-block');
+        swipedetect(el, function (swipedir) {
+        });
+
+        function swipedetect(el) {
+
+            var touchsurface = el,
+                startX,
+                threshold = 50;
+
+
+            touchsurface.addEventListener('touchstart', function (e) {
+                var touchobj = e.changedTouches[0]
+                startX = touchobj.pageX
+                e.preventDefault()
+            }, false)
+
+            touchsurface.addEventListener('touchend', function (e) {
+                var touchobj = e.changedTouches[0]
+
+                distX = touchobj.pageX - startX
+
+                if (Math.abs(distX) >= threshold) {
+
+                    if (distX < 0) {
+                        console.log(t, yy, t + (distX * -1))
+                        if (t + 150 < yy) {
+                            t += 150
+                            // $('.participation-block').css('left', -t)
+                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
+
+                        } else {
+                            t = yy
+                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
+                        }
+
+
+                    } else if (distX > 0) {
+                        if (t - 150 > 0) {
+                            t += -150
+                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
+                        } else {
+                            t = 0
+                            $('.participation-block').css({'left': '0px', 'transition': '.5s'})
+                        }
+                    }
+
+
+                    // swipedir = (distX < 0)? 'left' : 'right'
+                    // if ( t >= 0 && t <= yy) {
+                    //
+                    //     t += distX * -1
+                    //     // if (t > ) {
+                    //     //
+                    //     // }
+                    // }
+                    // t += distX * -1
+                }
+                // t += distX * -1
+
+            }, false)
+
+        }
+
+
+        // nav_participation.find('.nav-control')
+        //
+        //     .on('touchend', function () {
+        //         k = false
+        //         return false
+        //     })
+        //     .on('touchstart', function () {
+        //         k = true
+        //         this_ = $(this)
+        //
+        //         function timeout() {
+        //             setTimeout(function () {
+        //                 if (k == true && t < yy && t >= 0) {
+        //                     requestAnimationFrame(timeout)
+        //                 }
+        //             });
+        //
+        //             if (this_.hasClass('nav-control_prev')) {
+        //                 ttt()
+        //             } else if (this_.hasClass('nav-control_next')) {
+        //                 ttt_min()
+        //             }
+        //             // ttt()
+        //         }
+        //
+        //         timeout();
+        //         // if (t <= yy && t >= 0)  {
+        //         //     timeout();
+        //         //
+        //         // }
+        //
+        //     });
+        //
+        // function ttt() {
+        //     if (t > yy) {
+        //         t = yy
+        //     } else if (t <= yy) {
+        //         t += 3
+        //     }
+        //     // t += 1
+        //     $('.participation-block').css({'left': -t,'transition':'.0s'})
+        // }
+        //
+        // function ttt_min() {
+        //     if (t < 0) {
+        //         t = 0
+        //     } else if (t >= 0) {
+        //         t -= 3
+        //     }
+        //     // t -= 1
+        //     $('.participation-block').css({'left': -t,'transition':'.0s'})
+        // }
+
+
+        nav_participation.find('.nav-control').click(function () {
+            if ($(this).hasClass('nav-control_next')) {
+                if (t + 150 > yy) {
+                    t = yy
+                } else if (t + 150 <= yy) {
+                    t += 150
+                }
+            } else if ($(this).hasClass('nav-control_prev')) {
+                if (t - 150 < 0) {
+                    t = 0
+                } else if (t - 150 >= 0) {
+                    t -= 150
+                }
+            }
+
+            $('.participation-block').css({'left': -t, 'transition': '.5s'})
+        })
+
+    }
+
+    mousedown_clider()
 
 }
+// $(window).resize(function() {
+//     location.reload();
+// });

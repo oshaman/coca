@@ -15,14 +15,16 @@ class OrderCreated implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $email;
+    protected $content;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct($email, $content)
     {
         $this->email = $email;
+        $this->content = $content;
     }
 
     /**
@@ -32,7 +34,7 @@ class OrderCreated implements ShouldQueue
      */
     public function handle()
     {
-        $email = new NewOrder();
+        $email = new NewOrder($this->content);
         Mail::to($this->email)->send($email);
     }
 }

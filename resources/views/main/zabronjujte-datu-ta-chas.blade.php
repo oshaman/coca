@@ -86,11 +86,13 @@
 
                     <div class="button">
                         <div class="send">
-                            <input type="submit" id="send" value="Забронювати">
+                            <button type="submit" id="send" value="Забронювати">Забронювати</button>
                         </div>
-                        <label for="checkBox">
-                            <input id="checkBox" type="checkbox" name="checkBox"> Я згоден на оброботку своїх данних
+                        <label>
+                            <input id="checkBox" type="checkbox" name="checkBox">
+                            <span>Я згоден на оброботку своїх данних</span>
                         </label>
+
                     </div>
                 </form>
             </div>
