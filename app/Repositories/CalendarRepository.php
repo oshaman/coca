@@ -188,7 +188,7 @@ class CalendarRepository
 
             $current_day_excursion = $all_excursion->where('date', $today->format('Y-m-d'))->pluck(['interval'])->toArray();
 
-            if (!count($current_day_excursion) || $this->hasFreeIntervals($current_day_excursion)) {
+            if (!count($current_day_excursion) || !$this->hasFreeIntervals($current_day_excursion)) {
                 return $today->format('Y-m-d');
             }
 
