@@ -16,6 +16,6 @@ class EmailRepository
 
     public function requestList()
     {
-        \Log::info('test -'.date('d-m-Y'));
+        \Log::info('test new -'.date('d-m-Y'));
     }
 }

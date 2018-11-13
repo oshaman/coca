@@ -992,7 +992,7 @@ fieldset:nth-child(2) {
     width: 13.593749999999998VW;
 }
 
-fieldset label {
+fieldset label,.bot_contacts label {
     font-family: 'SFUIDisplay';
     font-weight: 400;
     /*line-height: 58px;*/
@@ -1002,7 +1002,7 @@ fieldset label {
     color: #A9AEBE;
 }
 
-fieldset input {
+fieldset input ,.bot_contacts input{
     border: none;
     border-bottom: 1px solid #B7BEC5;
     /*width: 398px;*/
@@ -1016,7 +1016,10 @@ fieldset input {
     color: #37393C;
     padding: 0 0 9px 0;
 }
-
+.bot_contacts input {
+    width: 100%;
+    background-color: transparent;
+}
 fieldset h3 {
     font-family: 'SFUIDisplay';
     font-weight: 400;
@@ -1034,7 +1037,7 @@ fieldset:nth-child(2) h3 {
     margin-bottom: 1.120833vw;
 }
 
-fieldset:nth-child(1) div {
+fieldset:nth-child(1) div,.bot_contacts div{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1052,7 +1055,7 @@ input:focus + label, input:not(:placeholder-shown) + label, textarea:focus + lab
     transition: .3s;
 }
 
-input.value_ + label, input:focus + label, textarea.value_ + label, textarea:focus + label, fieldset label.label-stay {
+input.value_ + label, input:focus + label, textarea.value_ + label, textarea:focus + label, fieldset label.label-stay,.bot_contacts label.label-stay {
     cursor: text;
     white-space: nowrap;
     overflow: hidden;
@@ -1521,7 +1524,7 @@ fieldset:nth-child(2) h3:nth-child(3) i:before {
     transition: .5s;
 }
 
-.gallery_block:hover:before {
+.gallery_block:not(.gallery_coca):hover:before {
     opacity: 1;
 }
 
@@ -1562,8 +1565,18 @@ fieldset:nth-child(2) h3:nth-child(3) i:before {
     opacity: 0;
     transition: .5s;
 }
-
-.gallery_block:hover p {
+.gallery_coca:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 91px;
+    height: 76px;
+    background-image: url("../img/icon/cola_bg_galler.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.gallery_block:not(.gallery_coca):hover p {
     opacity: 1;
 }
 body.hover_full,.bg_blur {
@@ -3388,7 +3401,11 @@ fieldset .error input {
     margin: 0 auto;
     cursor: pointer;
 }
-
+.button_chat.disabled {
+    border: 1px solid #A9AEBE;
+    color: #A9AEBE;
+    pointer-events: none;
+}
 .hellow h3 {
     font-family: 'Play';
     font-weight: 400;
@@ -3429,6 +3446,18 @@ fieldset .error input {
     visibility: visible;
     position: relative;
     margin: 0 auto;
+}
+.bot_contacts {
+    position: relative;
+    margin-top: 34px;
+}
+.bot_contacts div {
+    height: 2.695833vw;
+    margin-bottom: 0.65vw;
+}
+.bot_contacts div:last-child {
+    margin-bottom: 0;
+    height: 1.895833vw;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -4045,6 +4074,7 @@ fieldset .error input {
         width: 69.972917vw;
         /* height: 175px; */
         height: 23.114583vw;
+        top: 70.4vw;
     }
     .sec_5:after {
         /* width: 1095px; */

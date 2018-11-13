@@ -58,7 +58,7 @@
                 <input id='email' type="email" class="form-control" name="email" required>
                 <label for="email">Пошта</label>
             </div>
-            <div>
+            <div class="new-user-form">
                 {{Form::select('role_id',
                     $roles,
                     null,

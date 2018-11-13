@@ -27,8 +27,8 @@
                     </div>
 
                     @if(2==$loop->iteration)
-                        <div class="gallery_block" data-id="3">
-                            <img src="">
+                        <div class="gallery_block gallery_coca" data-id="3">
+                            <img src="{{ asset('assets') }}/img/icon/galler_3.jpg">
 
                             {!! $screen->content !!}
                         </div>

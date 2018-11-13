@@ -2811,7 +2811,9 @@ function chat_bot() {
             free_places: 'Вільні місця',
             sign_up: 'Записатися на екскурсію',
             cal_day: 'Виберіть дату',
-            cal_time: 'А тепер час'
+            cal_time: 'А тепер час',
+            cal_contact_1: 'Напиши інформацію щодо себе',
+            cal_contact_2: 'А тепер ще трішки інформації'
         },
         {
             h3_fin: '<h3>Хей!</h3>',
@@ -2822,6 +2824,12 @@ function chat_bot() {
         {
             prev: 'Назад',
             next: 'Далі',
+        },
+        {
+            name_bot: 'Ім’я та Прізвище',
+            phone_bot: 'Телефон',
+            email_bot: 'Пошта',
+            position_bot: 'Посада'
         }
     ]
 
@@ -3018,7 +3026,8 @@ function chat_bot() {
         })
         $('.cl_prev').on('click',function () {
             chat_window.html('')
-            eskurs()
+            var text_a = messages[2].sign_up
+            sign_up(text_a)
         })
 
     }
@@ -3028,13 +3037,73 @@ function chat_bot() {
         chat_window.prepend('<div class="bot_time"></div>')
         var $timer = $('form .custom-options').clone(true, true);
         $('.bot_time').html($timer);
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.bot_time li').click(function () {
+            $('.cl_next').removeClass('disabled')
+        })
+
         $('.cl_prev').on('click',function () {
             chat_window.html('')
             sign_up_1()
         })
+        $('.cl_next').on('click',function () {
+            sign_up_contactD()
+        })
     }
+    function sign_up_contactD() {
+        chat_window.html('')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
+        chat_window.prepend('<div class="bot_contacts">' +
+            '<div class="name">\n' +
+            '<input type="text" id="name_bot" name="name_bot" autocomplete="off">\n' +
+            '<label for="name_bot">'+messages[5].name_bot+'</label>\n' +
+            '</div>' +
+            '<div class="tell">\n' +
+            '<input type="text" id="phone_bot" name="phone_bot" autocomplete="off">\n' +
+            '<label for="phone_bot">'+messages[5].phone_bot+'</label>\n' +
+            '</div>' +
+            '<div class="email">\n' +
+            '<input type="email" id="email_bot" name="email_bot" autocomplete="off">\n' +
+            '<label for="email_bot">'+messages[5].email_bot+'</label>\n' +
+            '</div>' +
+            '<div class="pole_form">\n' +
+            '<input type="text" id="position_bot" name="position_bot" autocomplete="off">\n' +
+            '<label for="position_bot">'+messages[5].position_bot+'</label>\n' +
+            '</div>' +
+            '</div>');
 
+
+        $('.bot_contacts input').change(function () {
+            el = $(this);
+            el.each(function () {
+                if (el.val().length > 0) {
+                    el.parent().find('label').addClass('label-stay')
+                } else {
+                    el.parent().find('label').removeClass('label-stay')
+                }
+            })
+            var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            }if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            }
+        })
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            sign_up_time()
+        })
+        $('.cl_next').on('click',function () {
+
+        })
+
+    }
+    function sign_up_contactT() {
+        chat_window.html('')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
+
+    }
     function sign_up_2(text_a) {
         chat.find('.button_one_block').remove()
         setTimeout(function () {
@@ -3174,7 +3243,7 @@ $(document).ready(function () {
     f2()
 
     function f3() {
-        $('.gallery-area .gallery_block').click(function () {
+        $('.gallery-area .gallery_block').not('.gallery_coca').click(function () {
             $('.pop_up').addClass('open')
             $('body').addClass('hover_full')
             $('.slider_popUp').html('')

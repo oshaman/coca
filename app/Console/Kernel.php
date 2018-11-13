@@ -24,12 +24,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->call('\App\Repositories\EmailRepository@requestList')->everyMinute();
+        $schedule->call('\App\Repositories\EmailRepository@requestList')->everyMinute();
 //        $schedule->call('\App\Repositories\EmailRepository@requestList')->dailyAt('01:30');
 
-        $schedule->call(function () {
-            \Log::info('message');
-        })->everyMinute();
+//        $schedule->call(function () {
+//            \Log::info('test -'.date('d-m-Y'));
+//        })->everyMinute();
     }
 
     /**

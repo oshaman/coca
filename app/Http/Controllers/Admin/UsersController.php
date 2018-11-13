@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Jobs\AddUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class UsersController extends AdminController
         $this->title = 'Користувачі сайту';
         $roles = Role::all()->pluck('uk_name', 'id');
 
-        $users = User::with('role')->paginate(10);
+        $users = User::with('role')->paginate(20);
 
         $this->content = view('admin.contents.users')->with(compact('users', 'roles'))->render();
         return $this->renderOutput();
@@ -40,8 +41,9 @@ class UsersController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -53,6 +55,8 @@ class UsersController extends AdminController
 
         $user = User::add($request->all());
         $user->generatePassword($request->get('password'));
+
+        dispatch(new AddUser($user, $request->get('password')));
 
         return ['success'=>'Користувача створено'];
     }
