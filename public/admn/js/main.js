@@ -602,7 +602,7 @@ $(document).ready(function () {
 
     $(".custom-option").on("click", function (e) {
         _this = $(this);
-        if ($('body').hasClass('user-page')) {
+        if ($('body').hasClass('user-page') && !$(this).parents('.custom-select-wrapper').parent().hasClass('new-user-form')) {
             _role_id = _this.attr('data-value');
             $.ajax({
                 url: _this.attr('data-url'),
@@ -774,7 +774,7 @@ $(document).ready(function () {
             $('main').css('pointer-events', 'none')
             $('.edit-form  #trip-pos-edit').trigger('change');
 
-            $('.edit-form form').attr('action', 'https://coca.j2landing.com/admin/calendar/' + ids);
+            $('.edit-form form').attr('action', '/admin/calendar/' + ids);
             $('.edit-form form').prepend('<input type="hidden" name="_method" value="PUT">')
 
             changeMonth();

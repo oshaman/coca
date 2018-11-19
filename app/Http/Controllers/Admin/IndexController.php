@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\EmailRepository;
 use App\Screen;
 
 class IndexController extends AdminController
@@ -18,5 +19,12 @@ class IndexController extends AdminController
         $this->content = view('admin.contents.screens.index')
             ->with(compact('screens'))->render();
         return $this->renderOutput();
+    }
+
+    public function test()
+    {
+        $res = EmailRepository::test();
+
+        dd($res);
     }
 }

@@ -2613,7 +2613,7 @@ $(".seo_button").click(function () {
 });
 
 
-
+var data_mone, data_day, data_year
 
 
 function f() {
@@ -2768,12 +2768,62 @@ select_2()
 
 $.getScript("http://www.youtube.com/iframe_api");
 
+function mask(inputName, mask, evt) {
+    try {
+        var text = document.getElementById(inputName);
+        var value = text.value;
 
+        // If user pressed DEL or BACK SPACE, clean the value
+        try {
+            var e = (evt.which) ? evt.which : event.keyCode;
+            if ( e == 46 || e == 8 ) {
+                text.value = "";
+                return;
+            }
+        } catch (e1) {}
+
+        var literalPattern=/[0\*]/;
+        var numberPattern=/[0-9]/;
+        var newValue = "";
+
+        for (var vId = 0, mId = 0 ; mId < mask.length ; ) {
+            if (mId >= value.length)
+                break;
+
+            // Number expected but got a different value, store only the valid portion
+            if (mask[mId] == '0' && value[vId].match(numberPattern) == null) {
+                break;
+            }
+
+            // Found a literal
+            while (mask[mId].match(literalPattern) == null) {
+                if (value[vId] == mask[mId])
+                    break;
+
+                newValue += mask[mId++];
+            }
+
+            newValue += value[vId++];
+            mId++;
+        }
+
+        text.value = newValue;
+    } catch(e) {}
+}
 function chat_bot() {
     var chat = $('.chat'),
         chat_window = $('.bot_window'),
         data_chat,
-        button_chat
+        button_chat,
+        POST_time,
+        POST_name_bot,
+        POST_phone_bot,
+        POST_email_bot,
+        POST_position_bot,
+        POST_institution,
+        POST_people
+
+
 
     function ajax_chat() {
         $.ajax({
@@ -2824,12 +2874,18 @@ function chat_bot() {
         {
             prev: 'Назад',
             next: 'Далі',
+            finish: 'Завершити',
+            finh3: 'Круто!',
+            finh3_: 'Вітаю з заверщенням!',
+            finhp: 'Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації',
+            finhwin: 'ОК'
         },
         {
             name_bot: 'Ім’я та Прізвище',
             phone_bot: 'Телефон',
             email_bot: 'Пошта',
-            position_bot: 'Посада'
+            position_bot: 'Посада',
+            institution: 'Назва закладу'
         }
     ]
 
@@ -3002,11 +3058,13 @@ function chat_bot() {
         $('.bot_calendar').html($button);
         chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
         $('.month .arrow').click(function () {
+            // oute()
             add_calendar()
         })
 
         function data_click_e() {
             $('.day.ng-scope').not('.disabled').on('click',function () {
+                // oute()
                 add_calendar()
             })
 
@@ -3014,10 +3072,10 @@ function chat_bot() {
         data_click_e()
         function add_calendar() {
             var $button = $('form .calendar_w').clone(true, true);
+            // oute()
             $('.bot_calendar').html('');
             $('.bot_calendar').html($button);
             data_click_e()
-            console.log(data_mone, data_day, data_year);
         }
 
             angular.element(".day").triggerHandler("click");
@@ -3047,6 +3105,7 @@ function chat_bot() {
             sign_up_1()
         })
         $('.cl_next').on('click',function () {
+            POST_time = $('.bot_time li.selection').data('value')
             sign_up_contactD()
         })
     }
@@ -3059,7 +3118,7 @@ function chat_bot() {
             '<label for="name_bot">'+messages[5].name_bot+'</label>\n' +
             '</div>' +
             '<div class="tell">\n' +
-            '<input type="text" id="phone_bot" name="phone_bot" autocomplete="off">\n' +
+            '<input type="text" id="phone_bot" onkeyup="javascript:mask(\'phone_bot\', \'+3(000)000 00 00\', event);"  name="phone_bot" autocomplete="off">\n' +
             '<label for="phone_bot">'+messages[5].phone_bot+'</label>\n' +
             '</div>' +
             '<div class="email">\n' +
@@ -3072,6 +3131,62 @@ function chat_bot() {
             '</div>' +
             '</div>');
 
+        var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+        $('.bot_contacts input').change(function () {
+            el = $(this);
+            el.each(function () {
+                if (el.val().length > 0) {
+                    el.parent().find('label').addClass('label-stay')
+                } else {
+                    el.parent().find('label').removeClass('label-stay')
+                }
+            })
+
+            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            }else {
+                $('.cl_next').addClass('disabled')
+            }
+
+
+        });
+
+        $('.bot_contacts input').keypress(function () {
+
+            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
+            }
+        });
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            sign_up_time()
+        })
+        $('.cl_next').on('click',function () {
+            POST_name_bot = $('#name_bot').val();
+            POST_phone_bot = $('#phone_bot').val();
+            POST_email_bot = $('#email_bot').val();
+            POST_position_bot = $('#position_bot').val();
+            sign_up_contactT()
+        })
+
+    }
+    function sign_up_contactT() {
+
+        var $position = $('form .pole_form').eq(2).clone(true, true);
+        chat_window.html('');
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
+        chat_window.prepend('<div class="bot_contacts">' +
+            '<div class="name">\n' +
+            '<input type="text" id="institution_bot" name="institution_bot" autocomplete="off">\n' +
+            '<label for="institution_bot">'+messages[5].institution+'</label>\n' +
+            '</div>' +
+            '</div>');
+        $position.appendTo('.bot_contacts')
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].finish + '</div></div>')
+
 
         $('.bot_contacts input').change(function () {
             el = $(this);
@@ -3082,27 +3197,78 @@ function chat_bot() {
                     el.parent().find('label').removeClass('label-stay')
                 }
             })
-            var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+
+            if ($('#institution_bot').val().length > 3 && $('.bot_contacts .custom-option_people.selection').index() != 0) {
                 $('.cl_next').removeClass('disabled')
-            }if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+            }else {
+                $('.cl_next').addClass('disabled')
+            }
+
+
+        });
+        $('.bot_contacts .custom-option_people').click(function () {
+            if ($('.bot_contacts .custom-option_people.selection').index() != 0 && $('#institution_bot').val().length > 3) {
                 $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
             }
         })
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.bot_contacts input').keypress(function () {
+
+            if ($('#institution_bot').val().length > 3 && $('.bot_contacts .custom-option_people.selection').index() != 0) {
+                $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
+            }
+        });
+
+
         $('.cl_prev').on('click',function () {
-            chat_window.html('')
-            sign_up_time()
+            chat_window.html('');
+            sign_up_contactD()
         })
         $('.cl_next').on('click',function () {
+            POST_institution = $('#institution_bot').val()
+            POST_people = $('.bot_contacts .custom-option_people.selection').data('value')
+            $.ajax({
+                url: 'add-excursions',
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'name': POST_name_bot,
+                    'phone': POST_phone_bot,
+                    'email': POST_email_bot,
+                    'position': POST_position_bot,
+                    'institution':POST_institution,
+                    'people': POST_people,
+                    'interval': POST_time,
+                    'trip-month': data_mone,
+                    'trip-day':data_day
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 'Екскурсію збережено.') {
+                        chat_window.html('')
+                        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt=""><h3>' + messages[4].finh3 + '<br>' + messages[4].finh3_ + '</h3><p>' + messages[4].finhp + '</p><div class="button_chat">' + messages[4].finhwin + '</div></div>')
+                        $('.hellow .button_chat').click(function () {
+                            chat.removeClass('open')
+                            chat_window.html('')
+                        })
+                    }
 
+                }
+            });
+
+
+            console.log(POST_time,
+                POST_name_bot,
+                POST_phone_bot,
+                POST_email_bot,
+                POST_position_bot,
+                POST_institution,POST_institution,POST_people, data_mone, data_day);
         })
-
-    }
-    function sign_up_contactT() {
-        chat_window.html('')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
-
     }
     function sign_up_2(text_a) {
         chat.find('.button_one_block').remove()
@@ -3116,7 +3282,6 @@ function chat_bot() {
             chat.find('.fin .button_chat').click(function () {
                 chat.removeClass('open')
                 chat_window.html('')
-
 
             })
             // chat_window.prepend(loader)
@@ -13535,13 +13700,28 @@ function angular_tr() {
 
     }));
 }
-
+// function oute() {
+//     $('.days').find('.day').eq(5).addClass('out')
+//     $('.days').find('.day').eq(6).addClass('out')
+//     for (var i = 0; i < $('.days').length; i++ ) {
+//        var a_s =  $('.days').eq(i).find('.out').length;
+//        if (a_s == 7 ) {
+//            $('.days').eq(i).remove()
+//        }
+//     }
+//
+// }
 $('.data_calendar').click(function () {
     $(".custom-option").parents(".custom-select").removeClass("opened");
     $('.calendar_w').toggleClass('open')
     event.stopPropagation();
+
+    // oute()
+    // $('.month .arrow').click(function () {
+    //     oute()
+    // })
 })
-var data_mone, data_day, data_year
+
 
 function angul() {
 
@@ -13590,7 +13770,6 @@ function angul() {
                     data_day = first_available[2];
                     data_year = first_available[0];
                     data_mone = first_available[1];
-                    console.log(data_day, data_year,data_mone);
                     $scope.options = {
                         // defaultDate: "" + current_date + "",
                         defaultDate: data.first_available_day,
@@ -13606,16 +13785,15 @@ function angul() {
                             data_year = date.year;
                             data_mone = date._month;
                             f2()
-                            console.log(date);
 
                         },
                         dateClick: function (date) {
-                            console.log(date);
                             $('.calendar_w').removeClass('open')
                             data_day = date.day;
                             data_mone = date._month;
                             data_year = date.year;
                             f2()
+
                         },
                         changeMonth: function (month, year) {
                         },
@@ -13658,7 +13836,9 @@ function angul() {
 
                 function e() {
                     var e = '<div class="flex-calendar"><div class="month"><div class="arrow {{arrowPrevClass}}" ng-click="prevMonth()"></div><div class="label">{{ selectedMonth | translate }} <span>{{selectedYear}}</span></div><div class="arrow {{arrowNextClass}}" ng-click="nextMonth()"></div></div><div class="week"><div class="day" ng-repeat="day in weekDays(options.dayNamesLength) track by $index">{{ day }}</div></div><div class="days" ng-repeat="week in weeks"><div class="day"ng-repeat="day in week track by $index"ng-class="{selected: isDefaultDate(day), event: day.event[0], disabled: day.disabled, out: !day}"ng-click="onClick(day, $index, $event)"><div class="number">{{day.day}}</div></div></div></div>',
+
                         a = {restrict: "E", scope: {options: "=?", events: "=?"}, template: e, controller: t};
+
                     return a
                 }
 
@@ -13727,11 +13907,13 @@ function angul() {
                         }
 
                         e.arrowPrevClass = e.allowedPrevMonth() ? "visible" : "hidden", e.arrowNextClass = e.allowedNextMonth() ? "visible" : "hidden"
+
                     }
 
                     function D() {
                         e.options._defaultDate = e.options.defaultDate ? new Date(e.options.defaultDate) : new Date, e.selectedYear = e.options._defaultDate.getFullYear(), e.selectedMonth = M[e.options._defaultDate.getMonth()], e.selectedDay = e.options._defaultDate.getDate(), c()
                         $('.data_calendar').find('p').text('' + e.selectedMonth + ' ' + e.selectedDay + '')
+
                     }
 
                     function p() {
@@ -13761,6 +13943,7 @@ function angul() {
                             0 === t ? (e.selectedYear -= 1, e.selectedMonth = M[11]) : e.selectedMonth = M[t - 1];
                             var a = {name: e.selectedMonth, index: t - 1, _index: t + 2};
                             e.options.changeMonth(a, e.selectedYear), c()
+
                         }
                     }
 
@@ -13780,15 +13963,19 @@ function angul() {
                     if (e.options.mondayIsFirstDay) {
                         var y = g.shift();
                         g.push(y)
+
                     }
                     e.options.minDate && (e.options.minDate = new Date(e.options.minDate)), e.options.maxDate && (e.options.maxDate = new Date(e.options.maxDate)), e.options.disabledDates && a(), e.events && n(), e.$watch("options.defaultDate", function () {
                         D()
+
                     }), e.$watch("options.disabledDates", function () {
                         a(), p()
                     }), e.$watch("events", function () {
                         n(), c()
                     })
                 }
+
+
 
                 angular.module("flexcalendar", []).directive("flexCalendar", e), t.$inject = ["$scope", "$filter"]
             }();
@@ -13977,3 +14164,26 @@ if ($(window).width() < 1025) {
 // $(window).resize(function() {
 //     location.reload();
 // });
+
+
+$(window).on("load", function () {
+    $preloader = $("#canvas-container");
+    setTimeout(function () {
+        $('body').removeClass('is_load')
+       // $('.is_load_').delay(800).fadeOut("slow")
+        $preloader.delay(100).fadeOut("slow")
+        $preloader.find('.canvas_load').animate({ height: '10vh'}, 'slow');
+    }, 700);
+    setTimeout(function () {
+        // $("#canvas-container").remove()
+    }, 1000)
+    // $preloader.unbind(preloader_canvas())
+
+});
+
+[].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
+    img.setAttribute('src', img.getAttribute('data-src'));
+    img.onload = function() {
+        img.removeAttribute('data-src');
+    };
+});

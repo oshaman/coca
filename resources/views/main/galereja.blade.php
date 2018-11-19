@@ -3,8 +3,10 @@
         <div class="gallery-area">
             <div class="gallery_title">
                 <div class="sec_title">
-                    <span>Щаслива</span>
-                    <h2>Галерея</h2>
+                    <span>{{ $screen->headings[0]??'' }}</span>
+                    <div class="fs_title">
+                        <h2>{{ $screen->headings[1]??'' }}</h2>
+                    </div>
                 </div>
                 <div class="slider_nav">
                     <div class="nav-control nav-control_prev"></div>
@@ -18,7 +20,7 @@
                          data-id="@if(3>$loop->iteration) {{ $loop->iteration }} @else {{ $loop->iteration+1 }} @endif">
 
                         @if(empty($slide->video))
-                            <img src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}" title="{{ $slide->title }}">
+                            <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}" title="{{ $slide->title }}">
                         @else
                             <div class="video_galegy" data-video="{{ $slide->video }}"></div>
                         @endif
@@ -28,7 +30,7 @@
 
                     @if(2==$loop->iteration)
                         <div class="gallery_block gallery_coca" data-id="3">
-                            <img src="{{ asset('assets') }}/img/icon/galler_3.jpg">
+                            <img data-src="{{ asset('assets') }}/img/icon/galler_3.jpg">
 
                             {!! $screen->content !!}
                         </div>

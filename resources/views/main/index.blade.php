@@ -23,8 +23,80 @@
 
     <link rel="stylesheet" href="{{ asset('assets') }}/css/reset.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
+
+    <style>
+        body.is_load {
+            position: fixed;
+        }
+       /*.is_load_:before {*/
+            /*content: '';*/
+            /*position: fixed;*/
+            /*left: 0;*/
+            /*top: 0;*/
+            /*background-color: #F40009;*/
+            /*width: 100vw;*/
+            /*height: 100vh;*/
+            /*z-index: 999;*/
+        /*}*/
+        #canvas-container {
+            background: #ffffff;
+            /*background: #F40009;*/
+            background-size: cover;
+            top: 50%;
+            position: fixed;
+            transform: translate(0,-50%);
+            z-index: 999;
+            height: 100vh;
+            width: 100vw;
+        }
+        #sineCanvas {
+            position: absolute;
+            bottom: 0;
+        }
+        .canvas_load {
+            height: 50vh;
+            width: 100vw;
+            position: absolute;
+            bottom: 0;
+            background: #F40009;
+        }
+        .canvas_load:nth-child(1) {
+            top: 0;
+        }
+        #sineCanvas2,#sineCanvas {
+            background-color: #fff;
+            position: absolute;
+            width: 100vw
+        }
+        #sineCanvas2 {
+            bottom: 0;
+        }
+        #sineCanvas {
+            top: -1px;
+        }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PVCLZSN');</script>
+    <!-- End Google Tag Manager -->
 </head>
-<body>
+<body class="is_load">
+
+    <div id="canvas-container">
+        <div class="canvas_load">
+            <canvas id="sineCanvas2"></canvas>
+        </div>
+        <div class="canvas_load">
+            <canvas id="sineCanvas"></canvas>
+        </div>
+
+    </div>
+
+
 <header class="header">
     <div class="container">
         <div class="head">
@@ -54,7 +126,16 @@
                 </ul>
             </nav>
             <div class="stock_cola">
-                <img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
+                <div class="cola_event">
+                    <img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
+                </div>
+                <div class="event_info">
+                    <img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
+                    <p>Збери всі частини Коли
+                        <span>та отрімуй шалені подарунки!</span>
+                        </p>
+                </div>
+
             </div>
             <div class="back_call">
                 <a href="#form">
@@ -133,13 +214,156 @@
         <div class="bot_window"></div>
     </div>
 </div>
+<script>
+    function preloader_canvas() {
 
+        var unit = 100,
+            canvas, context, canvas2, context2,
+            height, width, xAxis, yAxis,
+            draw, draw2;
+
+        /**
+         * Init function.
+         *
+         * Initialize variables and begin the animation.
+         */
+        function init() {
+
+            canvas = document.getElementById("sineCanvas");
+            canvas2 = document.getElementById("sineCanvas2");
+            //Установите ширину холста на ширину окна
+            canvas.width = document.documentElement.clientWidth;
+            canvas2.width = document.documentElement.clientWidth;
+            canvas.height = 100;
+            canvas2.height = 100;
+
+            context = canvas.getContext("2d");
+            context2 = canvas2.getContext("2d");
+
+            height = canvas.height;
+            width = canvas.width;
+
+            xAxis = Math.floor(height/2);
+            yAxis = 0;
+
+            draw();
+            draw2();
+        }
+
+        /**
+         * Draw animation function.
+         *
+         * This function draws one frame of the animation, waits 20ms, and then calls
+         * itself again.
+         */
+        function draw() {
+
+            context.clearRect(0, 0, width, height);
+
+            drawWave('#F40009', 1, 2.5, 0);
+
+            // Обновите время и снова нарисуйте
+            draw.seconds = draw.seconds + .02;
+            draw.t = draw.seconds*Math.PI;
+            setTimeout(draw, 35);
+        };
+        draw.seconds = 0;
+        draw.t = 0;
+
+        function draw2() {
+
+            // Очистить рисунок холста
+            context2.clearRect(0, 0, width, height);
+
+            //Нарисуйте волну
+            drawWave2('#F40009', 1, 6, 0);
+
+            // Обновите время и снова нарисуйте
+            draw2.seconds = draw2.seconds + .01;
+            draw2.t = draw2.seconds*Math.PI;
+            setTimeout(draw2, 10);
+        };
+        draw2.seconds = 0;
+        draw2.t = 0;
+        /**
+         *Нарисуйте волну
+         * drawWave(Цвет, непрозрачность, масштабирование по ширине волны, отставание начального положения волны)
+         */
+        function drawWave(color, alpha, zoom, delay) {
+            context.fillStyle = color;
+            context.globalAlpha = alpha;
+            context.beginPath(); //Начальный проход
+            drawSine(draw.t / 0.5, zoom, delay);
+            context.lineTo(width + 10, height); //Путь в нижнем правом углу холста
+            context.lineTo(0, height); //Путь к левому нижнему углу холста
+            context.closePath() //Закрыть путь
+            context.fill(); //заполнить
+        }
+        function drawWave2(color, alpha, zoom, delay) {
+            context2.fillStyle = color;
+            context2.globalAlpha = alpha;
+            context2.beginPath(); //Начальный проход
+            drawSine2(draw.t / 0.8, zoom, delay);
+            context2.lineTo(width + 10, -height); //Путь в нижнем правом углу холста
+            context2.lineTo(0, -height); //Путь к левому нижнему углу холста
+            context2.closePath() //Закрыть путь
+            context2.fill(); //заполнить
+        }
+        /**
+         * Функция рисования синуса
+         *
+         * Кривая синуса рисуется в сегментах 10px, начиная с начала координат.
+         * drawSine(Время, ширина ширины ширины волны, задержка положения начала волны)
+         */
+        function drawSine(t, zoom, delay) {
+
+            // Задайте начальные x и y, начиная с 0,0 и переведя на начало координат
+            // на холст.
+            var x = t; //Пусть время будет горизонтальным
+            var y = Math.sin(x)/zoom;
+            context.moveTo(yAxis, unit*y+xAxis); //Поместите путь в исходное положение
+            // Цикл для рисования сегментов (Нарисуйте волны по ширине)
+            for (i = yAxis; i <= width + 10; i += 10) {
+                x = t+(-yAxis-i)/unit/zoom;
+                y = Math.sin(x - delay)/5;
+                context.lineTo(i, unit*y+xAxis);
+            }
+        }
+        function drawSine2(t, zoom, delay) {
+
+            var x = t;
+            var y = Math.sin(x)/zoom;
+            context2.moveTo(yAxis, unit*y+xAxis);
+
+            for (i = yAxis; i <= width + 10; i += 10) {
+                x = t+(-yAxis-i)/unit/zoom;
+                y = Math.sin(x - delay)/3;
+                context2.lineTo(i, unit*y+xAxis);
+            }
+        }
+
+        init();
+
+    };
+    preloader_canvas()
+</script>
 @include('main.popups', ['screen'=>$screens->where('slug', 'futer')->first()])
-
-{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>--}}
 <script src="{{ asset('assets') }}/js/animation.js"></script>
 
-<!--<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKFztHzVA7_L75JrTwyrzhk2asYAWUL7I&amp;callback=initMap&amp;language=ua"></script>-->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVCLZSN"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-86271972-14"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-86271972-14');
+</script>
+
 </body>
 </html>

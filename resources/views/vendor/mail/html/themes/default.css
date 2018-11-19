@@ -1,7 +1,8 @@
 /* Base */
 
 body, body *:not(html):not(style):not(br):not(tr):not(code) {
-    font-family: Avenir, Helvetica, sans-serif;
+    font-family: Roboto, Tahoma, sans-serif;
+    /*font-family: Avenir, Helvetica, sans-serif;*/
     box-sizing: border-box;
 }
 
@@ -287,4 +288,57 @@ img {
 .promotion p {
     font-size: 15px;
     text-align: center;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+.img-l {
+    width: 100%;
+    text-align: center;
+}
+.img-l img {
+    height: auto;
+}
+.main-text-l {
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+    color: #3c3c3c;
+    margin: 0 auto 24px;
+}
+.table-l {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 600px;
+    min-width: 320px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+.inner-l {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+}
+.inner-l div {
+    font-family: sans-serif;
+    width: 300px;
+    display: table-cell;
+    Float: none;
+    vertical-align: top;
+    padding: 24px 20px;
+}
+.pole-l {
+    font-size: 17px;
+    line-height: 21px;
+    text-align: right;
+    color: #8e8e8e;
+}
+.inner-l {
+    text-align: left;
+    color: #f40009;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 700;
 }

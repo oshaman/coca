@@ -15,4 +15,12 @@ class Seo extends Model
         $this->fill($fields)->save();
         return $this;
     }
+
+    public function setSeoTextAttribute($value)
+    {
+
+        $re = '/(<p>(&nbsp;)|(\s)<\/p>)|(<p><\/p>)/m';
+        $this->attributes['seo_text'] = preg_replace($re, '', $value);
+
+    }
 }

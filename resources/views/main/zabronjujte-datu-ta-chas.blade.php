@@ -3,7 +3,9 @@
         <div class="form-area">
             <div class="sec_title">
                 <span>{{ $screen->headings[0]??'' }}</span>
-                <h2>{{ $screen->headings[1]??'' }}</h2>
+                <div class="fs_title">
+                    <h2>{{ $screen->headings[1]??'' }}</h2>
+                </div>
                 {!! $screen->content !!}
             </div>
             <div class="form_sec5">
@@ -15,7 +17,7 @@
                             <label for="name">Ім’я та Прізвище</label>
                         </div>
                         <div class="tell">
-                            <input type="text" id="phone" name="phone" autocomplete="off">
+                            <input type="text" id="phone" onkeyup="javascript:mask('phone', '+3(000)000 00 00', event);" name="phone" autocomplete="off">
                             <label for="phone">Телефон</label>
                         </div>
                         <div class="email">
@@ -99,6 +101,6 @@
         </div>
     </div>
     <div class="class_woter">
-        <img src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">
+        <img data-src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">
     </div>
 </section>

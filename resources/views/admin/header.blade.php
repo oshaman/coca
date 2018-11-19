@@ -1,9 +1,12 @@
 <body class="{{ $body_class??'' }}">
 <header>
     <img class="angles topleft" src="{{ asset('admn') }}/imgs/topleft.svg" alt="1">
-    <div class="logo">
+    <a class="logo" href="{{ config('app.url') }}">
         <img src="{{ asset('admn') }}/imgs/Coca-Cola_logo.svg" alt="logo">
-    </div>
+    </a>
+    {{--<div class="logo">--}}
+        {{--<img src="{{ asset('admn') }}/imgs/Coca-Cola_logo.svg" alt="logo">--}}
+    {{--</div>--}}
     <div class="back-site">
         <div class="head-container">
             <a href="{{ config('app.url') }}" class="nav">Повернутись до сайту</a>

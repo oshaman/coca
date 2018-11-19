@@ -3,7 +3,9 @@
     <div class="contact">
         <div class="sec_title">
             <span>{{ $screen->headings[0]??'' }}</span>
-            <h2>{{ $screen->headings[1]??'' }}</h2>
+            <div class="fs_title">
+                <h2>{{ $screen->headings[1]??'' }}</h2>
+            </div>
         </div>
         <div class="contact-area">
             <div class="con_lan">

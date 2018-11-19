@@ -12,7 +12,7 @@
     <div class="slider_top">
         <div class="slider_top_img">
             @forelse($screen->slider as $slide)
-                <img src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}" title="{{ $slide->title }}" @if($loop->first) class="active" @endif>
+                <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}" title="{{ $slide->title }}" @if($loop->first) class="active" @endif>
             @empty
             @endforelse
         </div>

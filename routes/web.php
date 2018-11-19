@@ -35,6 +35,9 @@ Route::prefix('admin')
         Route::resource('photo-frame', 'PhotosController')->only(['index', 'store', 'destroy']);
         Route::post('get-excursions', 'AjaxController@getExcursions');
 
+
+        Route::get('test', 'IndexController@test')->name('test');
+
     });
 
 Auth::routes();
