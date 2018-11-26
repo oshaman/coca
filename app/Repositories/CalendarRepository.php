@@ -77,7 +77,7 @@ class CalendarRepository
         }
 
         if (null !== $this->validateExcursion($received_date, $request->get('interval'))) {
-            return ['status' => 'Даний час вже заброньований'];
+            return ['errors' => '<h3>УПС!</br>Нажаль цей час вже заброньовано!</h3><p>Буль-ласка виберіть інший час чи день екскурсії.</p>'];
         }
 
         $excursion = new Excursion();
@@ -261,7 +261,7 @@ class CalendarRepository
             "email" => "required|string|max:256",
             "status" => "nullable|numeric|between:2,4",
             "position" => "required|string|max:256",
-            "people" => "required|numeric|between:4,32",
+            "people" => "required|numeric|between:10,36",
             "institution" => "required|string|max:256",
             "file" => "nullable|mimes:pdf|max:5120",
             "comment" => "nullable|string|max:256",
@@ -279,7 +279,7 @@ class CalendarRepository
             "phone" => "required|string|max:256",
             "email" => "required|string|max:256",
             "position" => "required|string|max:256",
-            "people" => "required|numeric|between:4,32",
+            "people" => "required|numeric|between:10,36",
             "institution" => "required|string|max:256",
             "file" => "nullable|mimes:pdf|max:5120",
             "photo" => "nullable|mimes:jpeg,jpg,png|max:5120",

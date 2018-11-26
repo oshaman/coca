@@ -36,6 +36,15 @@ class Excursion extends Model
         $this->save();
     }
 
+
+    public function getPhoto()
+    {
+        if (!empty($this->photo)) {
+            return asset('assets/images/group-photos/'.$this->photo);
+        } else {
+            return asset('/assets/images/no-image.png');
+        }
+    }
     /**
      * @param $request
      * @param Carbon $date
@@ -51,6 +60,7 @@ class Excursion extends Model
 
         if ($request->has('photo')) {
             $this->uploadPhoto($request->file('photo'));
+            $this->setToken();
         }
 
         $this->updateStatus($request->get('status'));
@@ -140,6 +150,16 @@ class Excursion extends Model
         $file->storeAs('images/group-photos', $filename, 'public');
         $this->photo = $filename;
         $this->save();
+    }
+
+    public function setToken()
+    {
+        if ($this->token) {
+            return true;
+        }
+        $this->token = str_random(54) . time();
+        $this->save();
+        dispatch(new OrderCreated($this->email, Email::getEmail('sixth')));
     }
 
     public function removePhoto()

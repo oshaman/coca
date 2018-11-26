@@ -7,7 +7,7 @@
     <title>{{ $seo->seo_title }}</title>
     <meta name="description" content="{{ $seo->seo_description }}" />
     <meta name="keywords" content="{{ $seo->seo_keywords }}">
-    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta property="og:locale" content="uk_UA">
     <meta property="og:url" content="{{ env('APP_URL') }}">
     <meta property="og:site_name" content="{{ $seo->seo_title }}">
@@ -21,59 +21,11 @@
     <meta name="twitter:description" content="{{ $seo->seo_description }}">
     <meta name="twitter:image" content="{{ $seo->og_image }}">
 
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/reset.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
+    {{--<link rel="stylesheet" href="{{ asset('assets') }}/css/reset.css">--}}
+
 
     <style>
-        body.is_load {
-            position: fixed;
-        }
-       /*.is_load_:before {*/
-            /*content: '';*/
-            /*position: fixed;*/
-            /*left: 0;*/
-            /*top: 0;*/
-            /*background-color: #F40009;*/
-            /*width: 100vw;*/
-            /*height: 100vh;*/
-            /*z-index: 999;*/
-        /*}*/
-        #canvas-container {
-            background: #ffffff;
-            /*background: #F40009;*/
-            background-size: cover;
-            top: 50%;
-            position: fixed;
-            transform: translate(0,-50%);
-            z-index: 999;
-            height: 100vh;
-            width: 100vw;
-        }
-        #sineCanvas {
-            position: absolute;
-            bottom: 0;
-        }
-        .canvas_load {
-            height: 50vh;
-            width: 100vw;
-            position: absolute;
-            bottom: 0;
-            background: #F40009;
-        }
-        .canvas_load:nth-child(1) {
-            top: 0;
-        }
-        #sineCanvas2,#sineCanvas {
-            background-color: #fff;
-            position: absolute;
-            width: 100vw
-        }
-        #sineCanvas2 {
-            bottom: 0;
-        }
-        #sineCanvas {
-            top: -1px;
-        }
+        body.is_load{position:fixed}#canvas-container{background:#fff;background-size:cover;top:50%;position:fixed;transform:translate(0,-50%);z-index:999;height:100vh;width:100vw}#sineCanvas{position:absolute;bottom:0}.canvas_load{height:50vh;width:100vw;position:absolute;bottom:0;background:#f40009}.canvas_load:nth-child(1){top:0}#sineCanvas2,#sineCanvas{background-color:#fff;position:absolute;width:100vw}#sineCanvas2{bottom:0}#sineCanvas{top:-1px}
     </style>
 
     <!-- Google Tag Manager -->
@@ -165,7 +117,7 @@
                 <div class="about-description">
                     {!! $seo->seo_text??'' !!}
                 </div>
-                <div class="seo_button" data-on_text="Розкрити" data-off_text="Згорнути">
+                <div class="seo_button" data-on_text="Розгорнути" data-off_text="Згорнути">
                     <p>Розгорнути</p>
                 </div>
 
@@ -214,6 +166,7 @@
         <div class="bot_window"></div>
     </div>
 </div>
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
 <script>
     function preloader_canvas() {
 

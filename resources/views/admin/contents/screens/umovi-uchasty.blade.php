@@ -1,6 +1,6 @@
 <div class="nacc-content @if(1 == $loop->iteration) active @endif">
     <h3>{{ $screen->title }} <a href="javascript:void(0)">Переглянути</a></h3>
-    <form action="{{ route('admin.screen.update', $screen->id) }}" class="form-content" method="post">
+    <form action="{{ route('admin.screen.update', $screen->id) }}" class="form-content" method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
 
@@ -23,30 +23,12 @@
             </div>
         </div>
         {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
+
         <div class="seo-column">
-            <div>
-                {!! Form::text('headings[]', $screen->headings[2]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Текст блоку №01
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[3]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Текст блоку №02
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[4]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Текст блоку №03
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
+            @include('admin.contents.screens.slider')
+            <div class="add-new-slide">
+                Додати слайд
+                <p><img src="{{ asset('admn') }}/imgs/plus.svg" alt="+"></p>
             </div>
         </div>
         <button type="submit" class="btn btn-red">зберегти</button>

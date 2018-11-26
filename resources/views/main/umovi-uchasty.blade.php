@@ -13,39 +13,27 @@
 
             </div>
             <div class="participation-block" id="participation-block">
-                <div class="block_par">
-                    <div class="block_head">
-                        <div class="block_img_">
-                            <img data-src="{{ asset('assets') }}/img/icon/block_head_1.svg" alt="">
+                <div class="participation_umovi">
+                    @forelse($screen->slider as $slide)
+
+                        <div class="block_par">
+                            <div class="block_head">
+                                <div class="block_img_">
+                                    <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}"
+                                         title="{{ $slide->title }}">
+                                </div>
+                                <p>{{ $slide->description??'' }}</p>
+                            </div>
+                            <div class="block_number">
+                                <p>0{{ $loop->iteration }}</p>
+                            </div>
                         </div>
-                        <p>{{ $screen->headings[2]??'' }}</p>
-                    </div>
-                    <div class="block_number">
-                        <p>01</p>
-                    </div>
+
+                    @empty
+                    @endforelse
                 </div>
-                <div class="block_par">
-                    <div class="block_head">
-                        <div class="block_img_">
-                            <img data-src="{{ asset('assets') }}/img/icon/block_head_2.svg" alt="">
-                        </div>
-                        <p>{{ $screen->headings[3]??'' }}</p>
-                    </div>
-                    <div class="block_number">
-                        <p>02</p>
-                    </div>
-                </div>
-                <div class="block_par">
-                    <div class="block_head">
-                        <div class="block_img_">
-                            <img data-src="{{ asset('assets') }}/img/icon/block_head_3.svg" alt="">
-                        </div>
-                        <p>{{ $screen->headings[4]??'' }}</p>
-                    </div>
-                    <div class="block_number">
-                        <p>03</p>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div>

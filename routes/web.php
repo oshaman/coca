@@ -1,5 +1,7 @@
 <?php
 
+Route::pattern('photo', '[\w]{0,64}');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::match(['post', 'get'], '/get-calendar', 'HomeController@getCalendar');
 Route::post('/add-excursions', 'HomeController@addExcursions');
 
-Route::match(['post', 'get'], 'get-photo', 'PhotosController@index')->name('get-photo');
+Route::match(['post', 'get'], '/get-photo/{photo}', 'PhotosController@index')->name('get-photo');
 Route::post('/get-bot', 'BotController@getBot')->name('get-bot');
 
 Route::prefix('admin')
@@ -34,6 +36,7 @@ Route::prefix('admin')
         Route::resource('calendar', 'CalendarController')->only(['index', 'store', 'destroy', 'update']);
         Route::resource('photo-frame', 'PhotosController')->only(['index', 'store', 'destroy']);
         Route::post('get-excursions', 'AjaxController@getExcursions');
+        Route::post('day-status', 'AjaxController@toggleDayStatus');
 
 
         Route::get('test', 'IndexController@test')->name('test');

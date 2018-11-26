@@ -8,7 +8,7 @@
             <div class="rubric @if(1 == $loop->iteration) active @endif">
                 <div class="rub-num">
                     <p>#{{ $loop->iteration }}</p>
-                    <p>перший блок</p>
+                    {{--<p>перший блок</p>--}}
                 </div>
                 <div class="rub-name">{{ $screen->title }}</div>
                 <div class="rub-text">Його текстова информація. Також что буде якщо її немає?</div>

@@ -1,6 +1,6 @@
 <main>
     <div class="top-main">
-        <h1>Редагування контенту</h1>
+        <h1>Чат бот</h1>
         @include('admin.logout')
     </div>
     <div class="rubrics">
@@ -8,10 +8,10 @@
             <div class="rubric @if(1 == $loop->iteration) active @endif">
                 <div class="rub-num">
                     <p>#{{ $loop->iteration }}</p>
-                    <p>перший блок</p>
+                    {{--<p>перший блок</p>--}}
                 </div>
                 <div class="rub-name">{{ $bot->title }}</div>
-                <div class="rub-text">Його текстова информація. Також что буде якщо її немає?</div>
+                {{--<div class="rub-text">Його текстова информація. Також что буде якщо її немає?</div>--}}
             </div>
         @empty
         @endforelse

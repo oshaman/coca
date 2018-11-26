@@ -41,4 +41,13 @@ class Frame extends Model
         $this->removeImage();
         $this->delete();
     }
+
+    public function getFrame()
+    {
+        if (!empty($this->filename)) {
+            return asset('/assets/images/frames/'.$this->filename);
+        } else {
+            return asset('/assets/images/no-image.png');
+        }
+    }
 }

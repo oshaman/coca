@@ -17,11 +17,11 @@
                             <label for="name">Ім’я та Прізвище</label>
                         </div>
                         <div class="tell">
-                            <input type="text" id="phone" onkeyup="javascript:mask('phone', '+3(000)000 00 00', event);" name="phone" autocomplete="off">
+                            <input type="text" id="phone" maxlength="17" name="phone" autocomplete="off" value="">
                             <label for="phone">Телефон</label>
                         </div>
                         <div class="email">
-                            <input type="email" id="email" name="email" autocomplete="off">
+                            <input type="text" id="email" name="email" autocomplete="off">
                             <label for="email">Пошта</label>
                         </div>
                         <div class="pole_form">
@@ -30,10 +30,12 @@
                         </div>
                         <div class="pole_form">
                             <input type="text" id="institution" name="institution" autocomplete="off">
-                            <label for="institution">Назва закладу</label>
+                            <label for="institution">Навчальний заклад чи Приватна особа</label>
                         </div>
                         <div class="pole_form">
-                            {{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources",'placeholder'=>'Кількість людей'])}}
+                            <input type="number" id="people" name="people" maxlength="2" autocomplete="off" min="10" max="37">
+                            <label for="people">Кількість людей  (від 10 до 37)</label>
+                            {{--{{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources",'placeholder'=>'Кількість людей'])}}--}}
                         </div>
                     </fieldset>
                     <fieldset>
@@ -77,7 +79,7 @@
                             <div class="check_text">
                                 <label>
                                     <input type="checkbox">
-                                    <span>У мене не має документу</span>
+                                    <span>У мене немає документу</span>
                                 </label>
 
                                 <textarea name="comment" class="nodoc" cols="num" rows="num" placeholder="Тому що......"></textarea>

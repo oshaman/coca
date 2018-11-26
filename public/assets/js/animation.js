@@ -2601,1093 +2601,6 @@
     }, t || (e.jQuery = e.$ = w), w
 });
 
-
-/**************************************/
-$(".seo_button").click(function () {
-    $(this).parent().find(".about-description").toggleClass("full");
-    if ($(this).parent().find(".about-description").hasClass("full")) {
-        $(this).find("p").text($(this).data('off_text'));
-    } else {
-        $(this).find("p").text($(this).data('on_text'));
-    }
-});
-
-
-var data_mone, data_day, data_year
-
-
-function f() {
-    var t = 0;
-
-    left = ($(window).height() / ($('.sec_4').height() - $('.left_sec4').height())) / 2
-    w_h = $(window).height() / 2
-    $(window).height()
-    $(window).scroll(function () {
-        var $this = $(this),
-            now = $this.scrollTop(),
-            scroll = $(window).scrollTop(),
-            mm = 0,
-            o = 0;
-
-        if (scroll > position) {
-            o += 1
-        } else {
-            o += 0
-        }
-        position = scroll;
-        if (now > $('.sec_4').offset().top - w_h && now < $('.sec_4').offset().top + $('.sec_4').height() - w_h) {
-
-            if (o == 1) {
-                t += left;
-            } else if (o == 0) {
-                t -= left;
-            }
-
-            $('.left_sec4').animate({'top': +t + 'px'}, 0)
-            $('.right_sec4').animate({'bottom': +t + 'px'}, 0)
-        }
-    })
-}
-
-if ($(window).width() > 1024) {
-    f();
-}
-
-
-if ($(window).width() > 1024) {
-    bl2 = $("main").height();
-    r2 = $(".text_R").offset().top;
-    r3 = $(".text_R2").offset().top;
-    l1 = $(".text_L").offset().top;
-}
-
-
-
-function f1() {
-
-    klp_ = parseInt(1920 * 0.01)
-    Scroll = window.pageYOffset;
-    $(".text_R").css('top', ((r2 + (.3 * Scroll))) + 'px')
-    $(".text_R2").css('top', ((r3 + (.4 * Scroll))) + 'px')
-    $(".text_L").css('top', ((l1 + (.3 * Scroll))) + 'px')
-    // $(".text_R").css('top', ((r2 + (.3 * 0))/ klp_)+ 'vw')
-}
-
-// f1()
-if ($(window).width() > 1024) {
-    $(window).scroll(function () {
-        f1()
-
-    })
-}
-
-
-function select_() {
-    $(".timer .custom-select").each(function () {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-
-
-        var template = '<div class="' + classes + '">';
-        template += '<span class="custom-select-trigger">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
-        template += '<div class="custom-options"><ul>';
-        $(this).find("option").each(function () {
-            template += '<li class="custom-option " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
-        });
-        template += '</ul></div></div>';
-
-        $(this).wrap('<div class="custom-select-wrapper"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-    $(".custom-option:first-of-type").hover(function () {
-        $(this).parents(".custom-options").addClass("option-hover");
-    }, function () {
-        $(this).parents(".custom-options").removeClass("option-hover");
-    });
-    $(".custom-select-trigger").on("click", function () {
-        $('.calendar_w').removeClass('open')
-        $(this).parents(".custom-select").toggleClass("opened");
-        event.stopPropagation();
-    });
-    $(".custom-option").on("click", function () {
-        $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-        $(this).addClass("selection");
-        $(this).parents(".custom-select").removeClass("opened");
-        $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-
-
-    });
-}
-
-select_()
-
-function select_2() {
-    $(".custom-select_people").each(function () {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-
-
-        var template = '<div class="' + classes + '">';
-        template += '<span class="custom-select-trigger_people">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
-        template += '<div class="custom-options_people"><ul>';
-        $(this).find("option").each(function () {
-            template += '<li class="custom-option_people " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
-        });
-        template += '</ul></div></div>';
-
-        $(this).wrap('<div class="custom-select-wrapper_people"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-    $(".custom-option_people:first-of-type").hover(function () {
-        $(this).parents(".custom-options_people").addClass("option-hover");
-    }, function () {
-        $(this).parents(".custom-options_people").removeClass("option-hover");
-    });
-    $(".custom-select-trigger_people").on("click", function () {
-        $('.calendar_w').removeClass('open')
-        $(this).parents(".custom-select_people").toggleClass("opened");
-        event.stopPropagation();
-    });
-    $(".custom-option_people").on("click", function () {
-        $(this).parents(".custom-select-wrapper_people").find("select").val($(this).data("value"));
-        $(this).parents(".custom-options_people").find(".custom-option_people").removeClass("selection");
-        $(this).addClass("selection");
-        $(this).parents(".custom-select_people").removeClass("opened");
-        $(this).parents(".custom-select_people").find(".custom-select-trigger_people").text($(this).text());
-
-
-    });
-}
-
-select_2()
-
-$.getScript("http://www.youtube.com/iframe_api");
-
-function mask(inputName, mask, evt) {
-    try {
-        var text = document.getElementById(inputName);
-        var value = text.value;
-
-        // If user pressed DEL or BACK SPACE, clean the value
-        try {
-            var e = (evt.which) ? evt.which : event.keyCode;
-            if ( e == 46 || e == 8 ) {
-                text.value = "";
-                return;
-            }
-        } catch (e1) {}
-
-        var literalPattern=/[0\*]/;
-        var numberPattern=/[0-9]/;
-        var newValue = "";
-
-        for (var vId = 0, mId = 0 ; mId < mask.length ; ) {
-            if (mId >= value.length)
-                break;
-
-            // Number expected but got a different value, store only the valid portion
-            if (mask[mId] == '0' && value[vId].match(numberPattern) == null) {
-                break;
-            }
-
-            // Found a literal
-            while (mask[mId].match(literalPattern) == null) {
-                if (value[vId] == mask[mId])
-                    break;
-
-                newValue += mask[mId++];
-            }
-
-            newValue += value[vId++];
-            mId++;
-        }
-
-        text.value = newValue;
-    } catch(e) {}
-}
-function chat_bot() {
-    var chat = $('.chat'),
-        chat_window = $('.bot_window'),
-        data_chat,
-        button_chat,
-        POST_time,
-        POST_name_bot,
-        POST_phone_bot,
-        POST_email_bot,
-        POST_position_bot,
-        POST_institution,
-        POST_people
-
-
-
-    function ajax_chat() {
-        $.ajax({
-            url: 'get-bot',
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            processData: false,
-            contentType: false,
-            cache: false,
-            dataType: "json",
-            success: function (data) {
-                data_chat = data
-                button_chat = '<div class="button_one_block"><div class="button_chat">' + data_chat[0].question + '</div><div class="button_chat">' + data_chat[1].question + '</div><div class="button_chat">' + data_chat[2].question + '</div><div class="button_chat">' + data_chat[3].question + '</div></div>'
-
-
-            },
-        });
-    }
-
-
-    var messages = [
-        {
-            img: '/assets/img/icon/one_icon_chat.svg',
-            h3: '<h3>Привіт! Я - <span>Кока Коля.</span></h3>',
-            p: '<p>Я допоможу дізнатись цікаву для тебе інформацію.</p>',
-            button: 'Добре. Почнемо'
-        },
-        {
-            text: 'Що тебе цікавить?',
-            text_next: 'У мене ще є питання'
-        },
-        {
-            free_places: 'Вільні місця',
-            sign_up: 'Записатися на екскурсію',
-            cal_day: 'Виберіть дату',
-            cal_time: 'А тепер час',
-            cal_contact_1: 'Напиши інформацію щодо себе',
-            cal_contact_2: 'А тепер ще трішки інформації'
-        },
-        {
-            h3_fin: '<h3>Хей!</h3>',
-            p_fin: '<p>Дзвоніть за номером гарячої лінії Кока-Кола</p>',
-            ok_fin: 'ок'
-
-        },
-        {
-            prev: 'Назад',
-            next: 'Далі',
-            finish: 'Завершити',
-            finh3: 'Круто!',
-            finh3_: 'Вітаю з заверщенням!',
-            finhp: 'Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації',
-            finhwin: 'ОК'
-        },
-        {
-            name_bot: 'Ім’я та Прізвище',
-            phone_bot: 'Телефон',
-            email_bot: 'Пошта',
-            position_bot: 'Посада',
-            institution: 'Назва закладу'
-        }
-    ]
-
-    var loader = '<div class="c-chat__item log"> <div class="loader"><span></span><span></span><span></span></div> </div>';
-
-
-    chat.find('.chat_open').click(function () {
-        chat_window.html('')
-        chat.addClass('open')
-        ajax_chat()
-        chat_window.append(loader)
-        setTimeout(function () {
-            chat.find('.log').remove()
-            one_ekran()
-        }, 800)
-    })
-
-    function click_nav_bot() {
-        $('.button_one_block .button_chat').click(function () {
-            var text_a = $(this).text();
-            if ($(this).index() == 0) {
-
-                address(text_a)
-            } else if ($(this).index() == 1) {
-                content(text_a)
-            } else if ($(this).index() == 2) {
-                rules(text_a)
-            } else if ($(this).index() == 3) {
-                sign_up(text_a)
-            }
-        })
-    }
-
-    function one_ekran() {
-        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt="">' + messages[0].h3 + '' + messages[0].p + '<div class="button_chat">' + messages[0].button + '</div></div>')
-        $('.hellow .button_chat').click(function () {
-            two_ekran()
-        })
-    }
-
-    function two_ekran() {
-        chat_window.html('')
-        chat_window.append(loader)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[1].text + '</p></div></div>')
-            chat_window.prepend(loader)
-        }, 800)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend(button_chat)
-
-            click_nav_bot()
-        }, 1600)
-
-    }
-
-
-    function address(text_a) {
-        chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        setTimeout(function () {
-            chat_window.prepend(loader)
-        }, 300)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[0].answer + '</p></div></div>')
-            chat_window.prepend(loader)
-        }, 1100)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
-            $('.button_chat.remove').click(function () {
-                $(this).remove()
-                chat_window.prepend(button_chat)
-                click_nav_bot()
-            })
-        }, 1900)
-    }
-
-    function content(text_a) {
-        chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        setTimeout(function () {
-            chat_window.prepend(loader)
-        }, 300)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[1].answer + '</p></div></div>')
-            chat_window.prepend(loader)
-        }, 1100)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
-            $('.button_chat.remove').click(function () {
-                $(this).remove()
-                chat_window.prepend(button_chat)
-                click_nav_bot()
-            })
-        }, 1900)
-    }
-
-    function rules(text_a) {
-        chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        setTimeout(function () {
-            chat_window.prepend(loader)
-        }, 300)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[2].answer + '</p></div></div>')
-            chat_window.prepend(loader)
-        }, 1100)
-        setTimeout(function () {
-            chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
-            $('.button_chat.remove').click(function () {
-                $(this).remove()
-                chat_window.prepend(button_chat)
-                click_nav_bot()
-            })
-        }, 1900)
-    }
-
-    function sign_up(text_a) {
-        chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        setTimeout(function () {
-            chat_window.prepend(loader)
-        }, 300)
-        setTimeout(function () {
-            chat.find('.log').remove()
-            eskurs()
-            // chat_window.prepend(loader)
-        }, 1100)
-
-    }
-
-
-    function eskurs() {
-        chat_window.prepend('<div class="button_one_block"><div class="button_chat sing">' + messages[2].free_places + '</div><div class="button_chat sing">' + messages[2].sign_up + '</div></div>')
-        $('.button_chat.sing').click(function () {
-            var text_a = $(this).text();
-
-            if ($(this).index() == 0) {
-                sign_up_1(text_a)
-            } else {
-                sign_up_2(text_a)
-            }
-        })
-    }
-
-    function sign_up_1(text_a) {
-        chat.find('.button_one_block').remove()
-        chat_window.html('')
-        // chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_day + '</p></div></div>')
-
-        chat_window.prepend('<div class="bot_calendar"></div>')
-
-        var $button = $('form .calendar_w').clone(true, true);
-        $('.bot_calendar').html($button);
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
-        $('.month .arrow').click(function () {
-            // oute()
-            add_calendar()
-        })
-
-        function data_click_e() {
-            $('.day.ng-scope').not('.disabled').on('click',function () {
-                // oute()
-                add_calendar()
-            })
-
-        }
-        data_click_e()
-        function add_calendar() {
-            var $button = $('form .calendar_w').clone(true, true);
-            // oute()
-            $('.bot_calendar').html('');
-            $('.bot_calendar').html($button);
-            data_click_e()
-        }
-
-            angular.element(".day").triggerHandler("click");
-        $('.cl_next').on('click',function () {
-            sign_up_time()
-        })
-        $('.cl_prev').on('click',function () {
-            chat_window.html('')
-            var text_a = messages[2].sign_up
-            sign_up(text_a)
-        })
-
-    }
-    function sign_up_time() {
-        chat_window.html('')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
-        chat_window.prepend('<div class="bot_time"></div>')
-        var $timer = $('form .custom-options').clone(true, true);
-        $('.bot_time').html($timer);
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
-        $('.bot_time li').click(function () {
-            $('.cl_next').removeClass('disabled')
-        })
-
-        $('.cl_prev').on('click',function () {
-            chat_window.html('')
-            sign_up_1()
-        })
-        $('.cl_next').on('click',function () {
-            POST_time = $('.bot_time li.selection').data('value')
-            sign_up_contactD()
-        })
-    }
-    function sign_up_contactD() {
-        chat_window.html('')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
-        chat_window.prepend('<div class="bot_contacts">' +
-            '<div class="name">\n' +
-            '<input type="text" id="name_bot" name="name_bot" autocomplete="off">\n' +
-            '<label for="name_bot">'+messages[5].name_bot+'</label>\n' +
-            '</div>' +
-            '<div class="tell">\n' +
-            '<input type="text" id="phone_bot" onkeyup="javascript:mask(\'phone_bot\', \'+3(000)000 00 00\', event);"  name="phone_bot" autocomplete="off">\n' +
-            '<label for="phone_bot">'+messages[5].phone_bot+'</label>\n' +
-            '</div>' +
-            '<div class="email">\n' +
-            '<input type="email" id="email_bot" name="email_bot" autocomplete="off">\n' +
-            '<label for="email_bot">'+messages[5].email_bot+'</label>\n' +
-            '</div>' +
-            '<div class="pole_form">\n' +
-            '<input type="text" id="position_bot" name="position_bot" autocomplete="off">\n' +
-            '<label for="position_bot">'+messages[5].position_bot+'</label>\n' +
-            '</div>' +
-            '</div>');
-
-        var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-        $('.bot_contacts input').change(function () {
-            el = $(this);
-            el.each(function () {
-                if (el.val().length > 0) {
-                    el.parent().find('label').addClass('label-stay')
-                } else {
-                    el.parent().find('label').removeClass('label-stay')
-                }
-            })
-
-            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
-                $('.cl_next').removeClass('disabled')
-            }else {
-                $('.cl_next').addClass('disabled')
-            }
-
-
-        });
-
-        $('.bot_contacts input').keypress(function () {
-
-            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
-                $('.cl_next').removeClass('disabled')
-            } else {
-                $('.cl_next').addClass('disabled')
-            }
-        });
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
-        $('.cl_prev').on('click',function () {
-            chat_window.html('')
-            sign_up_time()
-        })
-        $('.cl_next').on('click',function () {
-            POST_name_bot = $('#name_bot').val();
-            POST_phone_bot = $('#phone_bot').val();
-            POST_email_bot = $('#email_bot').val();
-            POST_position_bot = $('#position_bot').val();
-            sign_up_contactT()
-        })
-
-    }
-    function sign_up_contactT() {
-
-        var $position = $('form .pole_form').eq(2).clone(true, true);
-        chat_window.html('');
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
-        chat_window.prepend('<div class="bot_contacts">' +
-            '<div class="name">\n' +
-            '<input type="text" id="institution_bot" name="institution_bot" autocomplete="off">\n' +
-            '<label for="institution_bot">'+messages[5].institution+'</label>\n' +
-            '</div>' +
-            '</div>');
-        $position.appendTo('.bot_contacts')
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].finish + '</div></div>')
-
-
-        $('.bot_contacts input').change(function () {
-            el = $(this);
-            el.each(function () {
-                if (el.val().length > 0) {
-                    el.parent().find('label').addClass('label-stay')
-                } else {
-                    el.parent().find('label').removeClass('label-stay')
-                }
-            })
-
-            if ($('#institution_bot').val().length > 3 && $('.bot_contacts .custom-option_people.selection').index() != 0) {
-                $('.cl_next').removeClass('disabled')
-            }else {
-                $('.cl_next').addClass('disabled')
-            }
-
-
-        });
-        $('.bot_contacts .custom-option_people').click(function () {
-            if ($('.bot_contacts .custom-option_people.selection').index() != 0 && $('#institution_bot').val().length > 3) {
-                $('.cl_next').removeClass('disabled')
-            } else {
-                $('.cl_next').addClass('disabled')
-            }
-        })
-        $('.bot_contacts input').keypress(function () {
-
-            if ($('#institution_bot').val().length > 3 && $('.bot_contacts .custom-option_people.selection').index() != 0) {
-                $('.cl_next').removeClass('disabled')
-            } else {
-                $('.cl_next').addClass('disabled')
-            }
-        });
-
-
-        $('.cl_prev').on('click',function () {
-            chat_window.html('');
-            sign_up_contactD()
-        })
-        $('.cl_next').on('click',function () {
-            POST_institution = $('#institution_bot').val()
-            POST_people = $('.bot_contacts .custom-option_people.selection').data('value')
-            $.ajax({
-                url: 'add-excursions',
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    'name': POST_name_bot,
-                    'phone': POST_phone_bot,
-                    'email': POST_email_bot,
-                    'position': POST_position_bot,
-                    'institution':POST_institution,
-                    'people': POST_people,
-                    'interval': POST_time,
-                    'trip-month': data_mone,
-                    'trip-day':data_day
-                },
-                dataType: "json",
-                success: function (data) {
-                    if (data.status == 'Екскурсію збережено.') {
-                        chat_window.html('')
-                        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt=""><h3>' + messages[4].finh3 + '<br>' + messages[4].finh3_ + '</h3><p>' + messages[4].finhp + '</p><div class="button_chat">' + messages[4].finhwin + '</div></div>')
-                        $('.hellow .button_chat').click(function () {
-                            chat.removeClass('open')
-                            chat_window.html('')
-                        })
-                    }
-
-                }
-            });
-
-
-            console.log(POST_time,
-                POST_name_bot,
-                POST_phone_bot,
-                POST_email_bot,
-                POST_position_bot,
-                POST_institution,POST_institution,POST_people, data_mone, data_day);
-        })
-    }
-    function sign_up_2(text_a) {
-        chat.find('.button_one_block').remove()
-        setTimeout(function () {
-            chat_window.prepend(loader)
-        }, 300)
-        setTimeout(function () {
-            chat.find('.log').remove()
-            chat_window.html('')
-            chat_window.append('<div class="hellow fin"><img src="' + messages[0].img + '" alt="">' + messages[3].h3_fin + '' + messages[3].p_fin + '<h5>' + data_chat[4].answer + '</h5><div class="button_chat">' + messages[3].ok_fin + '</div></div>')
-            chat.find('.fin .button_chat').click(function () {
-                chat.removeClass('open')
-                chat_window.html('')
-
-            })
-            // chat_window.prepend(loader)
-        }, 1100)
-    }
-
-    chat.find('.chat_close').click(function () {
-        chat.removeClass('open')
-        chat_window.html('')
-
-
-    })
-
-
-}
-
-function private_() {
-    var cd_modal = $('.cd-modal')
-    $('.footer__column:nth-child(2)').find('a').click(function (e) {
-        $('body').addClass('nooverflow')
-        e.preventDefault()
-
-        if ($(this).index() == 0) {
-            cd_modal.eq(0).addClass('modal-is-visible')
-        } else if ($(this).index() == 1) {
-            cd_modal.eq(1).addClass('modal-is-visible')
-        }
-    })
-    $('.close-privacy').click(function (e) {
-        e.preventDefault()
-        $('body').removeClass('nooverflow')
-        cd_modal.removeClass('modal-is-visible')
-    })
-}
-
-function top_menu_active() {
-
-    var lastId,
-        topMenu = $(".head li"),
-        topMenuHeight = topMenu.outerHeight() + 150,
-        menuItems = topMenu.find("a"),
-        scrollItems = menuItems.map(function () {
-            var item = $($(this).attr("href"));
-            if (item.length) {
-                return item;
-            }
-        });
-
-    menuItems.click(function (e) {
-        var href = $(this).attr("href"),
-            offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
-        $('html, body').stop().animate({
-            scrollTop: offsetTop
-        }, 300);
-        e.preventDefault();
-        if($( window ).width() < 1025) {
-            setTimeout(function () {
-                $('.mobile_nav').removeClass('open_menu')
-                $('body').removeClass('bg_blur')
-            },300)
-
-        }
-    });
-
-    $(window).scroll(function () {
-        var fromTop = $(this).scrollTop() + topMenuHeight;
-
-        var cur = scrollItems.map(function () {
-            if ($(this).offset().top < fromTop)
-                return this;
-        });
-        cur = cur[cur.length - 1];
-        var id = cur && cur.length ? cur[0].id : "";
-
-        if (lastId !== id) {
-            lastId = id;
-            menuItems
-                .parent().removeClass("active")
-                .end().filter("[href='#" + id + "']").parent().addClass("active");
-        }
-    });
-}
-
-$(document).ready(function () {
-    chat_bot()
-    private_()
-    top_menu_active()
-
-
-    function f2() {
-        var el = $('.slider_top'),
-            curr_obj = 0;
-
-        $('.nav_slider_top').find('.reviews-dots').html('');
-
-        function sliderRemote() {
-            dots = ""
-
-            for (var i = 0; i < $('.slider_top_img img').length; i++) {
-                dots += i == 0 ? '<div class="reviews-dot active" data-id="' + i + '"></div>' : '<div class="reviews-dot" data-id="' + i + '"></div>';
-                // $('.circle-button_id').eq(i).attr('data-id', +i);
-            }
-
-            $('.nav_slider_top').find('.reviews-dots').append(dots)
-
-            $('.nav_slider_top .nav-control').click(function () {
-                nav_container = $('.slider_top_img img');
-                $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
-                nav_container.removeClass('active');
-                $('.reviews-dot').removeClass('active');
-                nav_container.eq(curr_obj).addClass('active');
-                $('.reviews-dot').eq(curr_obj).addClass('active');
-
-            })
-
-
-        }
-
-        sliderRemote()
-
-
-    }
-
-    f2()
-
-    function f3() {
-        $('.gallery-area .gallery_block').not('.gallery_coca').click(function () {
-            $('.pop_up').addClass('open')
-            $('body').addClass('hover_full')
-            $('.slider_popUp').html('')
-            $('.slider_popUp').append('<div class="popUp_c"></div>')
-            $('.slider_popUp .popUp_c').append($('.gallery_block').clone())
-            id = $(this).data('id')
-            data = $('.slider_popUp .gallery_block')
-            for (var i = 0; i < $('.slider_popUp .gallery_block').length; i++) {
-                if (id == data.eq(i).data('id')) {
-                    data.eq(i).addClass('active')
-                }
-            }
-
-
-        })
-        $('.pop_up .close').click(function () {
-            $('.pop_up').removeClass('open')
-            $('body').removeClass('hover_full')
-            $('.slider_popUp').html(' ')
-        })
-        $('.about-img').click(function () {
-            $('.pop_up').addClass('open')
-            $('body').addClass('hover_full')
-            $('.slider_popUp').append('<div id="videoframe" class="video" data-video="' + $(this).data('video') + '"></div')
-            var tag = document.createElement("script");
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName("script")[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            var player = [];
-            var videoDiv = $(".video");
-            onYouTubeIframeAPIReady()
-
-            function onYouTubeIframeAPIReady() {
-                for (var a = 0; a < videoDiv.length; a++) {
-                    videoDiv[a].id = "videoframe" + a;
-                    video = videoDiv[a].getAttribute("data-video");
-
-                    player["videoframe" + a] = new YT.Player(videoDiv[a], {
-                        height: "100%",
-                        width: "640",
-                        videoId: videoDiv[a].getAttribute("data-video"),
-
-                    })
-                }
-            }
-
-
-        })
-
-
-    }
-
-    f3()
-
-
-    $('.check_text input').change(function () {
-        if ($(this).is(":checked")) {
-            $('.check_text textarea').addClass('open')
-        } else {
-            $('.check_text textarea').removeClass('open')
-        }
-
-    })
-    $('fieldset:nth-child(1) input').change(function () {
-        el = $(this);
-        el.each(function () {
-            if (el.val().length > 0) {
-                el.parent().find('label').addClass('label-stay')
-            } else {
-                el.parent().find('label').removeClass('label-stay')
-            }
-        })
-    })
-
-    function slider_galery() {
-        var tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        var player = [];
-        var videoDiv = $(".video_galegy");
-
-
-        onYouTubeIframeAPIReady = function () {
-            for (var a = 0; a < videoDiv.length; a++) {
-                videoDiv[a].id = "video_galegy" + a;
-                video = videoDiv[a].getAttribute("data-video");
-
-                player["video_galegy" + a] = new YT.Player(videoDiv[a], {
-                    height: "100%",
-                    width: "640",
-                    videoId: videoDiv[a].getAttribute("data-video"),
-                    playerVars: {
-                        showinfo: 0,
-                        color: "white",
-                        cc_load_policy: 1,
-                        disablekb: 1,
-                        enablejsapi: 1,
-                        loop: 1,
-                        modestbranding: 1,
-                        rel: 0,
-                        fs: 0
-                    },
-                })
-            }
-        }
-
-
-        var allElements = Array.from($('.gallery_slider').find(".gallery_block"));
-        if (window.matchMedia("(min-width: 1026px)").matches) {
-
-            for (var p = 0; p < allElements.length; p += 3) {
-                var wrap = document.createElement("div");
-                wrap.classList.add("conteiner_slider");
-                for (var j = 0; j < 3; j++) {
-                    if (p + j < allElements.length) {
-                        wrap.append(allElements[p + j]);
-                    }
-                }
-                $('.gallery_slider').append(wrap);
-            }
-            // var nn = (container.find('.maii-item').length * 7) - container.find('.item-senn').length
-
-        } else if (window.matchMedia("(max-width: 1025px)").matches) {
-            for (var p = 0; p < allElements.length; p += 1) {
-                var wrap = document.createElement("div");
-                wrap.classList.add("conteiner_slider");
-                for (var j = 0; j < 1; j++) {
-                    if (p + j < allElements.length) {
-                        wrap.append(allElements[p + j]);
-                    }
-                }
-                $('.gallery_slider').append(wrap);
-            }
-        }
-
-        $('.conteiner_slider').eq(0).addClass('active')
-        curr_obj = 0;
-        $('.gallery-area .nav-control').click(function () {
-            nav_container = $('.conteiner_slider');
-            $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
-            nav_container.removeClass('active');
-            nav_container.eq(curr_obj).addClass('active');
-
-        })
-
-    }
-
-    slider_galery()
-
-    function form() {
-
-        var b = 5 * 1024 * 1024;
-        var d = {};
-        d[""];
-
-        $(".file-don").click(function () {
-            $("#addFile").trigger("click")
-        });
-        $("#addFile").on("change", function () {
-            // setWidthToSpan();
-            var m = this.files;
-            for (var k = 0; k < m.length; k++) {
-                var j = m[k];
-                if (j.type != "application/pdf") {
-                    alert("Файл должна быть в формате pdf");
-                    continue
-                }
-                if (j.size > b) {
-                    alert("Размер файла не должен превышать 5 Мб");
-                    continue
-                }
-                file(m[k])
-            }
-            this.value = ""
-        });
-
-        function file(k) {
-            var j = new FileReader();
-            j.addEventListener("load", function (m) {
-                d[k.name] = k
-            });
-            j.readAsDataURL(k)
-        }
-
-        $('.form_sec5 form').submit(function (j) {
-            j.preventDefault()
-            var formData = new FormData(this);
-
-            for (var l in d) {
-                formData.append("file", d[l])
-            }
-            formData.append('trip-month', data_mone)
-            formData.append('trip-day', data_day)
-            // data_day = date.day;
-            // data_mone = date.month
-            console.log(d, formData);
-            $.ajax({
-                url: 'add-excursions',
-                type: "POST",
-                mimeType: "multipart/form-data",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                dataType: "json",
-                success: function (data) {
-                    if (data.status == 'Екскурсію збережено.') {
-                        $('.form_sec5 form').find('input').val('')
-
-                        $('body').addClass('hover_full')
-                        $('.pop_blag').addClass('open')
-                        console.log(56454);
-
-                        $('.pop_blag .close').click(function () {
-                            $('body').removeClass('hover_full')
-                            $('.pop_blag').removeClass('open')
-                        })
-                    } else {
-                        console.log(555);
-                    }
-
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                   var erf = xhr.responseText
-                    erf = JSON.parse(erf);
-
-                   var form_sec5 = $('.form_sec5')
-
-                    if (erf.errors.email != undefined) {
-                        form_sec5.find('.email').addClass('error')
-                    } else {
-                        form_sec5.find('.email').removeClass('error')
-                    }
-                    if (erf.errors.institution != undefined) {
-                        form_sec5.find('#institution').parent().addClass('error')
-                    }
-                    else {
-                        form_sec5.find('#institution').parent().removeClass('error')
-                    }
-                    if (erf.errors.name != undefined) {
-                        form_sec5.find('.name').addClass('error')
-                    }else {
-                        form_sec5.find('.name').parent().removeClass('error')
-                    }
-                    if (erf.errors.people != undefined) {
-                        form_sec5.find('.custom-select_people').addClass('error')
-                    }else {
-                        form_sec5.find('.custom-select_people').removeClass('error')
-                    }
-                    if (erf.errors.phone != undefined) {
-                        form_sec5.find('.tell').addClass('error')
-                    }else {
-                        form_sec5.find('.tell').removeClass('error')
-                    }
-                    if (erf.errors.position != undefined) {
-                        form_sec5.find('input#position').parent().addClass('error')
-                    }else {
-                        form_sec5.find('input#position').parent().removeClass('error')
-                    }
-                }
-            });
-        })
-
-
-    }
-
-    form()
-});
-
-
-/*****************************************/
-
-/*****************************************/
 function angular_js() {
 
     (function (N, W, u) {
@@ -13700,29 +12613,1138 @@ function angular_tr() {
 
     }));
 }
-// function oute() {
-//     $('.days').find('.day').eq(5).addClass('out')
-//     $('.days').find('.day').eq(6).addClass('out')
-//     for (var i = 0; i < $('.days').length; i++ ) {
-//        var a_s =  $('.days').eq(i).find('.out').length;
-//        if (a_s == 7 ) {
-//            $('.days').eq(i).remove()
-//        }
-//     }
-//
-// }
-$('.data_calendar').click(function () {
-    $(".custom-option").parents(".custom-select").removeClass("opened");
-    $('.calendar_w').toggleClass('open')
-    event.stopPropagation();
-
-    // oute()
-    // $('.month .arrow').click(function () {
-    //     oute()
-    // })
-})
+$.getScript("https://www.youtube.com/iframe_api");
+/**************************************/
 
 
+
+var data_mone,
+    data_day,
+    data_year;
+
+
+function f() {
+    var t = 0;
+
+    left = ($(window).height() / ($('.sec_4').height() - $('.left_sec4').height())) / 2
+    w_h = $(window).height() / 2
+    $(window).height()
+    $(window).scroll(function () {
+        var $this = $(this),
+            now = $this.scrollTop(),
+            scroll = $(window).scrollTop(),
+            mm = 0,
+            o = 0;
+
+        if (scroll > position) {
+            o += 1
+        } else {
+            o += 0
+        }
+        position = scroll;
+        if (now > $('.sec_4').offset().top - w_h && now < $('.sec_4').offset().top + $('.sec_4').height() - w_h) {
+
+            if (o == 1) {
+                t += left;
+            } else if (o == 0) {
+                t -= left;
+            }
+
+            $('.left_sec4').animate({'top': +t + 'px'}, 0)
+            $('.right_sec4').animate({'bottom': +t + 'px'}, 0)
+        }
+    })
+}
+function f1() {
+
+    klp_ = parseInt(1920 * 0.01)
+    Scroll = window.pageYOffset;
+    $(".text_R").css('top', ((r2 + (.3 * Scroll))) + 'px')
+    $(".text_R2").css('top', ((r3 + (.4 * Scroll))) + 'px')
+    $(".text_L").css('top', ((l1 + (.3 * Scroll))) + 'px')
+    // $(".text_R").css('top', ((r2 + (.3 * 0))/ klp_)+ 'vw')
+}
+function select_() {
+    $(".timer .custom-select").each(function () {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+
+
+        var template = '<div class="' + classes + '">';
+        template += '<span class="custom-select-trigger">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
+        template += '<div class="custom-options"><ul>';
+        $(this).find("option").each(function () {
+            template += '<li class="custom-option " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
+        });
+        template += '</ul></div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+    $(".custom-option:first-of-type").hover(function () {
+        $(this).parents(".custom-options").addClass("option-hover");
+    }, function () {
+        $(this).parents(".custom-options").removeClass("option-hover");
+    });
+    $(".custom-select-trigger").on("click", function () {
+        $('.calendar_w').removeClass('open')
+        $(this).parents(".custom-select").toggleClass("opened");
+        event.stopPropagation();
+    });
+    $(".custom-option").on("click", function () {
+        $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select").removeClass("opened");
+        $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+
+
+    });
+}
+function select_2() {
+    $(".custom-select_people").each(function () {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+
+
+        var template = '<div class="' + classes + '">';
+        template += '<span class="custom-select-trigger_people">' + $(this).find('option:not([disabled])').eq(0).text() + '</span>';
+        template += '<div class="custom-options_people"><ul>';
+        $(this).find("option").each(function () {
+            template += '<li class="custom-option_people " ' + $(this).attr("disabled") + ' data-value="' + $(this).attr("value") + '">' + $(this).html() + '</li>';
+        });
+        template += '</ul></div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper_people"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+    $(".custom-option_people:first-of-type").hover(function () {
+        $(this).parents(".custom-options_people").addClass("option-hover");
+    }, function () {
+        $(this).parents(".custom-options_people").removeClass("option-hover");
+    });
+    $(".custom-select-trigger_people").on("click", function () {
+        $('.calendar_w').removeClass('open')
+        $(this).parents(".custom-select_people").toggleClass("opened");
+        event.stopPropagation();
+    });
+    $(".custom-option_people").on("click", function () {
+        $(this).parents(".custom-select-wrapper_people").find("select").val($(this).data("value"));
+        $(this).parents(".custom-options_people").find(".custom-option_people").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select_people").removeClass("opened");
+        $(this).parents(".custom-select_people").find(".custom-select-trigger_people").text($(this).text());
+
+
+    });
+}
+function mask() {
+    $('#phone,#phone_bot')
+
+        .keydown(function (e) {
+            var key = e.which || e.charCode || e.keyCode || 0;
+            $phone = $(this);
+
+            // Don't let them remove the starting '('
+            if ($phone.val().length === 5 && (key === 8 || key === 46)) {
+                $phone.val('+38(0');
+                return false;
+            }
+            // Reset if they highlight and type over first char.
+            else if ($phone.val().charAt(4) !== '0') {
+                $phone.val('+38(0'+String.fromCharCode(e.keyCode)+'');
+            }
+
+            // Auto-format- do not expose the mask as the user begins to type
+            if (key !== 8 && key !== 9) {
+                if ($phone.val().length === 7) {
+                    $phone.val($phone.val() + ')');
+                }
+                if ($phone.val().length === 11) {
+                    $phone.val($phone.val() + '-');
+                }
+                if ($phone.val().length === 14) {
+                    $phone.val($phone.val() + '-');
+                }
+            }
+
+            // Allow numeric (and tab, backspace, delete) keys only
+            return (key == 8 ||
+                key == 9 ||
+                key == 46 ||
+                (key >= 48 && key <= 57) ||
+                (key >= 96 && key <= 105));
+        })
+
+        .bind('focus click', function () {
+            $phone = $(this);
+
+            if ($phone.val().length === 0) {
+                $phone.val('+38(0');
+            }
+            else {
+                var val = $phone.val();
+                $phone.val('').val(val); // Ensure cursor remains at the end
+            }
+        })
+
+        .blur(function () {
+            $phone = $(this);
+
+            if ($phone.val() === '+38(0') {
+                $phone.val('');
+            }
+        });
+}
+
+function chat_bot() {
+    var chat = $('.chat'),
+        chat_window = $('.bot_window'),
+        data_chat,
+        button_chat,
+        POST_time,
+        POST_name_bot,
+        POST_phone_bot,
+        POST_email_bot,
+        POST_position_bot,
+        POST_institution,
+        POST_people
+
+
+
+    function ajax_chat() {
+        $.ajax({
+            url: 'get-bot',
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType: "json",
+            success: function (data) {
+                data_chat = data
+                button_chat = '<div class="button_one_block"><div class="button_chat">' + data_chat[0].question + '</div><div class="button_chat">' + data_chat[1].question + '</div><div class="button_chat">' + data_chat[2].question + '</div><div class="button_chat">' + data_chat[3].question + '</div></div>'
+
+
+            },
+        });
+    }
+
+
+    var messages = [
+        {
+            img: '/assets/img/icon/one_icon_chat.svg',
+            h3: '<h3>Привіт! Я - <span>Кока Коля.</span></h3>',
+            p: '<p>Я допоможу дізнатись цікаву для тебе інформацію.</p>',
+            button: 'Добре. Почнемо'
+        },
+        {
+            text: 'Що тебе цікавить?',
+            text_next: 'У мене ще є питання'
+        },
+        {
+            free_places: 'Вільні місця',
+            sign_up: 'Записатися на екскурсію',
+            cal_day: 'Виберіть дату',
+            cal_time: 'А тепер час',
+            cal_contact_1: 'Напиши інформацію щодо себе',
+            cal_contact_2: 'А тепер ще трішки інформації'
+        },
+        {
+            h3_fin: '<h3>Хей!</h3>',
+            p_fin: '<p>Дзвоніть за номером гарячої лінії Кока-Кола</p>',
+            ok_fin: 'ок'
+
+        },
+        {
+            prev: 'Назад',
+            next: 'Далі',
+            finish: 'Завершити',
+            finh3: 'Круто!',
+            finh3_: 'Вітаю з заверщенням!',
+            finhp: 'Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації',
+            finhwin: 'ОК'
+        },
+        {
+            name_bot: 'Ім’я та Прізвище',
+            phone_bot: 'Телефон',
+            email_bot: 'Пошта',
+            position_bot: 'Посада',
+            institution: 'Назва закладу'
+        }
+    ]
+
+    var loader = '<div class="c-chat__item log"> <div class="loader"><span></span><span></span><span></span></div> </div>';
+
+
+    chat.find('.chat_open').click(function () {
+        chat_window.html('')
+        chat.addClass('open')
+        ajax_chat()
+        chat_window.append(loader)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            one_ekran()
+        }, 800)
+        if ($(window).width() < 768) {
+            $('body').addClass('open_chat_mob')
+        }
+    })
+
+    function click_nav_bot() {
+        $('.button_one_block .button_chat').click(function () {
+            var text_a = $(this).text();
+            if ($(this).index() == 0) {
+
+                address(text_a)
+            } else if ($(this).index() == 1) {
+                content(text_a)
+            } else if ($(this).index() == 2) {
+                rules(text_a)
+            } else if ($(this).index() == 3) {
+                sign_up(text_a)
+            }
+        })
+    }
+
+    function one_ekran() {
+        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt="">' + messages[0].h3 + '' + messages[0].p + '<div class="button_chat">' + messages[0].button + '</div></div>')
+        $('.hellow .button_chat').click(function () {
+            two_ekran()
+        })
+    }
+
+    function two_ekran() {
+        chat_window.html('')
+        chat_window.append(loader)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[1].text + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 800)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend(button_chat)
+
+            click_nav_bot()
+        }, 1600)
+
+    }
+
+
+    function address(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[0].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+
+    function content(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[1].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+
+    function rules(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[2].answer + '</p></div></div>')
+            chat_window.prepend(loader)
+        }, 1100)
+        setTimeout(function () {
+            chat.find('.log').remove()
+
+            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            $('.button_chat.remove').click(function () {
+                $(this).remove()
+                chat_window.prepend(button_chat)
+                click_nav_bot()
+            })
+        }, 1900)
+    }
+
+    function sign_up(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            eskurs()
+            // chat_window.prepend(loader)
+        }, 1100)
+
+    }
+
+
+    function eskurs() {
+        chat_window.prepend('<div class="button_one_block"><div class="button_chat sing">' + messages[2].free_places + '</div><div class="button_chat sing">' + messages[2].sign_up + '</div></div>')
+        $('.button_chat.sing').click(function () {
+            var text_a = $(this).text();
+
+            if ($(this).index() == 0) {
+                sign_up_1(text_a)
+            } else {
+                sign_up_2(text_a)
+            }
+        })
+    }
+
+    function sign_up_1(text_a) {
+        chat.find('.button_one_block').remove()
+        chat_window.html('')
+        // chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_day + '</p></div></div>')
+
+        chat_window.prepend('<div class="bot_calendar"></div>')
+
+        var $button = $('form .calendar_w').clone(true, true);
+        $('.bot_calendar').html($button);
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
+        $('.month .arrow').click(function () {
+            // oute()
+            add_calendar()
+        })
+
+        function data_click_e() {
+            $('.day.ng-scope').not('.disabled').on('click',function () {
+                // oute()
+                add_calendar()
+            })
+
+        }
+        data_click_e()
+        function add_calendar() {
+            var $button = $('form .calendar_w').clone(true, true);
+            // oute()
+            $('.bot_calendar').html('');
+            $('.bot_calendar').html($button);
+            data_click_e()
+        }
+
+            angular.element(".day").triggerHandler("click");
+        $('.cl_next').on('click',function () {
+            sign_up_time()
+        })
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            var text_a = messages[2].sign_up
+            sign_up(text_a)
+        })
+
+    }
+    function sign_up_time() {
+        chat_window.html('')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
+        chat_window.prepend('<div class="bot_time"></div>')
+        var $timer = $('form .custom-options').clone(true, true);
+        $('.bot_time').html($timer);
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.bot_time li').click(function () {
+            $('.cl_next').removeClass('disabled')
+        })
+
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            sign_up_1()
+        })
+        $('.cl_next').on('click',function () {
+            POST_time = $('.bot_time li.selection').data('value')
+            sign_up_contactD()
+        })
+    }
+    function sign_up_contactD() {
+        chat_window.html('')
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
+        chat_window.prepend('<div class="bot_contacts">' +
+            '<div class="name">\n' +
+            '<input type="text" id="name_bot" name="name_bot" autocomplete="off">\n' +
+            '<label for="name_bot">'+messages[5].name_bot+'</label>\n' +
+            '</div>' +
+            '<div class="tell">\n' +
+            '<input type="text" maxlength="17" id="phone_bot" name="phone_bot" autocomplete="off">\n' +
+            '<label for="phone_bot">'+messages[5].phone_bot+'</label>\n' +
+            '</div>' +
+            '<div class="email">\n' +
+            '<input type="email" id="email_bot" name="email_bot" autocomplete="off">\n' +
+            '<label for="email_bot">'+messages[5].email_bot+'</label>\n' +
+            '</div>' +
+            '<div class="pole_form">\n' +
+            '<input type="text" id="position_bot" name="position_bot" autocomplete="off">\n' +
+            '<label for="position_bot">'+messages[5].position_bot+'</label>\n' +
+            '</div>' +
+            '</div>');
+        mask()
+        var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+        $('.bot_contacts input').change(function () {
+            el = $(this);
+            el.each(function () {
+                if (el.val().length > 0) {
+                    el.parent().find('label').addClass('label-stay')
+                } else {
+                    el.parent().find('label').removeClass('label-stay')
+                }
+            })
+
+            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            }else {
+                $('.cl_next').addClass('disabled')
+            }
+
+
+        });
+
+        $('.bot_contacts input').keypress(function () {
+
+            if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
+                $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
+            }
+        });
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        $('.cl_prev').on('click',function () {
+            chat_window.html('')
+            sign_up_time()
+        })
+        $('.cl_next').on('click',function () {
+            POST_name_bot = $('#name_bot').val();
+            POST_phone_bot = $('#phone_bot').val();
+            POST_email_bot = $('#email_bot').val();
+            POST_position_bot = $('#position_bot').val();
+            sign_up_contactT()
+        })
+
+    }
+    function sign_up_contactT() {
+
+        var $position = $('form .pole_form').eq(2).clone();
+        chat_window.html('');
+        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
+        chat_window.prepend('<div class="bot_contacts">' +
+            '<div class="name">\n' +
+            '<input type="text" id="institution_bot" name="institution_bot" autocomplete="off">\n' +
+            '<label for="institution_bot">'+messages[5].institution+'</label>\n' +
+            '</div>' +
+            '</div>');
+        $position.appendTo('.bot_contacts')
+        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].finish + '</div></div>')
+
+
+        $('.bot_contacts input').change(function () {
+            el = $(this);
+            el.each(function () {
+                if (el.val().length > 0) {
+                    el.parent().find('label').addClass('label-stay')
+                } else {
+                    el.parent().find('label').removeClass('label-stay')
+                }
+            })
+
+            if ($('#institution_bot').val().length > 3 &&  $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '') {
+                $('.cl_next').removeClass('disabled')
+            }else {
+                $('.cl_next').addClass('disabled')
+            }
+
+
+        });
+        $('.bot_contacts .custom-option_people').click(function () {
+            if ( $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '' && $('#institution_bot').val().length > 3) {
+                $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
+            }
+        })
+        $('.bot_contacts input').keypress(function () {
+
+            if ($('#institution_bot').val().length > 3 && $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '') {
+                $('.cl_next').removeClass('disabled')
+            } else {
+                $('.cl_next').addClass('disabled')
+            }
+        });
+
+
+        $('.cl_prev').on('click',function () {
+            chat_window.html('');
+            sign_up_contactD()
+        })
+        $('.cl_next').on('click',function () {
+            POST_institution = $('#institution_bot').val()
+            POST_people = $('.bot_contacts #people').val()
+            $.ajax({
+                url: 'add-excursions',
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'name': POST_name_bot,
+                    'phone': POST_phone_bot,
+                    'email': POST_email_bot,
+                    'position': POST_position_bot,
+                    'institution':POST_institution,
+                    'people': POST_people,
+                    'interval': POST_time,
+                    'trip-month': data_mone,
+                    'trip-day':data_day
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 'Екскурсію збережено.') {
+                        chat_window.html('')
+                        chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt=""><h3>' + messages[4].finh3 + '<br>' + messages[4].finh3_ + '</h3><p>' + messages[4].finhp + '</p><div class="button_chat">' + messages[4].finhwin + '</div></div>')
+                        $('.hellow .button_chat').click(function () {
+                            chat.removeClass('open')
+                            chat_window.html('')
+                        })
+                    }
+
+                }
+            });
+
+
+            console.log(POST_time,
+                POST_name_bot,
+                POST_phone_bot,
+                POST_email_bot,
+                POST_position_bot,
+                POST_institution,POST_institution,POST_people, data_mone, data_day);
+        })
+    }
+    function sign_up_2(text_a) {
+        chat.find('.button_one_block').remove()
+        setTimeout(function () {
+            chat_window.prepend(loader)
+        }, 300)
+        setTimeout(function () {
+            chat.find('.log').remove()
+            chat_window.html('')
+            chat_window.append('<div class="hellow fin"><img src="' + messages[0].img + '" alt="">' + messages[3].h3_fin + '' + messages[3].p_fin + '<h5>' + data_chat[4].answer + '</h5><div class="button_chat">' + messages[3].ok_fin + '</div></div>')
+            chat.find('.fin .button_chat').click(function () {
+                chat.removeClass('open')
+                chat_window.html('')
+
+            })
+            // chat_window.prepend(loader)
+        }, 1100)
+    }
+
+    chat.find('.chat_close').click(function () {
+        chat.removeClass('open')
+        chat_window.html('')
+        if ($(window).width() < 768) {
+            $('body').removeClass('open_chat_mob')
+        }
+
+    })
+
+
+}
+function private_() {
+    var cd_modal = $('.cd-modal')
+    $('.footer__column:nth-child(2)').find('a').click(function (e) {
+        $('body').addClass('nooverflow')
+        e.preventDefault()
+
+        if ($(this).index() == 0) {
+            cd_modal.eq(0).addClass('modal-is-visible')
+        } else if ($(this).index() == 1) {
+            cd_modal.eq(1).addClass('modal-is-visible')
+        }
+    })
+    $('.close-privacy').click(function (e) {
+        e.preventDefault()
+        $('body').removeClass('nooverflow')
+        cd_modal.removeClass('modal-is-visible')
+    })
+}
+function top_menu_active() {
+
+    var lastId,
+        topMenu = $(".head li"),
+        topMenuHeight = topMenu.outerHeight() + 150,
+        menuItems = topMenu.find("a"),
+        scrollItems = menuItems.map(function () {
+            var item = $($(this).attr("href"));
+            if (item.length) {
+                return item;
+            }
+        });
+
+    menuItems.click(function (e) {
+        var href = $(this).attr("href"),
+            offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
+        $('html, body').stop().animate({
+            scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+        if($( window ).width() < 1025) {
+            setTimeout(function () {
+                $('.mobile_nav').removeClass('open_menu')
+                $('body').removeClass('bg_blur')
+            },300)
+
+        }
+    });
+    $(".back_call a,.button_callback a").click(function (e) {
+        var href = $(this).attr("href"),
+            offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
+        $('html, body').stop().animate({
+            scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+        if($( window ).width() < 1025) {
+            setTimeout(function () {
+                $('.mobile_nav').removeClass('open_menu')
+                $('body').removeClass('bg_blur')
+            },300)
+
+        }
+    });
+
+    $(window).scroll(function () {
+        var fromTop = $(this).scrollTop() + topMenuHeight;
+
+        var cur = scrollItems.map(function () {
+            if ($(this).offset().top < fromTop)
+                return this;
+        });
+        cur = cur[cur.length - 1];
+        var id = cur && cur.length ? cur[0].id : "";
+
+        if (lastId !== id) {
+            lastId = id;
+            menuItems
+                .parent().removeClass("active")
+                .end().filter("[href='#" + id + "']").parent().addClass("active");
+        }
+    });
+}
+function f2() {
+    var el = $('.slider_top'),
+        curr_obj = 0;
+
+    $('.nav_slider_top').find('.reviews-dots').html('');
+
+    function sliderRemote() {
+        dots = ""
+        var nav_container = $('.slider_top_img img');
+        for (var i = 0; i < $('.slider_top_img img').length; i++) {
+            dots += i == 0 ? '<div class="reviews-dot active" data-id="' + i + '"></div>' : '<div class="reviews-dot" data-id="' + i + '"></div>';
+        }
+
+        if (nav_container.length  > 2) {
+            nav_container.eq(nav_container.length - 1).addClass('prev');
+            nav_container.eq(1).addClass('next');
+        }
+
+        $('.nav_slider_top').find('.reviews-dots').append(dots)
+
+        $('.nav_slider_top .nav-control').click(function () {
+            $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
+            nav_container.removeClass('active next prev');
+            $('.reviews-dot').removeClass('active');
+
+            nav_container.eq(curr_obj).addClass('active');
+
+            if (nav_container.length  > 2) {
+                if ((j = curr_obj + 1 ? curr_obj == nav_container.length - 1 : '0') == false) {
+                    f =  curr_obj + 1
+                } else {
+                    f = 0
+                }
+                nav_container.eq(f).addClass('next');
+                nav_container.eq(curr_obj - 1).addClass('prev');
+            }
+
+            $('.reviews-dot').eq(curr_obj).addClass('active');
+        })
+
+
+    }
+
+    sliderRemote()
+
+
+}
+function f3() {
+    $('.gallery-area .gallery_block').not('.gallery_coca').click(function () {
+        $('.pop_up').addClass('open')
+        $('body').addClass('hover_full')
+        $('.slider_popUp').html('')
+        $('.slider_popUp').append('<div class="popUp_c"></div>')
+        $('.slider_popUp .popUp_c').append($('.gallery_block').clone())
+        id = $(this).data('id')
+        data = $('.slider_popUp .gallery_block')
+        for (var i = 0; i < $('.slider_popUp .gallery_block').length; i++) {
+            if (id == data.eq(i).data('id')) {
+                data.eq(i).addClass('active')
+            }
+        }
+
+
+    })
+    $('.pop_up .close').click(function () {
+        $('.pop_up').removeClass('open')
+        $('body').removeClass('hover_full')
+        $('.slider_popUp').html(' ')
+    })
+    $('.about-img').click(function () {
+        $('.pop_up').addClass('open')
+        $('body').addClass('hover_full')
+        $('.slider_popUp').append('<div id="videoframe" class="video" data-video="' + $(this).data('video') + '"></div')
+        var tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player = [];
+        var videoDiv = $(".video");
+        onYouTubeIframeAPIReady()
+
+        function onYouTubeIframeAPIReady() {
+            for (var a = 0; a < videoDiv.length; a++) {
+                videoDiv[a].id = "videoframe" + a;
+                video = videoDiv[a].getAttribute("data-video");
+
+                player["videoframe" + a] = new YT.Player(videoDiv[a], {
+                    height: "100%",
+                    width: "640",
+                    videoId: videoDiv[a].getAttribute("data-video"),
+
+                })
+            }
+        }
+
+
+    })
+
+
+}
+
+function event_cola() {
+    $('.gallery_coca').on('click', function () {
+        $(this).removeClass('gallery_coca')
+        f3()
+    })
+
+}
+function slider_galery() {
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player = [];
+    var videoDiv = $(".video_galegy");
+
+
+    onYouTubeIframeAPIReady = function () {
+        for (var a = 0; a < videoDiv.length; a++) {
+            videoDiv[a].id = "video_galegy" + a;
+            video = videoDiv[a].getAttribute("data-video");
+
+            player["video_galegy" + a] = new YT.Player(videoDiv[a], {
+                height: "100%",
+                width: "640",
+                videoId: videoDiv[a].getAttribute("data-video"),
+                playerVars: {
+                    showinfo: 0,
+                    color: "white",
+                    cc_load_policy: 1,
+                    disablekb: 1,
+                    enablejsapi: 1,
+                    loop: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    fs: 0
+                },
+            })
+        }
+    }
+
+
+    var allElements = Array.from($('.gallery_slider').find(".gallery_block"));
+    if (window.matchMedia("(min-width: 1026px)").matches) {
+
+        for (var p = 0; p < allElements.length; p += 3) {
+            var wrap = document.createElement("div");
+            wrap.classList.add("conteiner_slider");
+            for (var j = 0; j < 3; j++) {
+                if (p + j < allElements.length) {
+                    wrap.append(allElements[p + j]);
+                }
+            }
+            $('.gallery_slider').append(wrap);
+        }
+        // var nn = (container.find('.maii-item').length * 7) - container.find('.item-senn').length
+
+    } else if (window.matchMedia("(max-width: 1025px)").matches) {
+        for (var p = 0; p < allElements.length; p += 1) {
+            var wrap = document.createElement("div");
+            wrap.classList.add("conteiner_slider");
+            for (var j = 0; j < 1; j++) {
+                if (p + j < allElements.length) {
+                    wrap.append(allElements[p + j]);
+                }
+            }
+            $('.gallery_slider').append(wrap);
+        }
+    }
+
+    $('.conteiner_slider').eq(0).addClass('active')
+    curr_obj = 0;
+    $('.gallery-area .nav-control').click(function () {
+        nav_container = $('.conteiner_slider');
+        $(this).hasClass('nav-control_prev') ? (curr_obj -= 1, curr_obj < 0 ? curr_obj = nav_container.length - 1 : '') : (curr_obj += 1, curr_obj == nav_container.length ? curr_obj = 0 : '');
+        nav_container.removeClass('active');
+        nav_container.eq(curr_obj).addClass('active');
+
+    })
+
+}
+function form() {
+
+    var b = 5 * 1024 * 1024;
+    var d = {};
+    d[""];
+
+    $(".file-don").click(function () {
+        $("#addFile").trigger("click")
+    });
+    $("#addFile").on("change", function () {
+        // setWidthToSpan();
+        var m = this.files;
+        for (var k = 0; k < m.length; k++) {
+            var j = m[k];
+            if (j.type != "application/pdf") {
+                alert("Файл має бути в форматі pdf");
+                continue
+            }
+            if (j.size > b) {
+                alert("Розмір файлу не повинен перевищувати 5 Мб");
+                continue
+            }
+            file(m[k])
+        }
+        this.value = ""
+    });
+
+    function file(k) {
+        var j = new FileReader();
+        j.addEventListener("load", function (m) {
+            d[k.name] = k
+        });
+        j.readAsDataURL(k)
+    }
+
+    var form_sec5 = $('.form_sec5'),
+        verification;
+
+    $('#checkBox').change(function () {
+        verification,
+        cd_modal = $('.cd-modal')
+
+
+        if ($(this).is(":checked")) {
+            if (verification == undefined) {
+                $('body').addClass('nooverflow')
+                cd_modal.eq(1).addClass('modal-is-visible')
+                cd_modal.eq(1).find('.close-privacy').click(function (e) {
+                    e.preventDefault()
+                    $('body').removeClass('nooverflow')
+                    cd_modal.removeClass('modal-is-visible')
+                    verification = true;
+                    $('.send').addClass('verification')
+                })
+            } else {
+                $('.send').addClass('verification')
+            }
+
+        } else {
+            $('.send').removeClass('verification')
+        }
+
+    });
+
+
+    var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+    $('.form_sec5 form').submit(function (j) {
+        j.preventDefault()
+        var formData = new FormData(this);
+
+        for (var l in d) {
+            formData.append("file", d[l])
+        }
+        formData.append('trip-month', data_mone)
+        formData.append('trip-day', data_day)
+        console.log(d, formData);
+        form_sec5.find('input').parent().removeClass('error')
+        if ($('#name').val().length >= 3 && pattern.test($('#email').val()) == true && $('#institution').val().length >= 3 && $('#phone').val().length == 17 && $('#position').val().length >= 3 && $('#people').val() > Math.min(9) && $('#people').val() < Math.min(37) && $('#people').val() != '') {
+            $.ajax({
+                url: 'add-excursions',
+                type: "POST",
+                mimeType: "multipart/form-data",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data, 6666);
+                    if (data.status == 'Екскурсію збережено.') {
+                        $('.form_sec5 form').find('input').val('')
+
+                        $('body').addClass('hover_full')
+                        $('.pop_blag').addClass('open')
+
+                        $('.pop_blag .close').click(function () {
+                            $('body').removeClass('hover_full')
+                            $('.pop_blag').removeClass('open')
+                        })
+                    }
+                    if (data.errors != undefined) {
+                        $('body')
+                            .addClass('hover_full')
+                            .append('<div class="pop_blag open error_p">\n' +
+                            '    <img src="https://visitcoke.com.ua/assets/img/icon/error_icon.svg" alt="">\n' +
+                            '    '+data.errors+'\n' +
+                            '    <div class="close">\n' +
+                            '        <p>ок</p>\n' +
+                            '    </div>\n' +
+                            '</div>')
+
+                        $('.pop_blag .close').click(function () {
+                            $('body').removeClass('hover_full')
+                            $('.pop_blag').removeClass('open')
+                            $('.error_p').remove()
+                        })
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    var erf = xhr.responseText
+                    erf = JSON.parse(erf);
+
+
+
+                    if (erf.errors.email != undefined) {
+                        form_sec5.find('.email').addClass('error')
+                    } else {
+                        form_sec5.find('.email').removeClass('error')
+                    }
+                    if (erf.errors.institution != undefined) {
+                        form_sec5.find('#institution').parent().addClass('error')
+                    }
+                    else {
+                        form_sec5.find('#institution').parent().removeClass('error')
+                    }
+                    if (erf.errors.name != undefined) {
+                        form_sec5.find('.name').addClass('error')
+                    }else {
+                        form_sec5.find('.name').parent().removeClass('error')
+                    }
+                    if (erf.errors.people != undefined) {
+                        form_sec5.find('.custom-select_people').addClass('error')
+                    }else {
+                        form_sec5.find('.custom-select_people').removeClass('error')
+                    }
+                    if (erf.errors.phone != undefined) {
+                        form_sec5.find('.tell').addClass('error')
+                    }else {
+                        form_sec5.find('.tell').removeClass('error')
+                    }
+                    if (erf.errors.position != undefined) {
+                        form_sec5.find('input#position').parent().addClass('error')
+                    }else {
+                        form_sec5.find('input#position').parent().removeClass('error')
+                    }
+
+
+                }
+            });
+        } else {
+            if (pattern.test($('#email').val()) == false) {
+                form_sec5.find('.email').addClass('error')
+            }
+
+            if ($('#name').val().length < 3) {
+                form_sec5.find('.name').addClass('error')
+            }
+
+            if ($('#institution').val().length < 3) {
+                form_sec5.find('#institution').parent().addClass('error')
+            }
+            if ($('#phone').val().length != 17) {
+                form_sec5.find('.tell').addClass('error')
+            }
+            if ($('#position').val().length < 3) {
+                form_sec5.find('#position').parent().addClass('error')
+            }
+            if ($('#people').val() < Math.min(10) || $('#people').val() > Math.min(36) || $('#people').val() == '' ) {
+                form_sec5.find('#people').parent().addClass('error')
+            }
+        }
+
+    })
+
+
+}
 function angul() {
 
     $.ajax({
@@ -13806,11 +13828,7 @@ function angul() {
                 }])
 
             function f2() {
-                // var codtatdunt = 0;
                 a = "" + data_year + "-" + data_mone + "-" + data_day + "";
-                // for (ooo in data.excursions) {
-                //     codtatdunt++
-                // }
                 sel = $('#interval').find('option')
                 sel.removeAttr('disabled')
                 if (data.excursions[a] != undefined) {
@@ -13983,12 +14001,241 @@ function angul() {
     });
 }
 
-angul()
+
+$(document).ready(function () {
+    chat_bot();
+    private_();
+    top_menu_active();
+    f2();
+    f3();
+    event_cola();
+    slider_galery();
+    form();
+    angul();
+    select_();
+    select_2();
+    mask()
+
+
+
+    $('.check_text input').change(function () {
+        if ($(this).is(":checked")) {
+            $('.check_text textarea').addClass('open')
+        } else {
+            $('.check_text textarea').removeClass('open')
+        }
+
+    });
+    $('fieldset:nth-child(1) input').change(function () {
+        el = $(this);
+        el.each(function () {
+            if (el.val().length > 0) {
+                el.parent().find('label').addClass('label-stay')
+            } else {
+                el.parent().find('label').removeClass('label-stay')
+            }
+        })
+    });
+    $about_description = $(".about-description").height()
+    $(".about-description").css({height: $about_description - 10})
+    $(".seo_button").click(function () {
+        $(this).parent().find(".about-description").toggleClass("full");
+        if ($(this).parent().find(".about-description").hasClass("full")) {
+            $(this).parent().find(".about-description").animate({height: $('.about-description')[0].scrollHeight}, 500)
+
+            $(this).find("p").text($(this).data('off_text'));
+        } else {
+            $(this).find("p").text($(this).data('on_text'));
+            $(this).parent().find(".about-description").animate({height: $about_description - 10}, 500)
+
+        }
+    });
+
+    if ($(window).width() > 1024) {
+        f();
+        bl2 = $("main").height();
+        r2 = $(".text_R").offset().top;
+        r3 = $(".text_R2").offset().top;
+        l1 = $(".text_L").offset().top;
+        $(window).scroll(function () {
+            f1()
+        })
+    }
+
+    $('.data_calendar').click(function () {
+        $(".custom-option").parents(".custom-select").removeClass("opened");
+        $('.calendar_w').toggleClass('open')
+        event.stopPropagation();
+    })
+});
+
+
+/*****************************************/
+
+/*****************************************/
+
+
+
+
+
+
+
 
 
 // Library
 
 /*******************madia**********************/
+
+function mousedown_clider() {
+    $('.participation-area').append('<div class="nav_participation"><div class="nav-control nav-control_prev"></div><div class="nav-control nav-control_next"></div></div>')
+
+    nav_participation = $('.nav_participation')
+    $('.participation-block').css({'left': '0px'})
+    var t = 0
+
+    var k = true
+    yy = ($('.participation-block').width() + 40) - $(window).width()
+
+
+    var el = document.getElementById('participation-block');
+    swipedetect(el, function (swipedir) {
+    });
+
+    function swipedetect(el) {
+
+        var touchsurface = el,
+            startX,
+            threshold = 50;
+
+
+        touchsurface.addEventListener('touchstart', function (e) {
+            var touchobj = e.changedTouches[0]
+            startX = touchobj.pageX
+            e.preventDefault()
+        }, false)
+
+        touchsurface.addEventListener('touchend', function (e) {
+            var touchobj = e.changedTouches[0]
+
+            distX = touchobj.pageX - startX
+
+            if (Math.abs(distX) >= threshold) {
+
+                if (distX < 0) {
+                    console.log(t, yy, t + (distX * -1))
+                    if (t + 150 < yy) {
+                        t += 150
+                        // $('.participation-block').css('left', -t)
+                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
+
+                    } else {
+                        t = yy
+                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
+                    }
+
+
+                } else if (distX > 0) {
+                    if (t - 150 > 0) {
+                        t += -150
+                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
+                    } else {
+                        t = 0
+                        $('.participation-block').css({'left': '0px', 'transition': '.5s'})
+                    }
+                }
+
+
+                // swipedir = (distX < 0)? 'left' : 'right'
+                // if ( t >= 0 && t <= yy) {
+                //
+                //     t += distX * -1
+                //     // if (t > ) {
+                //     //
+                //     // }
+                // }
+                // t += distX * -1
+            }
+            // t += distX * -1
+
+        }, false)
+
+    }
+
+
+    // nav_participation.find('.nav-control')
+    //
+    //     .on('touchend', function () {
+    //         k = false
+    //         return false
+    //     })
+    //     .on('touchstart', function () {
+    //         k = true
+    //         this_ = $(this)
+    //
+    //         function timeout() {
+    //             setTimeout(function () {
+    //                 if (k == true && t < yy && t >= 0) {
+    //                     requestAnimationFrame(timeout)
+    //                 }
+    //             });
+    //
+    //             if (this_.hasClass('nav-control_prev')) {
+    //                 ttt()
+    //             } else if (this_.hasClass('nav-control_next')) {
+    //                 ttt_min()
+    //             }
+    //             // ttt()
+    //         }
+    //
+    //         timeout();
+    //         // if (t <= yy && t >= 0)  {
+    //         //     timeout();
+    //         //
+    //         // }
+    //
+    //     });
+    //
+    // function ttt() {
+    //     if (t > yy) {
+    //         t = yy
+    //     } else if (t <= yy) {
+    //         t += 3
+    //     }
+    //     // t += 1
+    //     $('.participation-block').css({'left': -t,'transition':'.0s'})
+    // }
+    //
+    // function ttt_min() {
+    //     if (t < 0) {
+    //         t = 0
+    //     } else if (t >= 0) {
+    //         t -= 3
+    //     }
+    //     // t -= 1
+    //     $('.participation-block').css({'left': -t,'transition':'.0s'})
+    // }
+
+
+    nav_participation.find('.nav-control').click(function () {
+        if ($(this).hasClass('nav-control_next')) {
+            if (t + 150 > yy) {
+                t = yy
+            } else if (t + 150 <= yy) {
+                t += 150
+            }
+        } else if ($(this).hasClass('nav-control_prev')) {
+            if (t - 150 < 0) {
+                t = 0
+            } else if (t - 150 >= 0) {
+                t -= 150
+            }
+        }
+
+        $('.participation-block').css({'left': -t, 'transition': '.5s'})
+    })
+
+}
+
 
 if ($(window).width() < 1025) {
     $('.head').append('<div class="menu_mob"><span></span><span></span><span></span></div>')
@@ -14008,159 +14255,13 @@ if ($(window).width() < 1025) {
         $('.mobile_nav').addClass('open_menu')
     })
 
-    function mousedown_clider() {
-        $('.participation-area').append('<div class="nav_participation"><div class="nav-control nav-control_prev"></div><div class="nav-control nav-control_next"></div></div>')
 
-        nav_participation = $('.nav_participation')
-        $('.participation-block').css({'left': '0px'})
-        var t = 0
-
-        var k = true
-        yy = ($('.participation-block').width() + 40) - $(window).width()
-
-
-        var el = document.getElementById('participation-block');
-        swipedetect(el, function (swipedir) {
-        });
-
-        function swipedetect(el) {
-
-            var touchsurface = el,
-                startX,
-                threshold = 50;
-
-
-            touchsurface.addEventListener('touchstart', function (e) {
-                var touchobj = e.changedTouches[0]
-                startX = touchobj.pageX
-                e.preventDefault()
-            }, false)
-
-            touchsurface.addEventListener('touchend', function (e) {
-                var touchobj = e.changedTouches[0]
-
-                distX = touchobj.pageX - startX
-
-                if (Math.abs(distX) >= threshold) {
-
-                    if (distX < 0) {
-                        console.log(t, yy, t + (distX * -1))
-                        if (t + 150 < yy) {
-                            t += 150
-                            // $('.participation-block').css('left', -t)
-                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
-
-                        } else {
-                            t = yy
-                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
-                        }
-
-
-                    } else if (distX > 0) {
-                        if (t - 150 > 0) {
-                            t += -150
-                            $('.participation-block').css({'left': -t, 'transition': '.5s'})
-                        } else {
-                            t = 0
-                            $('.participation-block').css({'left': '0px', 'transition': '.5s'})
-                        }
-                    }
-
-
-                    // swipedir = (distX < 0)? 'left' : 'right'
-                    // if ( t >= 0 && t <= yy) {
-                    //
-                    //     t += distX * -1
-                    //     // if (t > ) {
-                    //     //
-                    //     // }
-                    // }
-                    // t += distX * -1
-                }
-                // t += distX * -1
-
-            }, false)
-
-        }
-
-
-        // nav_participation.find('.nav-control')
-        //
-        //     .on('touchend', function () {
-        //         k = false
-        //         return false
-        //     })
-        //     .on('touchstart', function () {
-        //         k = true
-        //         this_ = $(this)
-        //
-        //         function timeout() {
-        //             setTimeout(function () {
-        //                 if (k == true && t < yy && t >= 0) {
-        //                     requestAnimationFrame(timeout)
-        //                 }
-        //             });
-        //
-        //             if (this_.hasClass('nav-control_prev')) {
-        //                 ttt()
-        //             } else if (this_.hasClass('nav-control_next')) {
-        //                 ttt_min()
-        //             }
-        //             // ttt()
-        //         }
-        //
-        //         timeout();
-        //         // if (t <= yy && t >= 0)  {
-        //         //     timeout();
-        //         //
-        //         // }
-        //
-        //     });
-        //
-        // function ttt() {
-        //     if (t > yy) {
-        //         t = yy
-        //     } else if (t <= yy) {
-        //         t += 3
-        //     }
-        //     // t += 1
-        //     $('.participation-block').css({'left': -t,'transition':'.0s'})
-        // }
-        //
-        // function ttt_min() {
-        //     if (t < 0) {
-        //         t = 0
-        //     } else if (t >= 0) {
-        //         t -= 3
-        //     }
-        //     // t -= 1
-        //     $('.participation-block').css({'left': -t,'transition':'.0s'})
-        // }
-
-
-        nav_participation.find('.nav-control').click(function () {
-            if ($(this).hasClass('nav-control_next')) {
-                if (t + 150 > yy) {
-                    t = yy
-                } else if (t + 150 <= yy) {
-                    t += 150
-                }
-            } else if ($(this).hasClass('nav-control_prev')) {
-                if (t - 150 < 0) {
-                    t = 0
-                } else if (t - 150 >= 0) {
-                    t -= 150
-                }
-            }
-
-            $('.participation-block').css({'left': -t, 'transition': '.5s'})
-        })
-
-    }
 
     mousedown_clider()
 
 }
+
+
 // $(window).resize(function() {
 //     location.reload();
 // });
@@ -14175,8 +14276,8 @@ $(window).on("load", function () {
         $preloader.find('.canvas_load').animate({ height: '10vh'}, 'slow');
     }, 700);
     setTimeout(function () {
-        // $("#canvas-container").remove()
-    }, 1000)
+        $("#canvas-container").remove()
+    }, 1100)
     // $preloader.unbind(preloader_canvas())
 
 });
@@ -14187,3 +14288,4 @@ $(window).on("load", function () {
         img.removeAttribute('data-src');
     };
 });
+

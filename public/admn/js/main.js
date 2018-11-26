@@ -574,6 +574,8 @@ $(document).ready(function () {
     }, function () {
         $(this).parents(".custom-options").removeClass("option-hover");
     });
+
+
     $(".custom-select-trigger").on("click", function () {
         $('html').one('click', function () {
             $(".custom-select").removeClass("opened");
@@ -583,10 +585,15 @@ $(document).ready(function () {
         $(this).parents(".custom-select").toggleClass("opened");
         $(this).parents(".td-position").toggleClass("opened");
         event.stopPropagation();
+
+        // if ($(".custom-select").hasClass('opened')) {
+        //     $(this).removeClass('opened');
+        //     $(".td-position").removeClass('opened')
+        // }
     });
 
     function custClick(e) {
-        vals = _this.data("value")
+        vals = _this.data("value");
         _this.parents(".custom-select-wrapper").find("select").val(vals);
         _this.parents(".custom-select-wrapper").find("select option").removeAttr('selected');
         _this.parents(".custom-select-wrapper").find("select option[value='" + vals + "']").attr('selected', true);
@@ -845,9 +852,7 @@ $(document).ready(function () {
                 success: function (res) {
                     $('.info-windows').html(res)
                     infoExcursions();
-                    $(".vkl:checkbox").on('click', function(){
-                        $(this).parents('.info-window').toggleClass("unactive");
-                    });
+                    toggleDayStatus();
                 }
             })
             $(".timetable .pres-month").removeClass("active");
@@ -862,3 +867,29 @@ $(document).ready(function () {
     });
 
 })
+
+
+function toggleDayStatus(){
+    $(".vkl:checkbox").on('click', function(){
+
+        _this = $(this);
+
+        _status = _this.is(":checked")
+        console.log(_status);
+
+        $.ajax({
+            url: '/admin/day-status',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {status: _status},
+            success: function (res) {
+                console.log(res);
+                _this.parents('.info-window').toggleClass("unactive");
+            }
+        });
+
+        // _this.parents('.info-window').toggleClass("unactive");
+    });
+}

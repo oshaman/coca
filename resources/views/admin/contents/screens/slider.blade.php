@@ -2,7 +2,7 @@
     @forelse($screen->slider as $pic)
         <div class="sl-block">
 
-            <p>СЛАЙД 1</p>
+            <p>СЛАЙД {{ $loop->iteration }}</p>
 
             <div class="del-slide" data-url="{{ route('admin.slide.delete', $pic->id) }}">
                 <img src="{{ asset('admn') }}/imgs/del-slide.svg" alt="-">

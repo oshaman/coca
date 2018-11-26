@@ -33,6 +33,8 @@ class NewOrder extends Mailable
         $email = $this->content;
 
         return $this->cc(['ekompanec@gmail.com', 'irka.v.struk@gmail.com'])
-            ->markdown('emails.new_order')->with(compact('email'));
+            ->subject($email->subject??'')
+            ->markdown('emails.new_order')
+            ->with(compact('email'));
     }
 }

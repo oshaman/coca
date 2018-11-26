@@ -396,6 +396,7 @@ div.inval label {
 }
 .form-trip-info .custom-select,
 .form-register .custom-select {
+    /*padding: 0.941vw 0 0.8vw;*/
     padding: 1.6vh 0 1.45vh;
     border-bottom: 1px solid #cfcfcf;
     display: flex;
@@ -427,7 +428,8 @@ div.inval label {
     padding: 1.6vh 0 1.45vh;
 }
 .form-trip-info input {
-    padding: 0.941vw 0 0.8vw;
+    padding: 1.6vh 0 1.45vh;
+    /*padding: 0.941vw 0 0.8vw;*/
 }
 
 
@@ -697,10 +699,12 @@ div.eye {
     content: none;
 }
 .form-trip-block div.custom-options {
-    max-height: calc(17.5vh + 15px);
+    max-height: 250px;
+    /*max-height: calc(17.5vh + 15px);*/
     text-align: left;
     margin: 8px 0;
 }
+
 .form-trip-block .custom-select-wrapper {
     border: 1px solid #F40009;
     border-radius: 2.60416vw;
@@ -794,6 +798,13 @@ div.eye {
     padding-left: 1vw;
     display: flex;
     cursor: pointer;
+    transition: .2s;
+}
+.radio-list-left input[type="radio"] + label:hover {
+    opacity: 1;
+}
+.radio-list-left input[type="radio"] + label:hover:before {
+    border-color: #222;
 }
 .radio-list-left input[type="radio"] + label:before {
     content: "";
@@ -2546,9 +2557,11 @@ h5 {
         margin-bottom: 2.2vh;
     }
     .form-trip-info,
-    .form-trip-block,
-    .form-trip-file {
+    .form-trip-block{
         padding-bottom: 0;
+    }
+    .form-trip-file {
+        padding-bottom: 3vh;
     }
     .form-trip-block p,
     .form-trip-info p,
@@ -2577,6 +2590,12 @@ h5 {
     }
     .create {
         padding: 3.444vh 2.25vw 2.2vh;
+    }
+    div.eye {
+        top: 20%;
+    }
+    .form-trip-block div.custom-options {
+        max-height: 150px;
     }
 }
 

@@ -10,7 +10,7 @@ abstract class AdminController extends Controller
 {
     protected $template = 'admin.index';
     protected $content = false;
-    protected $title;
+    protected $title='Admin';
     protected $jss;
     protected $vars;
     protected $body_class;

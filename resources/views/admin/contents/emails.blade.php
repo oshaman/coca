@@ -8,7 +8,7 @@
             <div class="rubric @if(1 == $loop->iteration) active @endif">
                 <div class="rub-num">
                     <p>#{{ $loop->iteration }}</p>
-                    <p>блок</p>
+                    {{--<p>блок</p>--}}
                 </div>
                 <div class="rub-name">{{ $email->title }}</div>
                 <div class="rub-text">?</div>
