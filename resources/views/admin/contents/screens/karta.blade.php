@@ -53,54 +53,7 @@
                     </div>
                 </label>
             </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[6]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №7
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[7]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №8
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[8]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №9
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[9]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №10
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[10]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №11
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
-            <div>
-                {!! Form::text('headings[]', $screen->headings[11]??null, ['class' => 'form-control']) !!}
-                <label for="seo-title">Заголовок №12
-                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
-                        <span class="tooltiptext">Підказка</span>
-                    </div>
-                </label>
-            </div>
+            {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
         </div>
 
         <div style="width: 100%">

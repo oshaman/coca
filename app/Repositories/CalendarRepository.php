@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DisabledDay;
 use App\Email;
 use App\Excursion;
 use App\Jobs\OrderCreated;
@@ -84,7 +85,7 @@ class CalendarRepository
 
         $excursion->add($request, $received_date);
 
-        dispatch(new OrderCreated($excursion->email, Email::getEmail('first')));
+        dispatch(new OrderCreated($excursion, Email::getEmail('first')));
 
         return ['status' => 'Екскурсію збережено.'];
     }
@@ -135,9 +136,10 @@ class CalendarRepository
 
     public function getDisabledDays(): array
     {
-
         $today = Carbon::now();
         $all_excursion = $this->getAllAvailableExcursions();
+
+        $all_days = DisabledDay::where([['val', '>', $today->copy()->addDay()], ['val', '<', $this->getMaximalAllowedDay()]])->get();
 
         $range = $this->dateRange();
 
@@ -157,6 +159,12 @@ class CalendarRepository
             }
 
             $today->addDay();
+        }
+
+        if($all_days->isNotEmpty()){
+            foreach($all_days as $day){
+                $disabled_days[] = $day->val->format('Y-m-d');
+            }
         }
 
         return $disabled_days;

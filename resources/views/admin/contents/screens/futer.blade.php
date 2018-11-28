@@ -30,7 +30,7 @@
             </div>
         </div>
         {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
-        {!! Form::textarea('description', $screen->description??null, ['class'=>'my-editor']) !!}
+        {!! Form::textarea('additionally', $screen->additionally??null, ['class'=>'my-editor']) !!}
         <div style="width: 100%">
             <button type="submit" class="btn btn-red">зберегти</button>
         </div>

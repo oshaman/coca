@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewOrder extends Mailable
+class ChangedStatus extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -37,7 +37,7 @@ class NewOrder extends Mailable
 
         return $this->cc(['ekompanec@gmail.com', 'irka.v.struk@gmail.com'])
             ->subject($email->subject??'')
-            ->markdown('emails.new_order')
+            ->markdown('emails.changed_status')
             ->with(compact('email', 'excursion'));
     }
 }

@@ -53,7 +53,9 @@
     <div class="container">
         <div class="head">
             <div class="logo">
+                <a href="#">
                 <img src="{{ asset('assets') }}/img/icon/logo.svg" alt="">
+                </a>
             </div>
             <nav>
                 <ul>
@@ -83,15 +85,14 @@
                 </div>
                 <div class="event_info">
                     <img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
-                    <p>Збери всі частини Коли
-                        <span>та отрімуй шалені подарунки!</span>
+                    <p>Збери всі частини пляшки Кока-Кола
+                       та отримай подарунок!
                         </p>
                 </div>
 
             </div>
             <div class="back_call">
-                <a href="#form">
-                    Записатись
+                <a href="#form">Забронювати
                 </a>
             </div>
         </div>
@@ -144,28 +145,28 @@
 </div>
 <div class="pop_blag">
     <img src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
-    <h3>Круто!</br>
+    <h3>Круто!<br>
         Вітаю з завершенням!</h3>
         <p>Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації</p>
     <div class="close">
         <p>ок</p>
     </div>
 </div>
-<div class="chat">
-    <div class="chat_open">
-        <img src="{{ asset('assets') }}/img/icon/chat_bot_colo.svg" alt="">
-        <img class="bot_coca_i" src="{{ asset('assets') }}/img/icon/luar.svg" alt="">
-        <div class="coca_hello"><p>Хей! Запитуй в мене!</p></div>
-    </div>
-    <div class="chat_close">
-        <span></span>
-        <span></span>
-        <img class="puls_cl" src="{{ asset('assets') }}/img/icon/puls_cl.gif" alt="">
-    </div>
-    <div class="chat_window">
-        <div class="bot_window"></div>
-    </div>
-</div>
+{{--<div class="chat">--}}
+    {{--<div class="chat_open">--}}
+        {{--<img src="{{ asset('assets') }}/img/icon/chat_bot_colo.svg" alt="">--}}
+        {{--<img class="bot_coca_i" src="{{ asset('assets') }}/img/icon/luar.svg" alt="">--}}
+        {{--<div class="coca_hello"><p>Хей! Запитуй в мене!</p></div>--}}
+    {{--</div>--}}
+    {{--<div class="chat_close">--}}
+        {{--<span></span>--}}
+        {{--<span></span>--}}
+        {{--<img class="puls_cl" src="{{ asset('assets') }}/img/icon/puls_cl.gif" alt="">--}}
+    {{--</div>--}}
+    {{--<div class="chat_window">--}}
+        {{--<div class="bot_window"></div>--}}
+    {{--</div>--}}
+{{--</div>--}}
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
 <script>
     function preloader_canvas() {
@@ -300,9 +301,11 @@
     };
     preloader_canvas()
 </script>
+
 @include('main.popups', ['screen'=>$screens->where('slug', 'futer')->first()])
 <script src="{{ asset('assets') }}/js/animation.js"></script>
 
+    {{--<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBktDMPdQuUkHC1MWrvNEaIKlhymL5X-C4&callback=initMap&language=ua"></script>--}}
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVCLZSN"

@@ -4,7 +4,7 @@
             <h1>{{ $screen->headings[0]??'' }} <span>{{ $screen->headings[1]??'' }}</span></h1>
             {!! $screen->content !!}
             <div class="button_callback">
-                <a href="#form">Записатись</a>
+                <a href="#form">Забронювати</a>
             </div>
         </div>
 

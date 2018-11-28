@@ -1,32 +1,19 @@
 <div class="img-l"><img src="{{ asset('admn') }}/imgs/colya.png" alt="кока-коля"></div>
-<div class="strong-l">Дані щодо Вашого бронювання</div>
+{{--<div class="strong-l">Дані щодо Вашого бронювання</div>--}}
 <div class="hr-l"></div>
 <div class="table-l">
     <div class="inner-l">
-        <div class="pole-l">
-            <p>Ім'я та Призвище:</p>
-            <p>Телефон:</p>
-            <p>Пошта:</p>
-            <p>Посада:</p>
-            <p>Назва закладу:</p>
-            <p>Кількість людей:</p>
-            <p>Дата та час:</p>
 
-        </div>
-        <div class="input-l">
-            <p>{{ $excursion->name }}</p>
-            <p>{{ $excursion->phone }}</p>
-            <p>{{ $excursion->email }}</p>
-            <p>{{ $excursion->position }}</p>
-            <p>{{ $excursion->institution }}</p>
-            <p>{{ $excursion->people }}</p>
-            <p>{{ config('settings.time_intervals.'.$excursion->interval) .' '. $excursion->created_at->format('d-m-Y')}}</p>
-        </div>
+        {!! $email->content??'' !!}
+
+        @if(!empty($excursion->token))
+            {{ route('get-photo', $excursion->token) }}
+        @endif
+
     </div>
 </div>
 
 <div class="footer-l">
-    {!! $email->content??'' !!}
     <div class="block-l">
         <em style="color: #8e8e8e">
             З радістю чекаємо Вас у гості
@@ -54,5 +41,3 @@
     </div>
     <div class="footer-out-l">Кока-Кола Беверіджиз Україна Лімітед</div>
 </div>
-
-

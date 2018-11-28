@@ -12613,9 +12613,9 @@ function angular_tr() {
 
     }));
 }
+
 $.getScript("https://www.youtube.com/iframe_api");
 /**************************************/
-
 
 
 var data_mone,
@@ -12655,6 +12655,7 @@ function f() {
         }
     })
 }
+
 function f1() {
 
     klp_ = parseInt(1920 * 0.01)
@@ -12664,6 +12665,7 @@ function f1() {
     $(".text_L").css('top', ((l1 + (.3 * Scroll))) + 'px')
     // $(".text_R").css('top', ((r2 + (.3 * 0))/ klp_)+ 'vw')
 }
+
 function select_() {
     $(".timer .custom-select").each(function () {
         var classes = $(this).attr("class"),
@@ -12703,6 +12705,7 @@ function select_() {
 
     });
 }
+
 function select_2() {
     $(".custom-select_people").each(function () {
         var classes = $(this).attr("class"),
@@ -12742,6 +12745,7 @@ function select_2() {
 
     });
 }
+
 function mask() {
     $('#phone,#phone_bot')
 
@@ -12756,7 +12760,7 @@ function mask() {
             }
             // Reset if they highlight and type over first char.
             else if ($phone.val().charAt(4) !== '0') {
-                $phone.val('+38(0'+String.fromCharCode(e.keyCode)+'');
+                $phone.val('+38(0' + String.fromCharCode(e.keyCode) + '');
             }
 
             // Auto-format- do not expose the mask as the user begins to type
@@ -12813,7 +12817,6 @@ function chat_bot() {
         POST_position_bot,
         POST_institution,
         POST_people
-
 
 
     function ajax_chat() {
@@ -13057,13 +13060,15 @@ function chat_bot() {
         })
 
         function data_click_e() {
-            $('.day.ng-scope').not('.disabled').on('click',function () {
+            $('.day.ng-scope').not('.disabled').on('click', function () {
                 // oute()
                 add_calendar()
             })
 
         }
+
         data_click_e()
+
         function add_calendar() {
             var $button = $('form .calendar_w').clone(true, true);
             // oute()
@@ -13072,17 +13077,18 @@ function chat_bot() {
             data_click_e()
         }
 
-            angular.element(".day").triggerHandler("click");
-        $('.cl_next').on('click',function () {
+        angular.element(".day").triggerHandler("click");
+        $('.cl_next').on('click', function () {
             sign_up_time()
         })
-        $('.cl_prev').on('click',function () {
+        $('.cl_prev').on('click', function () {
             chat_window.html('')
             var text_a = messages[2].sign_up
             sign_up(text_a)
         })
 
     }
+
     function sign_up_time() {
         chat_window.html('')
         chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
@@ -13094,34 +13100,35 @@ function chat_bot() {
             $('.cl_next').removeClass('disabled')
         })
 
-        $('.cl_prev').on('click',function () {
+        $('.cl_prev').on('click', function () {
             chat_window.html('')
             sign_up_1()
         })
-        $('.cl_next').on('click',function () {
+        $('.cl_next').on('click', function () {
             POST_time = $('.bot_time li.selection').data('value')
             sign_up_contactD()
         })
     }
+
     function sign_up_contactD() {
         chat_window.html('')
         chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
         chat_window.prepend('<div class="bot_contacts">' +
             '<div class="name">\n' +
             '<input type="text" id="name_bot" name="name_bot" autocomplete="off">\n' +
-            '<label for="name_bot">'+messages[5].name_bot+'</label>\n' +
+            '<label for="name_bot">' + messages[5].name_bot + '</label>\n' +
             '</div>' +
             '<div class="tell">\n' +
             '<input type="text" maxlength="17" id="phone_bot" name="phone_bot" autocomplete="off">\n' +
-            '<label for="phone_bot">'+messages[5].phone_bot+'</label>\n' +
+            '<label for="phone_bot">' + messages[5].phone_bot + '</label>\n' +
             '</div>' +
             '<div class="email">\n' +
             '<input type="email" id="email_bot" name="email_bot" autocomplete="off">\n' +
-            '<label for="email_bot">'+messages[5].email_bot+'</label>\n' +
+            '<label for="email_bot">' + messages[5].email_bot + '</label>\n' +
             '</div>' +
             '<div class="pole_form">\n' +
             '<input type="text" id="position_bot" name="position_bot" autocomplete="off">\n' +
-            '<label for="position_bot">'+messages[5].position_bot+'</label>\n' +
+            '<label for="position_bot">' + messages[5].position_bot + '</label>\n' +
             '</div>' +
             '</div>');
         mask()
@@ -13138,7 +13145,7 @@ function chat_bot() {
 
             if ($('#name_bot').val().length > 3 && $('#phone_bot').val().length >= 13 && pattern.test($('#email_bot').val()) == true && $('#position_bot').val().length >= 3) {
                 $('.cl_next').removeClass('disabled')
-            }else {
+            } else {
                 $('.cl_next').addClass('disabled')
             }
 
@@ -13154,11 +13161,11 @@ function chat_bot() {
             }
         });
         chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
-        $('.cl_prev').on('click',function () {
+        $('.cl_prev').on('click', function () {
             chat_window.html('')
             sign_up_time()
         })
-        $('.cl_next').on('click',function () {
+        $('.cl_next').on('click', function () {
             POST_name_bot = $('#name_bot').val();
             POST_phone_bot = $('#phone_bot').val();
             POST_email_bot = $('#email_bot').val();
@@ -13167,6 +13174,7 @@ function chat_bot() {
         })
 
     }
+
     function sign_up_contactT() {
 
         var $position = $('form .pole_form').eq(2).clone();
@@ -13175,7 +13183,7 @@ function chat_bot() {
         chat_window.prepend('<div class="bot_contacts">' +
             '<div class="name">\n' +
             '<input type="text" id="institution_bot" name="institution_bot" autocomplete="off">\n' +
-            '<label for="institution_bot">'+messages[5].institution+'</label>\n' +
+            '<label for="institution_bot">' + messages[5].institution + '</label>\n' +
             '</div>' +
             '</div>');
         $position.appendTo('.bot_contacts')
@@ -13192,16 +13200,16 @@ function chat_bot() {
                 }
             })
 
-            if ($('#institution_bot').val().length > 3 &&  $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '') {
+            if ($('#institution_bot').val().length > 3 && $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '') {
                 $('.cl_next').removeClass('disabled')
-            }else {
+            } else {
                 $('.cl_next').addClass('disabled')
             }
 
 
         });
         $('.bot_contacts .custom-option_people').click(function () {
-            if ( $('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '' && $('#institution_bot').val().length > 3) {
+            if ($('.bot_contacts #people').val() > Math.min(9) && $('.bot_contacts #people').val() < Math.min(37) && $('.bot_contacts #people').val() != '' && $('#institution_bot').val().length > 3) {
                 $('.cl_next').removeClass('disabled')
             } else {
                 $('.cl_next').addClass('disabled')
@@ -13217,11 +13225,11 @@ function chat_bot() {
         });
 
 
-        $('.cl_prev').on('click',function () {
+        $('.cl_prev').on('click', function () {
             chat_window.html('');
             sign_up_contactD()
         })
-        $('.cl_next').on('click',function () {
+        $('.cl_next').on('click', function () {
             POST_institution = $('#institution_bot').val()
             POST_people = $('.bot_contacts #people').val()
             $.ajax({
@@ -13235,11 +13243,11 @@ function chat_bot() {
                     'phone': POST_phone_bot,
                     'email': POST_email_bot,
                     'position': POST_position_bot,
-                    'institution':POST_institution,
+                    'institution': POST_institution,
                     'people': POST_people,
                     'interval': POST_time,
                     'trip-month': data_mone,
-                    'trip-day':data_day
+                    'trip-day': data_day
                 },
                 dataType: "json",
                 success: function (data) {
@@ -13261,9 +13269,10 @@ function chat_bot() {
                 POST_phone_bot,
                 POST_email_bot,
                 POST_position_bot,
-                POST_institution,POST_institution,POST_people, data_mone, data_day);
+                POST_institution, POST_institution, POST_people, data_mone, data_day);
         })
     }
+
     function sign_up_2(text_a) {
         chat.find('.button_one_block').remove()
         setTimeout(function () {
@@ -13293,6 +13302,7 @@ function chat_bot() {
 
 
 }
+
 function private_() {
     var cd_modal = $('.cd-modal')
     $('.footer__column:nth-child(2)').find('a').click(function (e) {
@@ -13311,6 +13321,7 @@ function private_() {
         cd_modal.removeClass('modal-is-visible')
     })
 }
+
 function top_menu_active() {
 
     var lastId,
@@ -13331,11 +13342,11 @@ function top_menu_active() {
             scrollTop: offsetTop
         }, 300);
         e.preventDefault();
-        if($( window ).width() < 1025) {
+        if ($(window).width() < 1025) {
             setTimeout(function () {
                 $('.mobile_nav').removeClass('open_menu')
                 $('body').removeClass('bg_blur')
-            },300)
+            }, 300)
 
         }
     });
@@ -13346,11 +13357,11 @@ function top_menu_active() {
             scrollTop: offsetTop
         }, 300);
         e.preventDefault();
-        if($( window ).width() < 1025) {
+        if ($(window).width() < 1025) {
             setTimeout(function () {
                 $('.mobile_nav').removeClass('open_menu')
                 $('body').removeClass('bg_blur')
-            },300)
+            }, 300)
 
         }
     });
@@ -13373,7 +13384,8 @@ function top_menu_active() {
         }
     });
 }
-function f2() {
+
+function slider_top() {
     var el = $('.slider_top'),
         curr_obj = 0;
 
@@ -13386,7 +13398,7 @@ function f2() {
             dots += i == 0 ? '<div class="reviews-dot active" data-id="' + i + '"></div>' : '<div class="reviews-dot" data-id="' + i + '"></div>';
         }
 
-        if (nav_container.length  > 2) {
+        if (nav_container.length > 2) {
             nav_container.eq(nav_container.length - 1).addClass('prev');
             nav_container.eq(1).addClass('next');
         }
@@ -13400,9 +13412,9 @@ function f2() {
 
             nav_container.eq(curr_obj).addClass('active');
 
-            if (nav_container.length  > 2) {
+            if (nav_container.length > 2) {
                 if ((j = curr_obj + 1 ? curr_obj == nav_container.length - 1 : '0') == false) {
-                    f =  curr_obj + 1
+                    f = curr_obj + 1
                 } else {
                     f = 0
                 }
@@ -13420,6 +13432,7 @@ function f2() {
 
 
 }
+
 function f3() {
     $('.gallery-area .gallery_block').not('.gallery_coca').click(function () {
         $('.pop_up').addClass('open')
@@ -13482,6 +13495,7 @@ function event_cola() {
     })
 
 }
+
 function slider_galery() {
     var tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
@@ -13555,6 +13569,7 @@ function slider_galery() {
     })
 
 }
+
 function form() {
 
     var b = 5 * 1024 * 1024;
@@ -13595,7 +13610,7 @@ function form() {
 
     $('#checkBox').change(function () {
         verification,
-        cd_modal = $('.cd-modal')
+            cd_modal = $('.cd-modal')
 
 
         if ($(this).is(":checked")) {
@@ -13662,12 +13677,12 @@ function form() {
                         $('body')
                             .addClass('hover_full')
                             .append('<div class="pop_blag open error_p">\n' +
-                            '    <img src="https://visitcoke.com.ua/assets/img/icon/error_icon.svg" alt="">\n' +
-                            '    '+data.errors+'\n' +
-                            '    <div class="close">\n' +
-                            '        <p>ок</p>\n' +
-                            '    </div>\n' +
-                            '</div>')
+                                '    <img src="https://visitcoke.com.ua/assets/img/icon/error_icon.svg" alt="">\n' +
+                                '    ' + data.errors + '\n' +
+                                '    <div class="close">\n' +
+                                '        <p>ок</p>\n' +
+                                '    </div>\n' +
+                                '</div>')
 
                         $('.pop_blag .close').click(function () {
                             $('body').removeClass('hover_full')
@@ -13680,7 +13695,6 @@ function form() {
                 error: function (xhr, ajaxOptions, thrownError) {
                     var erf = xhr.responseText
                     erf = JSON.parse(erf);
-
 
 
                     if (erf.errors.email != undefined) {
@@ -13696,22 +13710,22 @@ function form() {
                     }
                     if (erf.errors.name != undefined) {
                         form_sec5.find('.name').addClass('error')
-                    }else {
+                    } else {
                         form_sec5.find('.name').parent().removeClass('error')
                     }
                     if (erf.errors.people != undefined) {
                         form_sec5.find('.custom-select_people').addClass('error')
-                    }else {
+                    } else {
                         form_sec5.find('.custom-select_people').removeClass('error')
                     }
                     if (erf.errors.phone != undefined) {
                         form_sec5.find('.tell').addClass('error')
-                    }else {
+                    } else {
                         form_sec5.find('.tell').removeClass('error')
                     }
                     if (erf.errors.position != undefined) {
                         form_sec5.find('input#position').parent().addClass('error')
-                    }else {
+                    } else {
                         form_sec5.find('input#position').parent().removeClass('error')
                     }
 
@@ -13736,7 +13750,7 @@ function form() {
             if ($('#position').val().length < 3) {
                 form_sec5.find('#position').parent().addClass('error')
             }
-            if ($('#people').val() < Math.min(10) || $('#people').val() > Math.min(36) || $('#people').val() == '' ) {
+            if ($('#people').val() < Math.min(10) || $('#people').val() > Math.min(36) || $('#people').val() == '') {
                 form_sec5.find('#people').parent().addClass('error')
             }
         }
@@ -13745,6 +13759,7 @@ function form() {
 
 
 }
+
 function angul() {
 
     $.ajax({
@@ -13758,7 +13773,6 @@ function angul() {
         cache: false,
         success: function (data) {
             var count = 0;
-
 
 
             mondays_ = []
@@ -13994,19 +14008,310 @@ function angul() {
                 }
 
 
-
                 angular.module("flexcalendar", []).directive("flexCalendar", e), t.$inject = ["$scope", "$filter"]
             }();
         },
     });
 }
 
+function mousedown_clider() {
+    $('.participation-area').append('<div class="nav_participation"><div class="nav-control nav-control_prev"></div><div class="nav-control nav-control_next"></div></div>')
+
+    var nav_participation = $('.nav_participation'),
+        participation_umovi = $('.participation_umovi'),
+        block_par = $('.block_par').innerWidth(),
+        w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth;
+
+    participation_umovi.css({'left': '0px'});
+
+    var t = 0;
+    var k = true;
+
+
+    if ($(window).width() > 1025) {
+        vwValue = parseFloat(65 / 1920) * 100;
+        vwValue_ = (x * vwValue) / 100;
+
+        yy = participation_umovi.width() - ($('.participation-block').width() + vwValue_ )
+    } else {
+        yy =  (participation_umovi.width()+ 22) - $(window).width()
+
+    }
+
+
+
+    if ($(window).width() < 1025) {
+        var el = document.getElementById('participation_umovi');
+
+        swipedetect(el, function (swipedir) {
+        });
+
+        function swipedetect(el) {
+
+            var touchsurface = el,
+                startX,
+                threshold = 50;
+
+
+            touchsurface.addEventListener('touchstart', function (e) {
+                var touchobj = e.changedTouches[0]
+                startX = touchobj.pageX
+                e.preventDefault()
+            }, false)
+
+            touchsurface.addEventListener('touchend', function (e) {
+                var touchobj = e.changedTouches[0]
+
+                distX = touchobj.pageX - startX
+
+                if (Math.abs(distX) >= threshold) {
+
+                    if (distX < 0) {
+                        console.log(t, yy, t + (distX * -1))
+                        if (t + block_par < yy) {
+                            t += block_par
+                            participation_umovi.css({'left': -t, 'transition': '.5s'})
+
+                        } else {
+                            t = yy
+                            participation_umovi.css({'left': -t, 'transition': '.5s'})
+                        }
+
+
+                    } else if (distX > 0) {
+                        if (t - block_par > 0) {
+                            t += -block_par
+                            participation_umovi.css({'left': -t, 'transition': '.5s'})
+                        } else {
+                            t = 0
+                            participation_umovi.css({'left': '0px', 'transition': '.5s'})
+                        }
+                    }
+                }
+
+            }, false)
+
+        }
+    }
+
+
+
+
+    nav_participation.find('.nav-control').click(function () {
+        if ($(this).hasClass('nav-control_next')) {
+            if (t + block_par > yy) {
+                t = yy
+            } else if (t + block_par <= yy) {
+                t += block_par
+            }
+        } else if ($(this).hasClass('nav-control_prev')) {
+            if (t - block_par < 0) {
+                t = 0
+            } else if (t - block_par >= 0) {
+                t -= block_par
+            }
+        }
+
+        participation_umovi.css({'left': -t, 'transition': '.5s'})
+    })
+
+}
+
+// Функция initMap которая отрисует карту на странице
+function initMap() {
+    var _lat, _lng, centerX, centerY;
+    _lat = 50.610271;
+    _lng = 30.873070;
+    centerX = 50.611271;
+    centerY = 30.872070;
+    var e = [{
+            featureType: "all",
+            elementType: "geometry.fill",
+            stylers: [{
+                weight: "2.00"
+            }]
+        }, {
+            featureType: "all",
+            elementType: "geometry.stroke",
+            stylers: [{
+                color: "#9c9c9c"
+            }]
+        }, {
+            featureType: "all",
+            elementType: "labels.text",
+            stylers: [{
+                visibility: "on"
+            }]
+        }, {
+            featureType: "administrative.locality",
+            elementType: "labels.text.fill",
+            stylers: [{
+                color: "#de4540"
+            }]
+        }, {
+            featureType: "administrative.locality",
+            elementType: "labels.text.stroke",
+            stylers: [{
+                color: "#de4540"
+            }, {
+                visibility: "off"
+            }]
+        }, {
+            featureType: "landscape",
+            elementType: "all",
+            stylers: [{
+                color: "#f2f2f2"
+            }]
+        }, {
+            featureType: "landscape",
+            elementType: "geometry.fill",
+            stylers: [{
+                color: "#ffffff"
+            }]
+        }, {
+            featureType: "landscape.man_made",
+            elementType: "geometry.fill",
+            stylers: [{
+                color: "#ffffff"
+            }]
+        }, {
+            featureType: "poi",
+            elementType: "all",
+            stylers: [{
+                visibility: "off"
+            }]
+        }, {
+            featureType: "road",
+            elementType: "all",
+            stylers: [{
+                saturation: -100
+            }, {
+                lightness: 45
+            }]
+        }, {
+            featureType: "road",
+            elementType: "geometry.fill",
+            stylers: [{
+                color: "#eeeeee"
+            }]
+        }, {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{
+                color: "#7b7b7b"
+            }]
+        }, {
+            featureType: "road",
+            elementType: "labels.text.stroke",
+            stylers: [{
+                color: "#ffffff"
+            }]
+        }, {
+            featureType: "road.highway",
+            elementType: "all",
+            stylers: [{
+                visibility: "simplified"
+            }]
+        }, {
+            featureType: "road.arterial",
+            elementType: "labels.icon",
+            stylers: [{
+                visibility: "off"
+            }]
+        }, {
+            featureType: "transit",
+            elementType: "all",
+            stylers: [{
+                visibility: "off"
+            }]
+        }, {
+            featureType: "transit",
+            elementType: "geometry",
+            stylers: [{
+                visibility: "on"
+            }]
+        }, {
+            featureType: "transit",
+            elementType: "labels",
+            stylers: [{
+                visibility: "on"
+            }]
+        }, {
+            featureType: "transit.station",
+            elementType: "labels.text.fill",
+            stylers: [{
+                color: "#646464"
+            }]
+        }, {
+            featureType: "water",
+            elementType: "all",
+            stylers: [{
+                color: "#46bcec"
+            }, {
+                visibility: "on"
+            }]
+        }, {
+            featureType: "water",
+            elementType: "geometry.fill",
+            stylers: [{
+                color: "#c8d7d4"
+            }]
+        }, {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [{
+                color: "#070707"
+            }]
+        }, {
+            featureType: "water",
+            elementType: "labels.text.stroke",
+            stylers: [{
+                color: "#ffffff"
+            }]
+        }],
+        t = {
+            lat: centerX,
+            lng: centerY
+        },
+        markerPos = {
+            lat: _lat,
+            lng: _lng
+        }
+    var coordinates = {lat: 50.611271, lng: 30.872070},
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: t,
+            zoom: 16,
+            styles: e,
+            disableDefaultUI: true,
+        }),
+        icon = {
+            url: 'assets/img/icon/marker.svg',
+            scaledSize: new google.maps.Size(273, 400)
+        },
+        marker = new google.maps.Marker({
+            position: markerPos,
+            map: map,
+            icon: icon,
+        });
+
+    setTimeout(function () {
+        $(".gm-style img[src='" + icon.url + "']").addClass("markerClass")
+    }, 2000)
+
+}
 
 $(document).ready(function () {
     chat_bot();
     private_();
     top_menu_active();
-    f2();
+    if ($('.slider_top_img img').length > 1) {
+        slider_top();
+    }
+
     f3();
     event_cola();
     slider_galery();
@@ -14015,7 +14320,7 @@ $(document).ready(function () {
     select_();
     select_2();
     mask()
-
+    mousedown_clider()
 
 
     $('.check_text input').change(function () {
@@ -14037,6 +14342,7 @@ $(document).ready(function () {
         })
     });
     $about_description = $(".about-description").height()
+
     $(".about-description").css({height: $about_description - 10})
     $(".seo_button").click(function () {
         $(this).parent().find(".about-description").toggleClass("full");
@@ -14075,166 +14381,9 @@ $(document).ready(function () {
 /*****************************************/
 
 
-
-
-
-
-
-
-
 // Library
 
 /*******************madia**********************/
-
-function mousedown_clider() {
-    $('.participation-area').append('<div class="nav_participation"><div class="nav-control nav-control_prev"></div><div class="nav-control nav-control_next"></div></div>')
-
-    nav_participation = $('.nav_participation')
-    $('.participation-block').css({'left': '0px'})
-    var t = 0
-
-    var k = true
-    yy = ($('.participation-block').width() + 40) - $(window).width()
-
-
-    var el = document.getElementById('participation-block');
-    swipedetect(el, function (swipedir) {
-    });
-
-    function swipedetect(el) {
-
-        var touchsurface = el,
-            startX,
-            threshold = 50;
-
-
-        touchsurface.addEventListener('touchstart', function (e) {
-            var touchobj = e.changedTouches[0]
-            startX = touchobj.pageX
-            e.preventDefault()
-        }, false)
-
-        touchsurface.addEventListener('touchend', function (e) {
-            var touchobj = e.changedTouches[0]
-
-            distX = touchobj.pageX - startX
-
-            if (Math.abs(distX) >= threshold) {
-
-                if (distX < 0) {
-                    console.log(t, yy, t + (distX * -1))
-                    if (t + 150 < yy) {
-                        t += 150
-                        // $('.participation-block').css('left', -t)
-                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
-
-                    } else {
-                        t = yy
-                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
-                    }
-
-
-                } else if (distX > 0) {
-                    if (t - 150 > 0) {
-                        t += -150
-                        $('.participation-block').css({'left': -t, 'transition': '.5s'})
-                    } else {
-                        t = 0
-                        $('.participation-block').css({'left': '0px', 'transition': '.5s'})
-                    }
-                }
-
-
-                // swipedir = (distX < 0)? 'left' : 'right'
-                // if ( t >= 0 && t <= yy) {
-                //
-                //     t += distX * -1
-                //     // if (t > ) {
-                //     //
-                //     // }
-                // }
-                // t += distX * -1
-            }
-            // t += distX * -1
-
-        }, false)
-
-    }
-
-
-    // nav_participation.find('.nav-control')
-    //
-    //     .on('touchend', function () {
-    //         k = false
-    //         return false
-    //     })
-    //     .on('touchstart', function () {
-    //         k = true
-    //         this_ = $(this)
-    //
-    //         function timeout() {
-    //             setTimeout(function () {
-    //                 if (k == true && t < yy && t >= 0) {
-    //                     requestAnimationFrame(timeout)
-    //                 }
-    //             });
-    //
-    //             if (this_.hasClass('nav-control_prev')) {
-    //                 ttt()
-    //             } else if (this_.hasClass('nav-control_next')) {
-    //                 ttt_min()
-    //             }
-    //             // ttt()
-    //         }
-    //
-    //         timeout();
-    //         // if (t <= yy && t >= 0)  {
-    //         //     timeout();
-    //         //
-    //         // }
-    //
-    //     });
-    //
-    // function ttt() {
-    //     if (t > yy) {
-    //         t = yy
-    //     } else if (t <= yy) {
-    //         t += 3
-    //     }
-    //     // t += 1
-    //     $('.participation-block').css({'left': -t,'transition':'.0s'})
-    // }
-    //
-    // function ttt_min() {
-    //     if (t < 0) {
-    //         t = 0
-    //     } else if (t >= 0) {
-    //         t -= 3
-    //     }
-    //     // t -= 1
-    //     $('.participation-block').css({'left': -t,'transition':'.0s'})
-    // }
-
-
-    nav_participation.find('.nav-control').click(function () {
-        if ($(this).hasClass('nav-control_next')) {
-            if (t + 150 > yy) {
-                t = yy
-            } else if (t + 150 <= yy) {
-                t += 150
-            }
-        } else if ($(this).hasClass('nav-control_prev')) {
-            if (t - 150 < 0) {
-                t = 0
-            } else if (t - 150 >= 0) {
-                t -= 150
-            }
-        }
-
-        $('.participation-block').css({'left': -t, 'transition': '.5s'})
-    })
-
-}
 
 
 if ($(window).width() < 1025) {
@@ -14256,9 +14405,6 @@ if ($(window).width() < 1025) {
     })
 
 
-
-    mousedown_clider()
-
 }
 
 
@@ -14271,9 +14417,9 @@ $(window).on("load", function () {
     $preloader = $("#canvas-container");
     setTimeout(function () {
         $('body').removeClass('is_load')
-       // $('.is_load_').delay(800).fadeOut("slow")
+        // $('.is_load_').delay(800).fadeOut("slow")
         $preloader.delay(100).fadeOut("slow")
-        $preloader.find('.canvas_load').animate({ height: '10vh'}, 'slow');
+        $preloader.find('.canvas_load').animate({height: '10vh'}, 'slow');
     }, 700);
     setTimeout(function () {
         $("#canvas-container").remove()
@@ -14282,9 +14428,9 @@ $(window).on("load", function () {
 
 });
 
-[].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
+[].forEach.call(document.querySelectorAll('img[data-src]'), function (img) {
     img.setAttribute('src', img.getAttribute('data-src'));
-    img.onload = function() {
+    img.onload = function () {
         img.removeAttribute('data-src');
     };
 });

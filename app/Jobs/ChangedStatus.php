@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\NewOrder;
+use App\Mail\ChangedStatus as StatusEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
 
-class OrderCreated implements ShouldQueue
+class ChangedStatus implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -34,7 +34,7 @@ class OrderCreated implements ShouldQueue
      */
     public function handle()
     {
-        $email = new NewOrder($this->excursion, $this->content);
-        Mail::to($this->excursion)->send($email);
+        $email = new StatusEmail($this->excursion, $this->content);
+        Mail::to($this->excursion->email)->send($email);
     }
 }

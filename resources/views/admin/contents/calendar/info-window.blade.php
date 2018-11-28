@@ -1,11 +1,11 @@
-<div class="info-window">
+<div class="info-window @if((null != $isDisabled)) unactive @endif">
     <h5>
         <p class="day">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $date)->day }} число</p>
         Інформація екскурсій
         {{--<div class="toggle-button-cover">--}}
             <div class="button-cover">
                 <div class="button r" id="button-1">
-                    <input type="checkbox" name="foo" class="checkbox vkl">
+                    <input type="checkbox" @if((null != $isDisabled)) checked @endif name="foo" class="checkbox vkl" data-val="{{ \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('Y-m-d') }}">
                     <div class="knobs"></div>
                     <div class="layer"></div>
                     <div class="unactive"></div>

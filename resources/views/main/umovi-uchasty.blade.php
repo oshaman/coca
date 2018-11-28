@@ -13,27 +13,28 @@
 
             </div>
             <div class="participation-block" id="participation-block">
-                <div class="participation_umovi">
-                    @forelse($screen->slider as $slide)
+                <div class="over-hidden">
+                    <div class="participation_umovi" id="participation_umovi">
+                        @forelse($screen->slider as $slide)
 
-                        <div class="block_par">
-                            <div class="block_head">
-                                <div class="block_img_">
-                                    <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}"
-                                         title="{{ $slide->title }}">
+                            <div class="block_par">
+                                <div class="block_head">
+                                    <div class="block_img_">
+                                        <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}"
+                                             title="{{ $slide->title }}">
+                                    </div>
+                                    <p>{{ $slide->description??'' }}</p>
                                 </div>
-                                <p>{{ $slide->description??'' }}</p>
+                                <div class="block_number">
+                                    <p>0{{ $loop->iteration }}</p>
+                                </div>
                             </div>
-                            <div class="block_number">
-                                <p>0{{ $loop->iteration }}</p>
-                            </div>
-                        </div>
 
-                    @empty
-                    @endforelse
+                        @empty
+                        @endforelse
+                    </div>
+
                 </div>
-
-
             </div>
         </div>
     </div>

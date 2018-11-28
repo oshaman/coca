@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Jobs\ChangedStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +16,8 @@ class Excursion extends Model
         'position',
         'people',
         'institution',
-        'file',
-        'photo',
+//        'file',
+//        'photo',
         'comment',
         'interval',
     ];
@@ -79,16 +80,20 @@ class Excursion extends Model
 
     public function updateStatus($status): void
     {
+        \Log::info('test - '.$status);
+
         if ($this->status != $status) {
             $this->status = $status;
             //TODO: send email
 
-            if (3 === $this->status) {
-                dispatch(new OrderCreated($this->email, Email::getEmail('second')));
+            if (3 == $this->status) {
+                dispatch(new ChangedStatus($this->email, Email::getEmail('second')));
+                \Log::info($this->status);
             }
 
-            if (4 === $this->status) {
-                dispatch(new OrderCreated($this->email, Email::getEmail('fourth')));
+            if (4 == $this->status) {
+                dispatch(new ChangedStatus($this->email, Email::getEmail('fourth')));
+                \Log::info($this->status);
             }
 
         }
@@ -159,13 +164,14 @@ class Excursion extends Model
         }
         $this->token = str_random(54) . time();
         $this->save();
-        dispatch(new OrderCreated($this->email, Email::getEmail('sixth')));
+        dispatch(new ChangedStatus($this, Email::getEmail('sixth')));
     }
 
     public function removePhoto()
     {
         if (!empty($this->photo)) {
             Storage::disk('public')->delete('images/group-photos/' . $this->photo);
+            \Log::info('photo deleted - '.$this->photo);
         }
     }
 

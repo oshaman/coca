@@ -203,7 +203,6 @@ $(document).ready(function () {
 
     $('[data-action="see-password"]').on('click', function () {
         el = '#' + $(this).attr('data-toggle');
-        console.log(el)
 
         if ($(el).attr('type') == 'password') {
             $(this).find('i').addClass('icon-eye-close');
@@ -459,7 +458,6 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
-                console.log(data);
                 _this.parent().remove();
             },
             error: function (data) {
@@ -473,7 +471,7 @@ $(document).ready(function () {
 //-------------------------------tinymce-------------
 var editor_config = {
     selector: 'textarea.my-editor',
-    height: '300',
+    height: "300",
     theme: 'modern',
     toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
     image_advtab: true,
@@ -522,7 +520,6 @@ $('.del-slide').on('click', function (e) {
         cache: false,
         processData: false,
         success: function (data) {
-            console.log(data);
             _this.parent('.sl-block').remove();
         },
         error: function (data) {
@@ -619,7 +616,6 @@ $(document).ready(function () {
                 },
                 data: {'role_id': _role_id},
                 success: function (data) {
-                    console.log(data);
                     if($(e.target).parents('.custom-select-wrapper').find('#select-month-edit').length) {
                         custClick();
                     }
@@ -642,8 +638,6 @@ $(document).ready(function () {
     $(".form-register .custom-option").on("click", function (e) {
         _this = $(this);
         custClick();
-        console.log(e.target)
-
 
         $('.form-register  .custom-select-trigger').each(function () {
             _th = $(this);
@@ -719,7 +713,6 @@ $(document).ready(function () {
         $('.form-trip').bind('change', tripChange);
 
         function tripChange(e) {
-            console.log(3243)
             if ($('.circle2').hasClass('active') && ($("#filename").length > 0 || $('.nodoc').val().length > 3)) {
                 $('.circle3').addClass('active');
                 $('.p-3').addClass('active');
@@ -874,8 +867,8 @@ function toggleDayStatus(){
 
         _this = $(this);
 
-        _status = _this.is(":checked")
-        console.log(_status);
+        _status = Math.floor(_this.is(":checked"));
+        _val = _this.attr('data-val');
 
         $.ajax({
             url: '/admin/day-status',
@@ -883,9 +876,8 @@ function toggleDayStatus(){
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data: {status: _status},
+            data: {'status': _status, 'val':_val},
             success: function (res) {
-                console.log(res);
                 _this.parents('.info-window').toggleClass("unactive");
             }
         });

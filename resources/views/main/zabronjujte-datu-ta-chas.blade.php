@@ -39,7 +39,7 @@
                         </div>
                     </fieldset>
                     <fieldset>
-                        <h3>Дату та час</h3>
+                        <h3>Дата та час</h3>
                         <div class="bron">
                             <div class="data">
                                 <div  class="data_calendar">

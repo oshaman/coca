@@ -6,7 +6,7 @@
 
     <p class="main-text-l">Вітаю, друже!</p>
 
-    <p class="main-text-l">Тепер і в тебе є доступ до сайту visitcoke.com.ua</p>
+    <p class="main-text-l">Тепер і в тебе є доступ до сайту visitcoke.com.ua/login</p>
 
     <div class="table-l">
 

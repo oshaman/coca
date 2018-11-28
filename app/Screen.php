@@ -14,7 +14,7 @@ class Screen extends Model
 
     public function slider()
     {
-        return $this->hasMany(Slider::class);
+        return $this->hasMany(Slider::class)->orderBy('created_at', 'asc');
     }
 
     public function updateScreen($fields)

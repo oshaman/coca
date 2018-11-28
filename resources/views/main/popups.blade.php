@@ -16,7 +16,7 @@
             <a href="#" class="modal-close close-privacy-btn modal-close-title decor">Закрити</a>
         </div>
         <div class="priv-content">
-            {!! $screen->description??'' !!}
+            {!! $screen->additionally??'' !!}
         </div>
     </div>
 </div>

@@ -124,7 +124,10 @@
     <div class="container">
         <div class="head">
             <div class="logo">
-                <img src="{{ asset('assets') }}/img/icon/logo.svg" alt="">
+                <a href="/">
+                    <img src="{{ asset('assets') }}/img/icon/logo.svg" alt="">
+                </a>
+
             </div>
             <nav>
                 <ul>
@@ -153,7 +156,7 @@
             </div>
             <div class="back_call">
                 <a href="#form">
-                    Записатись
+                    Забронювати
                 </a>
             </div>
         </div>
