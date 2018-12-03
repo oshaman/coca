@@ -12748,11 +12748,9 @@ function select_2() {
 
 function mask() {
     $('#phone,#phone_bot')
-
         .keydown(function (e) {
             var key = e.which || e.charCode || e.keyCode || 0;
             $phone = $(this);
-
             // Don't let them remove the starting '('
             if ($phone.val().length === 5 && (key === 8 || key === 46)) {
                 $phone.val('+38(0');
@@ -12763,8 +12761,8 @@ function mask() {
                 $phone.val('+38(0' + String.fromCharCode(e.keyCode) + '');
             }
 
-            // Auto-format- do not expose the mask as the user begins to type
-            if (key !== 8 && key !== 9) {
+            // Автоформатування - не виставляйте маску, коли користувач починає вводити текст
+            if (key !== 8 && key !== 9 && key !== 16) {
                 if ($phone.val().length === 7) {
                     $phone.val($phone.val() + ')');
                 }
@@ -12781,7 +12779,9 @@ function mask() {
                 key == 9 ||
                 key == 46 ||
                 (key >= 48 && key <= 57) ||
-                (key >= 96 && key <= 105));
+                (key >= 96 && key <= 105) || key == 16);
+
+
         })
 
         .bind('focus click', function () {
@@ -12793,6 +12793,7 @@ function mask() {
             else {
                 var val = $phone.val();
                 $phone.val('').val(val); // Ensure cursor remains at the end
+                console.log(val);
             }
         })
 
@@ -12819,6 +12820,7 @@ function chat_bot() {
         POST_people
 
 
+    // $('.bot_window').scrollbar();
     function ajax_chat() {
         $.ajax({
             url: 'get-bot',
@@ -12883,14 +12885,16 @@ function chat_bot() {
         }
     ]
 
-    var loader = '<div class="c-chat__item log"> <div class="loader"><span></span><span></span><span></span></div> </div>';
+    var loader = '<div class="c-chat__item log"><div class="loader"><span></span><span></span><span></span></div></div>';
 
 
     chat.find('.chat_open').click(function () {
+
         chat_window.html('')
         chat.addClass('open')
-        ajax_chat()
         chat_window.append(loader)
+        ajax_chat()
+
         setTimeout(function () {
             chat.find('.log').remove()
             one_ekran()
@@ -12898,6 +12902,7 @@ function chat_bot() {
         if ($(window).width() < 768) {
             $('body').addClass('open_chat_mob')
         }
+
     })
 
     function click_nav_bot() {
@@ -12928,16 +12933,17 @@ function chat_bot() {
         chat_window.append(loader)
         setTimeout(function () {
             chat.find('.log').remove()
-
             chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[1].text + '</p></div></div>')
-            chat_window.prepend(loader)
+            chat_window.append(loader)
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 800)
         setTimeout(function () {
             chat.find('.log').remove()
 
-            chat_window.prepend(button_chat)
+            chat_window.append(button_chat)
 
             click_nav_bot()
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 1600)
 
     }
@@ -12945,85 +12951,95 @@ function chat_bot() {
 
     function address(text_a) {
         chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.append('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
         setTimeout(function () {
-            chat_window.prepend(loader)
+            chat_window.append(loader)
         }, 300)
         setTimeout(function () {
             chat.find('.log').remove()
 
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[0].answer + '</p></div></div>')
-            chat_window.prepend(loader)
+            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[0].answer + '</p></div></div>')
+            chat_window.append(loader)
         }, 1100)
         setTimeout(function () {
             chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            chat.find('.button_one_block').remove()
+            chat_window.append('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
             $('.button_chat.remove').click(function () {
                 $(this).remove()
-                chat_window.prepend(button_chat)
+                chat_window.append(button_chat)
                 click_nav_bot()
+                $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
             })
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 1900)
     }
 
     function content(text_a) {
         chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.append('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
         setTimeout(function () {
-            chat_window.prepend(loader)
+            chat_window.append(loader)
         }, 300)
         setTimeout(function () {
             chat.find('.log').remove()
 
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[1].answer + '</p></div></div>')
-            chat_window.prepend(loader)
+            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[1].answer + '</p></div></div>')
+            chat_window.append(loader)
         }, 1100)
         setTimeout(function () {
             chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            chat.find('.button_one_block').remove()
+            chat_window.append('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
             $('.button_chat.remove').click(function () {
                 $(this).remove()
-                chat_window.prepend(button_chat)
+                chat_window.append(button_chat)
                 click_nav_bot()
+                $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
             })
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 1900)
     }
 
     function rules(text_a) {
         chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.append('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
         setTimeout(function () {
-            chat_window.prepend(loader)
+            chat_window.append(loader)
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 300)
         setTimeout(function () {
             chat.find('.log').remove()
 
-            chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[2].answer + '</p></div></div>')
-            chat_window.prepend(loader)
+            chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + data_chat[2].answer + '</p></div></div>')
+            chat_window.append(loader)
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 1100)
         setTimeout(function () {
             chat.find('.log').remove()
-
-            chat_window.prepend('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
+            chat.find('.button_one_block').remove()
+            chat_window.append('<div class="button_one_block"><div class="button_chat remove">' + messages[1].text_next + '</div></div>')
             $('.button_chat.remove').click(function () {
                 $(this).remove()
-                chat_window.prepend(button_chat)
+                chat_window.append(button_chat)
                 click_nav_bot()
+                $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
             })
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 1900)
     }
 
     function sign_up(text_a) {
         chat.find('.button_one_block').remove()
-        chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
+        chat_window.append('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
         setTimeout(function () {
-            chat_window.prepend(loader)
+            chat_window.append(loader)
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
         }, 300)
         setTimeout(function () {
             chat.find('.log').remove()
             eskurs()
+            $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
             // chat_window.prepend(loader)
         }, 1100)
 
@@ -13031,7 +13047,7 @@ function chat_bot() {
 
 
     function eskurs() {
-        chat_window.prepend('<div class="button_one_block"><div class="button_chat sing">' + messages[2].free_places + '</div><div class="button_chat sing">' + messages[2].sign_up + '</div></div>')
+        chat_window.append('<div class="button_one_block"><div class="button_chat sing">' + messages[2].free_places + '</div><div class="button_chat sing">' + messages[2].sign_up + '</div></div>')
         $('.button_chat.sing').click(function () {
             var text_a = $(this).text();
 
@@ -13047,13 +13063,13 @@ function chat_bot() {
         chat.find('.button_one_block').remove()
         chat_window.html('')
         // chat_window.prepend('<div class="c-chat__item c-chat__item--human"><div class="c-chat__message"> <p>' + text_a + '</p> </div></div>')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_day + '</p></div></div>')
+        chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_day + '</p></div></div>')
 
-        chat_window.prepend('<div class="bot_calendar"></div>')
+        chat_window.append('<div class="bot_calendar"></div>')
 
         var $button = $('form .calendar_w').clone(true, true);
         $('.bot_calendar').html($button);
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
+        chat_window.append('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next">' + messages[4].next + '</div></div>')
         $('.month .arrow').click(function () {
             // oute()
             add_calendar()
@@ -13091,11 +13107,11 @@ function chat_bot() {
 
     function sign_up_time() {
         chat_window.html('')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
-        chat_window.prepend('<div class="bot_time"></div>')
+        chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_time + '</p></div></div>')
+        chat_window.append('<div class="bot_time"></div>')
         var $timer = $('form .custom-options').clone(true, true);
         $('.bot_time').html($timer);
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        chat_window.append('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
         $('.bot_time li').click(function () {
             $('.cl_next').removeClass('disabled')
         })
@@ -13112,8 +13128,8 @@ function chat_bot() {
 
     function sign_up_contactD() {
         chat_window.html('')
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
-        chat_window.prepend('<div class="bot_contacts">' +
+        chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_1 + '</p></div></div>')
+        chat_window.append('<div class="bot_contacts">' +
             '<div class="name">\n' +
             '<input type="text" id="name_bot" name="name_bot" autocomplete="off">\n' +
             '<label for="name_bot">' + messages[5].name_bot + '</label>\n' +
@@ -13160,7 +13176,7 @@ function chat_bot() {
                 $('.cl_next').addClass('disabled')
             }
         });
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
+        chat_window.append('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].next + '</div></div>')
         $('.cl_prev').on('click', function () {
             chat_window.html('')
             sign_up_time()
@@ -13179,15 +13195,15 @@ function chat_bot() {
 
         var $position = $('form .pole_form').eq(2).clone();
         chat_window.html('');
-        chat_window.prepend('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
-        chat_window.prepend('<div class="bot_contacts">' +
+        chat_window.append('<div class="c-chat__item chat__item_bot"><div class="c-chat__message"><p>' + messages[2].cal_contact_2 + '</p></div></div>')
+        chat_window.append('<div class="bot_contacts">' +
             '<div class="name">\n' +
             '<input type="text" id="institution_bot" name="institution_bot" autocomplete="off">\n' +
             '<label for="institution_bot">' + messages[5].institution + '</label>\n' +
             '</div>' +
             '</div>');
         $position.appendTo('.bot_contacts')
-        chat_window.prepend('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].finish + '</div></div>')
+        chat_window.append('<div class="form_chat_c button_one_block"><div class="button_chat cl_prev">' + messages[4].prev + '</div><div class="button_chat cl_next disabled">' + messages[4].finish + '</div></div>')
 
 
         $('.bot_contacts input').change(function () {
@@ -13254,6 +13270,7 @@ function chat_bot() {
                     if (data.status == 'Екскурсію збережено.') {
                         chat_window.html('')
                         chat_window.append('<div class="hellow"><img src="' + messages[0].img + '" alt=""><h3>' + messages[4].finh3 + '<br>' + messages[4].finh3_ + '</h3><p>' + messages[4].finhp + '</p><div class="button_chat">' + messages[4].finhwin + '</div></div>')
+                        $('.bot_window').scrollTop($('.bot_window')[0].scrollHeight);
                         $('.hellow .button_chat').click(function () {
                             chat.removeClass('open')
                             chat_window.html('')
@@ -13276,7 +13293,7 @@ function chat_bot() {
     function sign_up_2(text_a) {
         chat.find('.button_one_block').remove()
         setTimeout(function () {
-            chat_window.prepend(loader)
+            chat_window.append(loader)
         }, 300)
         setTimeout(function () {
             chat.find('.log').remove()
@@ -13306,6 +13323,7 @@ function chat_bot() {
 function private_() {
     var cd_modal = $('.cd-modal')
     $('.footer__column:nth-child(2)').find('a').click(function (e) {
+
         $('body').addClass('nooverflow')
         e.preventDefault()
 
@@ -13489,14 +13507,118 @@ function f3() {
 }
 
 function event_cola() {
+    var one_e,
+        two_e,
+        three_e,
+        event = [],
+        final_pop = $('.easters').html(),
+        $pop_event = $('.pop_event'),
+        ev_fs_cr = document.cookie.replace(/(?:(?:^|.*;\s*)ev_fs_cr\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
+        ev_fs_v = document.cookie.replace(/(?:(?:^|.*;\s*)ev_fs_v\s*\=\s*([^;]*).*$)|^.*$/, "$1"),
+        ev_fs_e = document.cookie.replace(/(?:(?:^|.*;\s*)ev_fs_e\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+
+
+    $('.easters').remove();
+    if ($(window).width() < 1025) {
+        $('.gallery_coca').removeClass('gallery_coca')
+        $('.event_coka_v').removeClass('event_coka_v')
+        $('.event_coka_e').removeClass('event_coka_e')
+    }
+    if (ev_fs_cr == 'true') {
+        event.push('one_e');
+        one_e = true;
+        $('.cola_event').find('.ev_fs_cr').css('display','block')
+        $('.gallery_coca').removeClass('gallery_coca')
+    }
+    if (ev_fs_v == 'true') {
+        event.push('two_e')
+        two_e = true;
+        $('.cola_event').find('.ev_fs_v').css('display','block')
+        $('.event_coka_v').removeClass('event_coka_v')
+    }
+    if (ev_fs_e == 'true') {
+        event.push('three_e')
+        three_e = true;
+        $('.cola_event').find('.ev_fs_e').css('display','block')
+        $('.event_coka_e').removeClass('event_coka_e')
+    }
+
     $('.gallery_coca').on('click', function () {
-        $(this).removeClass('gallery_coca')
-        f3()
+        $(this).removeClass('gallery_coca');
+        f3();
+        if (one_e != true) {
+            event.push('one_e')
+            pop_event(easters[0], event.length)
+        }
+
+        one_e = true;
+        $('.cola_event').find('.ev_fs_cr').css('display','block')
+        document.cookie = "ev_fs_cr=true;expires=604800";
+
+
     })
+    $('.event_coka_v').on('click', function () {
+        $(this).removeClass('event_coka_v');
+        if (two_e != true) {
+            event.push('two_e')
+            pop_event(easters[1], event.length)
+        }
+
+        two_e = true;
+        $('.cola_event').find('.ev_fs_v').css('display','block')
+        document.cookie = "ev_fs_v=true;expires=604800";
+    })
+    $('.event_coka_e').on('click', function () {
+        $(this).removeClass('event_coka_e');
+        if (three_e != true) {
+            event.push('three_e')
+            pop_event(easters[2], event.length)
+        }
+
+        three_e = true;
+        $('.cola_event').find('.ev_fs_e').css('display','block')
+        document.cookie = "ev_fs_e=true;expires=604800";
+    })
+    
+    function pop_event(text, number) {
+        if (number < 3 ) {
+            if (one_e != true || two_e != true || three_e != true) {
+                $pop_event.addClass('open');
+                $('body').addClass('hover_full')
+                console.log(text,number);
+                $pop_event.find('h3 span').text(text);
+                $pop_event.find('.cool_ev_fs p span').text(number);
+                for (var i = 0; i < number; i++) {
+                    $pop_event.find('.hr_fs span').eq(i).addClass('active');
+                }
+            }
+        } else {
+            $('body').addClass('hover_full')
+           $('body').append('<div class="pop_event open fin__event">\n' +
+               '    <img src="" alt="">\n' +
+               ''+final_pop+'\n' +
+               '    <div class="close">\n' +
+               '        <p>Круто!</p>\n' +
+               '      </div>\n' +
+               '</div>');
+            $('.fin__event').find('.close').click(function () {
+                $pop_event.removeClass('open');
+                $('body').removeClass('hover_full')
+                $('.fin__event').remove()
+            })
+        }
+
+        $pop_event.find('.close').click(function () {
+            $pop_event.removeClass('open');
+            $('body').removeClass('hover_full')
+        })
+    }
+
 
 }
 
 function slider_galery() {
+
     var tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName("script")[0];
@@ -13508,7 +13630,7 @@ function slider_galery() {
     onYouTubeIframeAPIReady = function () {
         for (var a = 0; a < videoDiv.length; a++) {
             videoDiv[a].id = "video_galegy" + a;
-            video = videoDiv[a].getAttribute("data-video");
+            var video = videoDiv[a].getAttribute("data-video");
 
             player["video_galegy" + a] = new YT.Player(videoDiv[a], {
                 height: "100%",
@@ -13530,31 +13652,33 @@ function slider_galery() {
     }
 
 
-    var allElements = Array.from($('.gallery_slider').find(".gallery_block"));
+   var allElements = []
+    allElements.forEach.call($('.gallery_slider').find(".gallery_block"),function(i) {
+        allElements.push(i)
+    })
     if (window.matchMedia("(min-width: 1026px)").matches) {
 
         for (var p = 0; p < allElements.length; p += 3) {
-            var wrap = document.createElement("div");
-            wrap.classList.add("conteiner_slider");
+            var $wrap_ = $("<div></div>");
+            $wrap_.addClass("conteiner_slider");
             for (var j = 0; j < 3; j++) {
                 if (p + j < allElements.length) {
-                    wrap.append(allElements[p + j]);
+                    $wrap_.append(allElements[p + j]);
                 }
             }
-            $('.gallery_slider').append(wrap);
+            $('.gallery_slider').append($wrap_);
         }
-        // var nn = (container.find('.maii-item').length * 7) - container.find('.item-senn').length
 
     } else if (window.matchMedia("(max-width: 1025px)").matches) {
         for (var p = 0; p < allElements.length; p += 1) {
-            var wrap = document.createElement("div");
-            wrap.classList.add("conteiner_slider");
+            var wrap_ = document.createElement("div");
+            wrap_.classList.add("conteiner_slider");
             for (var j = 0; j < 1; j++) {
                 if (p + j < allElements.length) {
-                    wrap.append(allElements[p + j]);
+                    wrap_.append(allElements[p + j]);
                 }
             }
-            $('.gallery_slider').append(wrap);
+            $('.gallery_slider').append(wrap_);
         }
     }
 
@@ -13567,6 +13691,9 @@ function slider_galery() {
         nav_container.eq(curr_obj).addClass('active');
 
     })
+    if (window.matchMedia("(min-width: 1026px)").matches && $('.conteiner_slider').length < 2) {
+        $('.gallery_title .slider_nav').css('display', 'none')
+    }
 
 }
 
@@ -14124,8 +14251,8 @@ function mousedown_clider() {
 // Функция initMap которая отрисует карту на странице
 function initMap() {
     var _lat, _lng, centerX, centerY;
-    _lat = 50.610271;
-    _lng = 30.873070;
+    _lat = 50.611271;
+    _lng = 30.872070;
     centerX = 50.611271;
     centerY = 30.872070;
     var e = [{
@@ -14284,13 +14411,13 @@ function initMap() {
     var coordinates = {lat: 50.611271, lng: 30.872070},
         map = new google.maps.Map(document.getElementById('map'), {
             center: t,
-            zoom: 16,
-            styles: e,
+            zoom: 12,
+            // styles: e,
             disableDefaultUI: true,
         }),
         icon = {
             url: 'assets/img/icon/marker.svg',
-            scaledSize: new google.maps.Size(273, 400)
+            scaledSize: new google.maps.Size(176, 144)
         },
         marker = new google.maps.Marker({
             position: markerPos,
@@ -14305,6 +14432,7 @@ function initMap() {
 }
 
 $(document).ready(function () {
+    event_cola();
     chat_bot();
     private_();
     top_menu_active();
@@ -14313,7 +14441,7 @@ $(document).ready(function () {
     }
 
     f3();
-    event_cola();
+
     slider_galery();
     form();
     angul();
@@ -14373,6 +14501,15 @@ $(document).ready(function () {
         $('.calendar_w').toggleClass('open')
         event.stopPropagation();
     })
+    $(document).click(function(e) {
+        if (!$(e.target).is('.data_calendar, .data *')) {
+            $('.calendar_w').removeClass('open')
+        }
+
+        if (!$(e.target).is('.custom-options, .timer *')) {
+            $('.custom-select').removeClass('opened')
+        }
+    });
 });
 
 
@@ -14408,10 +14545,6 @@ if ($(window).width() < 1025) {
 }
 
 
-// $(window).resize(function() {
-//     location.reload();
-// });
-
 
 $(window).on("load", function () {
     $preloader = $("#canvas-container");
@@ -14432,6 +14565,14 @@ $(window).on("load", function () {
     img.setAttribute('src', img.getAttribute('data-src'));
     img.onload = function () {
         img.removeAttribute('data-src');
+
     };
 });
+var script_n = []
+script_n.forEach.call(document.querySelectorAll('script[data-src]'), function (script) {
+    script.setAttribute('src', script.getAttribute('data-src'));
+    script.onload = function () {
+        script.removeAttribute('data-src');
 
+    };
+});

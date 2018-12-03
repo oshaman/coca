@@ -6,6 +6,7 @@ use App\DisabledDay;
 use App\Email;
 use App\Excursion;
 use App\Jobs\OrderCreated;
+use App\Traits\Dates;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,8 @@ use Illuminate\Http\Request;
  */
 class CalendarRepository
 {
+    use Dates;
+
     public function getCalendar(Request $request): array
     {
         $currentDay = Carbon::now()->startOfMonth();
@@ -129,17 +132,12 @@ class CalendarRepository
         return Carbon::create($received_year, $received_month, $received_day);
     }
 
-    public function getMaximalAllowedDay()
-    {
-        return Carbon::today()->addMonth()->endOfMonth();
-    }
-
     public function getDisabledDays(): array
     {
         $today = Carbon::now();
         $all_excursion = $this->getAllAvailableExcursions();
 
-        $all_days = DisabledDay::where([['val', '>', $today->copy()->addDay()], ['val', '<', $this->getMaximalAllowedDay()]])->get();
+        $all_days = DisabledDay::current()->get();
 
         $range = $this->dateRange();
 

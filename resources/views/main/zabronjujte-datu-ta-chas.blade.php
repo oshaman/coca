@@ -17,7 +17,7 @@
                             <label for="name">Ім’я та Прізвище</label>
                         </div>
                         <div class="tell">
-                            <input type="text" id="phone" maxlength="17" name="phone" autocomplete="off" value="">
+                            <input type="text" id="phone" pattern="\d{1,2}|100" maxlength="17" name="phone" autocomplete="off" value="">
                             <label for="phone">Телефон</label>
                         </div>
                         <div class="email">
@@ -102,7 +102,10 @@
             </div>
         </div>
     </div>
+    {{--<div class="class_woter">--}}
+        {{--<img data-src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">--}}
+    {{--</div>--}}
     <div class="class_woter">
-        <img data-src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">
+        <img data-src="{{ asset('assets') }}/img/icon/bottle_2.png" alt="">
     </div>
 </section>

@@ -124,7 +124,7 @@ $(document).ready(function () {
 
     $('.close').on('click', function () {
         $('.pop-trip').removeClass('active');
-        $('.pop-trip').hide();
+        // $('.pop-trip').hide();
         $('main').css('pointer-events', 'auto')
     })
 
@@ -755,7 +755,8 @@ $(document).ready(function () {
 
             $('.edit-form #select-time-edit option').removeAttr('selected');
             $('.edit-form #select-time-edit option[value="' + interval + '"]').attr('selected', true);
-            $('.edit-form #select-time-edit').siblings('.custom-select').find('.custom-select-trigger').html($('#select-time option[value="' + interval + '"]').html());
+            inta = $('.edit-form #select-time-edit option[value="' + interval + '"]').html();
+            $('.edit-form #select-time-edit').siblings('.custom-select').find('.custom-select-trigger').html(inta);
 
 
             $('.edit-form #trip-name-edit').attr('value', nam);
@@ -879,6 +880,9 @@ function toggleDayStatus(){
             data: {'status': _status, 'val':_val},
             success: function (res) {
                 _this.parents('.info-window').toggleClass("unactive");
+                if (_this.parents('.info-window').hasClass('unactive')) {
+                    $('.pres-month.active').addClass("unactive");
+                } else $('.pres-month.active').removeClass("unactive");
             }
         });
 

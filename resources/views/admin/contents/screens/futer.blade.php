@@ -28,6 +28,22 @@
                     </div>
                 </label>
             </div>
+            <div>
+                {!! Form::text('headings[]', $screen->headings[3]??null, ['class' => 'form-control']) !!}
+                <label for="seo-title">Посилання 1
+                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
+                        <span class="tooltiptext">Підказка</span>
+                    </div>
+                </label>
+            </div>
+            <div>
+                {!! Form::text('headings[]', $screen->headings[4]??null, ['class' => 'form-control']) !!}
+                <label for="seo-title">Посилання 2
+                    <div class="tooltip"><img src="{{asset('admn')}}/imgs/Subtract.svg" alt="1">
+                        <span class="tooltiptext">Підказка</span>
+                    </div>
+                </label>
+            </div>
         </div>
         {!! Form::textarea('content', $screen->content??null, ['class'=>'my-editor']) !!}
         {!! Form::textarea('additionally', $screen->additionally??null, ['class'=>'my-editor']) !!}

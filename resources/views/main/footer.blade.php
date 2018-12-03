@@ -3,7 +3,9 @@
         <div class="footer__columns">
             <div class="footer__column">
                 <div class="logo_footer">
-                    <img data-src="{{ asset('assets') }}/img/icon/logo_footer.svg" alt="">
+                    <a href="#">
+                        <img data-src="{{ asset('assets') }}/img/icon/logo_footer.svg" alt="">
+                    </a>
                 </div>
                 <div class="footer__local_icon">
                     @if(!empty($screen->headings[0]))
@@ -25,8 +27,8 @@
             </div>
             <div class="footer__column">
                 {{--<p>Всі права захищені. {{ date('Y') }}</p>--}}
-                <a href="#">Політика конфіденційності</a>
-                <a href="#"> Згода на обробку персональних даних</a>
+                <a href="#">{{ $screen->headings[3]??'' }}</a>
+                <a href="#">{{ $screen->headings[4]??'' }}</a>
             </div>
             <div class="footer__column">
                 <div class="logo_flesh">

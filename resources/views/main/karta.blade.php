@@ -1,5 +1,13 @@
 <section id="map_cola" class="sec_7">
-    <div id="map"></div>
+    <div id="map_id">
+
+        <div id="map"></div>
+        <div class="map_bg_lt"></div>
+        <div class="map_bg_rt"></div>
+        <div class="map_bg_lb"></div>
+    </div>
+
+
     <div class="contact">
         <div class="sec_title">
             <span>{{ $screen->headings[0]??'' }}</span>

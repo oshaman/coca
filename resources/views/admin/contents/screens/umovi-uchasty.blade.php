@@ -1,4 +1,4 @@
-<div class="nacc-content @if(1 == $loop->iteration) active @endif">
+<div class="nacc-content del-sl @if(1 == $loop->iteration) active @endif">
     <h3>{{ $screen->title }} <a href="javascript:void(0)">Переглянути</a></h3>
     <form action="{{ route('admin.screen.update', $screen->id) }}" class="form-content" method="post" enctype="multipart/form-data">
         @method('PUT')

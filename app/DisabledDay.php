@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Traits\Dates;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class DisabledDay extends Model
 {
+    use Dates;
+
     protected $fillable = ['val'];
     public $timestamps = false;
 
@@ -39,5 +43,10 @@ class DisabledDay extends Model
     public static function getDay($val)
     {
         return static::whereVal($val)->first();
+    }
+
+    public function scopeCurrent($query)
+    {
+        return $query->where([['val', '>', Carbon::now()->subMonth()->startOfMonth()], ['val', '<', $this->getMaximalAllowedDay()]]);
     }
 }

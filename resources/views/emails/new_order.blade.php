@@ -23,10 +23,17 @@
             <p>{{ config('settings.time_intervals.'.$excursion->interval) .' '. $excursion->created_at->format('d-m-Y')}}</p>
         </div>
     </div>
+
 </div>
 
 <div class="footer-l">
-    {!! $email->content??'' !!}
+    {{--текст з адмінки --}}
+    <div class="block-l">
+        <div class="admin-text-l">
+            {!! $email->content??'' !!}
+        </div>
+    </div>
+    {{--текст з адмінки --}}
     <div class="block-l">
         <em style="color: #8e8e8e">
             З радістю чекаємо Вас у гості

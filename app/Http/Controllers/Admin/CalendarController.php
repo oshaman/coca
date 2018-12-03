@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DisabledDay;
 use App\Excursion;
 use App\Repositories\CalendarRepository;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class CalendarController extends AdminController
     {
         $calendar = $this->repository->getCalendar($request);
 
-        $currentMonthHasAvailableDays =$this->repository->currentMonthHasAvailableDays();
+        $currentMonthHasAvailableDays = $this->repository->currentMonthHasAvailableDays();
+
+        $disabledDays = DisabledDay::current()->get();
 
         $this->content = view('admin.contents.calendar.calendar')
             ->with([
@@ -36,6 +39,7 @@ class CalendarController extends AdminController
                 'currentDay' => $calendar['currentDay'],
                 'excursions' => $calendar['excursions'],
                 'currentMonthHasAvailableDays' => $currentMonthHasAvailableDays,
+                'disabledDays' => $disabledDays
             ])
             ->render();
         return $this->renderOutput();
