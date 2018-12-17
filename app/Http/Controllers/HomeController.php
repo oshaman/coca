@@ -6,6 +6,7 @@ use App\Repositories\CalendarRepository;
 use App\Screen;
 use App\Seo;
 use Illuminate\Http\Request;
+use Cache;
 
 class HomeController extends Controller
 {
@@ -29,9 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $screens = Screen::with('slider')->get();
+        $screens = Cache::remember('screens', 1440, function () {
+            return Screen::with('slider')->get();
+        });
 
-        $seo = Seo::first();
+        $seo = Cache::remember('seo', 1440, function () {
+            return Seo::first();
+        });
 
         return view('main.index')->with(compact('screens', 'seo'));
     }

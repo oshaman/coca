@@ -14,11 +14,11 @@
 
         </div>
         <div class="input-l">
-            <p>{{ $excursion->name }}</p>
+            <p>{{ $excursion->name??'' }}</p>
             <p>{{ $excursion->phone }}</p>
             <p>{{ $excursion->email }}</p>
             <p>{{ $excursion->position }}</p>
-            <p>{{ $excursion->institution }}</p>
+            <p>{{ $excursion->institution??'' }}</p>
             <p>{{ $excursion->people }}</p>
             <p>{{ config('settings.time_intervals.'.$excursion->interval) .' '. $excursion->created_at->format('d-m-Y')}}</p>
         </div>

@@ -20,8 +20,11 @@
                             @if(0 == $loop->index)
                                 @continue
                             @endif
-                                <img data-src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}"
-                                     title="{{ $slide->title }}">
+                                <div class="img___slider">
+                                    <img src="{{ $slide->getImage() }}" alt="{{ $slide->alt }}"
+                                         title="{{ $slide->title }}">
+                                </div>
+
                         @empty
                         @endforelse
                     </div>

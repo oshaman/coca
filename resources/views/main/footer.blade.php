@@ -4,7 +4,7 @@
             <div class="footer__column">
                 <div class="logo_footer">
                     <a href="#">
-                        <img data-src="{{ asset('assets') }}/img/icon/logo_footer.svg" alt="">
+                        {{--<img data-src="{{ asset('assets') }}/img/icon/logo.svg" alt="">--}}
                     </a>
                 </div>
                 <div class="footer__local_icon">
@@ -33,7 +33,7 @@
             <div class="footer__column">
                 <div class="logo_flesh">
                     <div class="fresh">
-                        <div class="created">САЙТ РАЗРАБОТАН</div>
+                        <div class="created">САЙТ РОЗРОБЛЕНО</div>
                         <a href="https://freshweb.agency/?utm_source=visitcoke.com.ua" target="_blank">
                             <div class="fresh-logo">
                                 <span>F</span><span>R</span><span>E</span><span>S</span><span>H</span>

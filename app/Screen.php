@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cache;
 
 class Screen extends Model
 {
@@ -20,6 +21,9 @@ class Screen extends Model
     public function updateScreen($fields)
     {
         $this->update($fields);
+
+        Cache::forget('screens');
+
         return $this;
     }
 

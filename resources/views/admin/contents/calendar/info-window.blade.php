@@ -26,7 +26,7 @@
                 </div>
             </div>
         @else
-            <div class="info-block" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-phone="{{ $item->phone }}" data-email="{{ $item->email }}" data-institution="{{ $item->institution }}" data-position="{{ $item->position }}" data-people="{{ $item->people }}" data-status="{{ $item->status }}" data-day="{{ $item->current_day }}" data-month="{{ $item->current_month }}" data-interval="{{ $item->interval }}" data-current="{{ $item->isCurrentMonth() }}">
+            <div class="info-block" data-id="{{ $item->id }}" data-name="{{ $item->name }}" data-phone="{{ $item->phone }}" data-email="{{ $item->email }}" data-institution="{{ $item->institution }}" data-position="{{ $item->position }}" data-people="{{ $item->people }}" data-status="{{ $item->status }}" data-day="{{ $item->current_day }}" data-month="{{ $item->current_month }}" data-interval="{{ $item->interval }}" data-current="{{ $item->isCurrentMonth() }}" data-comment="{{ $item->comment }}" data-comments="{{ $item->comments }}">
                 <div class="info-after"></div>
                 <div class="header-note">
                     <div class="time-calendar {{ config('settings.status_class.'.$item->status) }}">
@@ -55,6 +55,8 @@
                         <p class="info-name">{{ $item->name }}</p>
                         <p class="info-position">{{ $item->position }}</p>
                         <p class="info-mail">{{ $item->email }}</p>
+                        <p class="info-mail">{{ $item->comment }}</p>
+                        {{--<p class="info-mail">{{ $item->comments }}</p>--}}
                     </div>
                     <div class="btn">Редагувати</div>
                 </div>

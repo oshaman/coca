@@ -1,7 +1,9 @@
 <section id="map_cola" class="sec_7">
     <div id="map_id">
 
-        <div id="map"></div>
+        <div id="map">
+            <img data-src="{{ asset('assets') }}/img/icon/imagecarta.webp" alt="" style="height: 100%;">
+        </div>
         <div class="map_bg_lt"></div>
         <div class="map_bg_rt"></div>
         <div class="map_bg_lb"></div>

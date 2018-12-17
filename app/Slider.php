@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Cache;
 
 class Slider extends Model
 {
@@ -46,6 +47,7 @@ class Slider extends Model
     public function remove()
     {
         $this->removeImage();
+        Cache::forget('screens');
         $this->delete();
     }
 }

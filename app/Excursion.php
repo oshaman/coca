@@ -19,6 +19,7 @@ class Excursion extends Model
 //        'file',
 //        'photo',
         'comment',
+        'comments',
         'interval',
     ];
 
@@ -87,12 +88,12 @@ class Excursion extends Model
             //TODO: send email
 
             if (3 == $this->status) {
-                dispatch(new ChangedStatus($this->email, Email::getEmail('second')));
+                dispatch(new ChangedStatus($this, Email::getEmail('second')));
                 \Log::info($this->status);
             }
 
             if (4 == $this->status) {
-                dispatch(new ChangedStatus($this->email, Email::getEmail('fourth')));
+                dispatch(new ChangedStatus($this, Email::getEmail('fourth')));
                 \Log::info($this->status);
             }
 

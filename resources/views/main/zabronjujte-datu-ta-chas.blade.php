@@ -13,11 +13,11 @@
                     <fieldset>
                         <h3>Загальна інформація</h3>
                         <div class="name">
-                            <input type="text" id="name" name="name" autocomplete="off">
+                            <input type="text" id="name" name="name" autocomplete="off" onkeyup="return proverka_text(this);">
                             <label for="name">Ім’я та Прізвище</label>
                         </div>
                         <div class="tell">
-                            <input type="text" id="phone" pattern="\d{1,2}|100" maxlength="17" name="phone" autocomplete="off" value="">
+                            <input type="text" id="phone" maxlength="17" name="phone" autocomplete="off" value="" onkeyup="return proverka(this);">
                             <label for="phone">Телефон</label>
                         </div>
                         <div class="email">
@@ -33,8 +33,8 @@
                             <label for="institution">Навчальний заклад чи Приватна особа</label>
                         </div>
                         <div class="pole_form">
-                            <input type="number" id="people" name="people" maxlength="2" autocomplete="off" min="10" max="37">
-                            <label for="people">Кількість людей  (від 10 до 37)</label>
+                            <input type="number" id="people" name="people" maxlength="2" autocomplete="off" >
+                            <label for="people">Кількість людей (від 10 до 36)</label>
                             {{--{{Form::selectRange('people', 4, 32, null, ['id'=>'position', 'class'=>"custom-select_people sources",'placeholder'=>'Кількість людей'])}}--}}
                         </div>
                     </fieldset>
@@ -57,13 +57,12 @@
                             </div>
                             <div class="timer">
 
-                                <select name="interval" id="interval" class="custom-select" >
-                                    <option value="1">9:00-10:30</option>
-                                    <option  value="2">10:30-12:00</option>
-                                    <option value="3">12:00-13:30</option>
-                                    <option value="4">13:30-15:00</option>
-                                    <option value="5">15:00-16:30</option>
-                                    <option value="6">16:30-18:00</option>
+                                <select name="interval" id="interval" class="custom-select">
+                                    @forelse(config('settings.time_intervals') as $value)
+                                        @if($loop->first) @continue @endif
+                                        <option value="{{$loop->index}}">{{ $value }}</option>
+                                    @empty
+                                    @endforelse
                                 </select>
 
 
@@ -82,7 +81,8 @@
                                     <span>У мене немає документу</span>
                                 </label>
 
-                                <textarea name="comment" class="nodoc" cols="num" rows="num" placeholder="Тому що......"></textarea>
+                                <textarea name="comment" class="nodoc" cols="num" rows="num"
+                                          placeholder="Тому що......"></textarea>
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
         </div>
     </div>
     {{--<div class="class_woter">--}}
-        {{--<img data-src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">--}}
+    {{--<img data-src="{{ asset('assets') }}/img/icon/cola_woter.gif" alt="">--}}
     {{--</div>--}}
     <div class="class_woter">
         <img data-src="{{ asset('assets') }}/img/icon/bottle_2.png" alt="">

@@ -33,6 +33,7 @@ $(document).ready(function () {
         $(".main-frames > img").remove();
         var frame = $(this).find("img").clone();
         $(".main-frames").append(frame);
+        $('.main-frames img[alt="st"]').addClass('image1')
     });
     // $(".vkl:checkbox").on('click', function(){
     //     $(this).parent().toggleClass("unactive");

@@ -82,6 +82,8 @@
             <input id="upload-photo" type="file" name="photo">
             <label for="upload-photo" class="btn btn-grey upload-doc">Завантажити</label>
             <input type="text" id="photo-filename" class="filename" disabled>
+            {{--{!! Form::textarea('comment') !!}--}}
+            {{--{!! Form::textarea('comments') !!}--}}
         </div>
         {{--Групповое фото--}}
 
@@ -98,7 +100,7 @@
                 </dd>
                 <dd>
                     <input type="radio" name="status" id="pq1-3" value="4">
-                    <label for="pq1-3">Підтвердженно</label>
+                    <label for="pq1-3">Підтверджено</label>
                 </dd>
             </dl>
         </div>

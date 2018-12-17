@@ -24,3 +24,50 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+FileETag MTime Size
+<ifmodule mod_expires.c>
+    <filesmatch ".(jpg|JPG|jpeg|gif|png|ico|css|js|svg|ttf|woff)$">
+    ExpiresActive on
+    ExpiresDefault "access plus 1 month"
+    </filesmatch>
+    # Your document html
+      ExpiresByType text/html "access plus 0 seconds"
+
+    # Media: images, video, audio
+      ExpiresByType audio/ogg "access plus 1 month"
+      ExpiresByType image/gif "access plus 1 month"
+      ExpiresByType image/jpeg "access plus 1 month"
+      ExpiresByType image/png "access plus 1 month"
+      ExpiresByType video/mp4 "access plus 1 month"
+      ExpiresByType video/ogg "access plus 1 month"
+      ExpiresByType video/webm "access plus 1 month"
+
+    # CSS and JavaScript
+      ExpiresByType application/javascript "access plus 1 year"
+      ExpiresByType text/css "access plus 1 year"
+</ifmodule>
+
+<ifModule mod_headers.c>
+    <filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|svg|ttf|woff)$">
+    Header set Cache-Control "max-age=2592000, public"
+    </filesMatch>
+    <filesMatch "\\.(css)$">
+    Header set Cache-Control "max-age=604800, public"
+    </filesMatch>
+    <filesMatch "\\.(mp4)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </filesMatch>
+    <filesMatch "\\.(js)$">
+    Header set Cache-Control "max-age=616000, private"
+    </filesMatch>
+    <filesMatch "\\.(xml|txt)$">
+    Header set Cache-Control "max-age=216000, public, must-revalidate"
+    </filesMatch>
+    <filesMatch "\\.(html|htm|php)$">
+    Header set Cache-Control "max-age=1, private, must-revalidate"
+    </filesMatch>
+    <FilesMatch "\.(ttf|otf|eot|svg)$" >
+     SetOutputFilter DEFLATE
+    </FilesMatch>
+</ifModule>

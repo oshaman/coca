@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cache;
 
 class Seo extends Model
 {
@@ -13,6 +14,9 @@ class Seo extends Model
     public function updateSeo($fields)
     {
         $this->fill($fields)->save();
+
+        Cache::forget('seo');
+
         return $this;
     }
 

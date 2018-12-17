@@ -82,7 +82,7 @@
                 </dd>
                 <dd>
                     <input type="radio" name="status" id="pq1-3-add" value="4">
-                    <label for="pq1-3-add">Підтвердженно</label>
+                    <label for="pq1-3-add">Підтверджено</label>
                 </dd>
             </dl>
         </div>

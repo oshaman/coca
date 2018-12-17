@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="{{ $seo->seo_title }}">
     <meta name="twitter:description" content="{{ $seo->seo_description }}">
     <meta name="twitter:image" content="{{ $seo->og_image }}">
-
+    {{--<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>--}}
     {{--<link rel="stylesheet" href="{{ asset('assets') }}/css/reset.css">--}}
 
 
@@ -54,7 +54,7 @@
         <div class="head">
             <div class="logo">
                 <a href="#">
-                <img src="{{ asset('assets') }}/img/icon/logo.svg" alt="">
+                {{--<img data-src="{{ asset('assets') }}/img/icon/logo.svg" alt="">--}}
                 </a>
             </div>
             <nav>
@@ -85,7 +85,7 @@
                     {{--<img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">--}}
                 </div>
                 <div class="event_info">
-                    <img src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
+                    <img data-src="{{ asset('assets') }}/img/icon/svg_cola.svg" alt="">
                     <p>Збери всі частини пляшки Кока-Кола
                        та отримай подарунок!
                         </p>
@@ -145,7 +145,7 @@
     </div>
 </div>
 <div class="pop_blag">
-    <img src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
+    <img data-src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
     <h3>Круто!<br>
         Вітаю з завершенням!</h3>
         <p>Тепер менеджер з тобою зв’яжеться для отримання більш детальньої інформації</p>
@@ -154,7 +154,7 @@
     </div>
 </div>
 <div class="pop_event">
-    <img src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
+    <img data-src="{{ asset('assets') }}/img/icon/pop_blag.svg" alt="">
     <h3>Вітаємо Тебе!<br>Ти знайшов пaсхалку - <br><span></span></h3>
     <p>Знайди всі та отримай крутий подарунок!</p>
     <div class="cool_ev_fs">

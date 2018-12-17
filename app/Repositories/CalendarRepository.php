@@ -289,6 +289,7 @@ class CalendarRepository
             "institution" => "required|string|max:256",
             "file" => "nullable|mimes:pdf|max:5120",
             "photo" => "nullable|mimes:jpeg,jpg,png|max:5120",
+            "comments" => 'nullable|string|max:40000'
         ];
     }
 

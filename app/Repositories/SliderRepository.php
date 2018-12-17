@@ -11,6 +11,8 @@ namespace App\Repositories;
  * @property Request $request
  */
 
+use Cache;
+
 class SliderRepository
 {
     public function handle($request, $screen)
@@ -34,6 +36,8 @@ class SliderRepository
                 }
 
             }
+
+            Cache::forget('screens');
         }
     }
 }
